@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ShakoMakoAndroid</string>
+    <string name="cont_facebook">Continue with Facebook</string>
+    <string name="cont_google">Continue with Google</string>
+    <string name="cont_insta">Continue with Instagram</string>
+    <string name="cont_number">Continue with Phone Number</string>
+</resources>
