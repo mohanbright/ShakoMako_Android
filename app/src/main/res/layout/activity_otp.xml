@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="listener"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <variable
+            name="viewModel"
+            type="com.io.app.shakomako.ui.login.LoginViewModel" />
+
+        <variable
+            name="count"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent">
+
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/include_toolbar"
+            app:listener="@{listener}" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            style="@style/Widget.ShakoMako.Text.Heading.Black"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:gravity="start"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/sms_verification"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/include_toolbar" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_phone_number"
+            style="@style/Widget.ShakoMako.Text.Title.Black"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/dummy_number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+
+        <com.io.app.shakomako.utils.otp.OtpView
+            android:id="@+id/otp_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="number"
+            android:itemBackground="@android:color/transparent"
+            android:padding="@dimen/_8sdp"
+
+            android:textSize="18dp"
+            app:OtpCursorColor="@color/colorPrimary"
+            app:OtpItemCount="6"
+            app:OtpItemHeight="@dimen/_33sdp"
+            app:OtpItemRadius="@dimen/_5sdp"
+            app:OtpItemSpacing="@dimen/_15sdp"
+            app:OtpItemWidth="@dimen/_33sdp"
+            app:OtpLineColor="@android:color/darker_gray"
+            app:OtpLineWidth="1dp"
+            app:OtpState_filled="true"
+            app:OtpViewType="rectangle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/button_verify"
+            style="@style/Widget.ShakoMako.Text.Button"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_40sdp"
+            android:onClick="@{listener::onClick}"
+            android:text="@string/verify"
+            android:textAllCaps="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/otp_view" />
+
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_verify" />
+
+        <TextView
+            android:id="@+id/tv_resend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/resend_title"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="@id/ll_resend"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/ll_resend"
+            app:layout_constraintTop_toTopOf="@id/ll_resend" />
+
+        <LinearLayout
+            android:id="@+id/ll_resend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:background="@drawable/button_border_primary"
+            android:orientation="horizontal"
+            android:onClick="@{listener::onClick}"
+            android:padding="@dimen/_10sdp"
+            app:layout_constraintLeft_toRightOf="@id/tv_resend"
+            app:layout_constraintTop_toBottomOf="@id/divider">
+
+            <TextView
+                android:id="@+id/resend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:onClick="@{listener::onClick}"
+                android:text="@string/resend"
+                android:textAllCaps="false"
+                app:layout_constraintLeft_toRightOf="@id/tv_resend"
+                app:layout_constraintTop_toBottomOf="@id/divider" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/Widget.ShakoMako.Text.Black"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:text="@{count}" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

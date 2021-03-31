@@ -2,15 +2,19 @@ package com.io.app.shakomako.dagger.module
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
+import com.io.app.shakomako.R
 import com.io.app.shakomako.application.ShakoMakoApplication
 import com.io.app.shakomako.dagger.component.ActivityComponent
+import com.io.app.shakomako.ui.base.BaseUtils
+import com.io.app.shakomako.utils.session.UserSession
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 
 @Module(includes = [UiModule::class], subcomponents = [ActivityComponent::class])
-public class BaseModule {
+class BaseModule {
 
     @Provides
     @Singleton
@@ -18,30 +22,28 @@ public class BaseModule {
 
     @Provides
     @Singleton
-    public fun provideContext(app: ShakoMakoApplication): Context = app.applicationContext
+    fun provideContext(app: ShakoMakoApplication): Context = app.applicationContext
 
-
-    /*@Provides
+    @Provides
     @Singleton
-    public Context provideContext(@NonNull FlipperApp flipperApp){
-        return flipperApp.getApplicationContext();
+    fun provideSharedPreference(shakoMakoApplication: ShakoMakoApplication): SharedPreferences {
+        return shakoMakoApplication.getSharedPreferences(shakoMakoApplication.resources.getString(R.string.shared_pref_file),
+            Context.MODE_PRIVATE
+        )
     }
 
     @Provides
     @Singleton
-    SharedPreferences provideSharedPreference(FlipperApp flipperApp){
-        return flipperApp.getSharedPreferences(flipperApp.getResources().getString(R.string.shared_pref_file_name), Context.MODE_PRIVATE);
+    fun provideSharedPreferencesEditor(sharedPreference: SharedPreferences): SharedPreferences.Editor {
+        return sharedPreference.edit()
     }
 
     @Provides
     @Singleton
-    SharedPreferences.Editor provideSharedPreferencesEditor(SharedPreferences sharedPreferences){
-        return sharedPreferences.edit();
+    fun provideUserSession(
+        sharedPreference: SharedPreferences,
+        editor: SharedPreferences.Editor
+    ): UserSession {
+        return UserSession(sharedPreference, editor)
     }
-
-    @Provides
-    @Singleton
-    public UserSession provideUserSession(@NonNull SharedPreferences sharedPreferences, SharedPreferences.Editor editor){
-        return new UserSession(sharedPreferences, editor);
-    }*/
 }

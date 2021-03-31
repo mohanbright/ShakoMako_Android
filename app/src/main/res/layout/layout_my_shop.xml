@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewHandler"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <variable
+            name="data"
+            type="com.io.app.shakomako.api.pojo.shop.BusinessProfile" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorGray">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/Widget.ShakoMako.Text.Heading.Black.X"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:gravity="center"
+                android:text="@string/my_shop" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:id="@+id/ll_verify"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:onClick="@{viewHandler::onClick}"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:src="@drawable/ic_verify" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text.Tiny.Black"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:gravity="center"
+                    android:text="@string/verify" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_my_deal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:gravity="center"
+                android:onClick="@{viewHandler::onClick}"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:src="@drawable/ic_cart" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text.Tiny.Black"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:gravity="center"
+                    android:text="@string/deals" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorView" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorGray"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="@dimen/_80sdp"
+                            android:layout_height="@dimen/_80sdp"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/_10sdp">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/business_profile_image"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_80sdp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_profile"
+                                app:civ_circle_background_color="#66AAAAAA" />
+
+                            <ProgressBar
+                                android:id="@+id/progressBarMedium"
+                                style="?android:attr/progressBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:indeterminateTint="@color/colorPrimary" />
+                        </RelativeLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        style="@style/Widget.ShakoMako.Text.Black"
+                                        android:gravity="center"
+                                        android:text="@string/_0" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        style="@style/Widget.ShakoMako.Text.Black"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:gravity="center"
+                                        android:text="@string/deals_" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        style="@style/Widget.ShakoMako.Text.Black"
+                                        android:gravity="center"
+                                        android:text="@string/_0" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        style="@style/Widget.ShakoMako.Text.Black"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:gravity="center"
+                                        android:text="@string/followers" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        style="@style/Widget.ShakoMako.Text.Black"
+                                        android:gravity="center"
+                                        android:text="@string/_0" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        style="@style/Widget.ShakoMako.Text.Black"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:gravity="center"
+                                        android:text="@string/ratings" />
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_analytics"
+                                style="@style/Widget.ShakoMako.Text.Black"
+                                android:layout_margin="@dimen/_10sdp"
+                                android:background="@drawable/bg_green_broder"
+                                android:gravity="center"
+                                android:onClick="@{viewHandler::onClick}"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:paddingTop="@dimen/_3sdp"
+                                android:paddingEnd="@dimen/_10sdp"
+                                android:paddingBottom="@dimen/_3sdp"
+                                android:text="@string/analytics" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/iv_edit"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_gravity="end"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:onClick="@{viewHandler::onClick}"
+                                android:src="@drawable/edit" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text.Black"
+                            android:text="@{data.businessProfileDetails.businessName}" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text.Black"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@{data.businessProfileDetails.businessBio}" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_add_product_"
+                            style="@style/Widget.ShakoMako.Text.Black"
+                            android:layout_margin="@dimen/_10sdp"
+                            android:layout_weight=".9"
+                            android:background="@drawable/bg_green_broder"
+                            android:gravity="center"
+                            android:onClick="@{viewHandler::onClick}"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingTop="@dimen/_3sdp"
+                            android:paddingEnd="@dimen/_10sdp"
+                            android:paddingBottom="@dimen/_3sdp"
+                            android:text="@string/add_product" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_chat"
+                            style="@style/Widget.ShakoMako.Text.Black"
+                            android:layout_margin="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_green_broder"
+                            android:gravity="center"
+                            android:onClick="@{viewHandler::onClick}"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingTop="@dimen/_3sdp"
+                            android:paddingEnd="@dimen/_10sdp"
+                            android:paddingBottom="@dimen/_3sdp"
+                            android:text="@string/chat" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_share"
+                            style="@style/Widget.ShakoMako.Text.Black"
+                            android:layout_margin="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_green_broder"
+                            android:gravity="center"
+                            android:onClick="@{viewHandler::onClick}"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingTop="@dimen/_3sdp"
+                            android:paddingEnd="@dimen/_10sdp"
+                            android:paddingBottom="@dimen/_3sdp"
+                            android:text="@string/share" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_add_product"
+                    style="@style/Widget.ShakoMako.Text.Black"
+                    android:layout_margin="@dimen/_30sdp"
+                    android:background="@drawable/bg_green_dash"
+                    android:gravity="center"
+                    android:onClick="@{viewHandler::onClick}"
+                    android:padding="@dimen/_30sdp"
+                    android:text="@string/click_here_n_nto_add_products_n_amp_services"
+                    android:textStyle="italic"
+                    android:visibility="gone"
+                    app:textAllCaps="true" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorView" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text.Black"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:text="@string/no_data_to_show"
+                    android:visibility="@{data.businessProducts.size() == 0? View.VISIBLE : View.GONE}"
+                    tools:visibility="gone" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_my_shop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/layout_my_shop_item" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </LinearLayout>
+</layout>

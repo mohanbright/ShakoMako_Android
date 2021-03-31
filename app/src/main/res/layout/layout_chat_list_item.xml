@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.io.app.shakomako.api.pojo.chat_response.ChatMessageData" />
+
+        <variable
+            name="messageType"
+            type="int" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_chat_send_backgound"
+                android:orientation="vertical"
+                android:visibility="@{messageType == 0? View.VISIBLE : View.GONE}">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_user"
+                    style="@style/Widget.ShakoMako.Text"
+                    android:layout_width="wrap_content"
+                    android:gravity="end"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingTop="@dimen/_6sdp"
+                    android:paddingEnd="@dimen/_12sdp"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:text="@{data.message,default=`Hey`}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text.Tiny"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_gravity="end"
+                    android:gravity="end"
+                    android:paddingStart="@dimen/_2sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:text="9:00 AM" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_chat_green_round_corner"
+                android:orientation="vertical"
+                android:visibility="@{messageType == 4 || messageType ==8? View.VISIBLE : View.GONE}">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:cardCornerRadius="@dimen/_15sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_product"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarMedium"
+                        style="?android:attr/progressBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:indeterminateTint="@color/colorPrimary" />
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text.Tiny"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:gravity="center"
+                    android:text="@{data.price + ` IQD`}"
+                    android:visibility="@{messageType == 8? View.GONE : View.VISIBLE}" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_chat_send_backgound"
+                android:orientation="vertical"
+                android:visibility="@{messageType == 6? View.VISIBLE : View.GONE}">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_loc"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:src="@drawable/map_loc" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_user_address"
+                        style="@style/Widget.ShakoMako.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_toEndOf="@id/iv_loc"
+                        android:layout_centerInParent="true"
+                        android:gravity="end"
+                        android:paddingStart="@dimen/_3sdp"
+                        android:paddingTop="@dimen/_6sdp"
+                        android:paddingEnd="@dimen/_12sdp"
+                        android:paddingBottom="@dimen/_4sdp"
+                        android:text="@{data.message.split(`&amp;`)[0],default=`Hey`}" />
+                </RelativeLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text.Tiny"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_gravity="end"
+                    android:gravity="end"
+                    android:paddingStart="@dimen/_2sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:text="9:00 AM" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_chat_send_backgound"
+                android:orientation="vertical"
+                android:visibility="@{messageType == 2? View.VISIBLE : View.GONE}">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:src="@drawable/ic_ici_gray"
+                        android:tint="@color/tick_green" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Widget.ShakoMako.Text"
+                        android:layout_width="wrap_content"
+                        android:gravity="end"
+                        android:paddingStart="@dimen/_12sdp"
+                        android:paddingTop="@dimen/_6sdp"
+                        android:paddingEnd="@dimen/_12sdp"
+                        android:paddingBottom="@dimen/_4sdp"
+                        android:text="In-Chat-Invoice (ICI)"
+                        android:textColor="@color/com_facebook_blue" />
+
+
+                </LinearLayout>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text.Tiny"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_gravity="end"
+                    android:gravity="end"
+                    android:paddingStart="@dimen/_2sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:text="9:00 AM" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_40sdp"
+                android:background="@drawable/bg_chat_received_message"
+                android:orientation="vertical"
+                android:visibility="@{messageType == 1? View.VISIBLE : View.GONE}">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_business"
+                    style="@style/Widget.ShakoMako.Text"
+                    android:layout_width="wrap_content"
+                    android:gravity="end"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingTop="@dimen/_6sdp"
+                    android:paddingEnd="@dimen/_12sdp"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:text="@{data.message,default=`Hey i want these fishes`}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text.Tiny"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_gravity="end"
+                    android:gravity="end"
+                    android:paddingStart="@dimen/_2sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:text="9:00 AM" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:background="@drawable/bg_chat_received_message"
+                android:orientation="vertical"
+                android:visibility="@{messageType == 3? View.VISIBLE : View.GONE}">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:src="@drawable/ic_ici_gray"
+                        android:tint="@color/tick_green" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Widget.ShakoMako.Text"
+                        android:layout_width="wrap_content"
+                        android:gravity="end"
+                        android:paddingStart="@dimen/_12sdp"
+                        android:paddingTop="@dimen/_6sdp"
+                        android:paddingEnd="@dimen/_12sdp"
+                        android:paddingBottom="@dimen/_4sdp"
+                        android:text="In-Chat-Invoice (ICI)"
+                        android:textColor="@color/com_facebook_blue" />
+
+
+                </LinearLayout>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text.Tiny"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_gravity="end"
+                    android:gravity="end"
+                    android:paddingStart="@dimen/_2sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:text="9:00 AM" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_40sdp"
+                android:background="@drawable/bg_chat_received_message"
+                android:orientation="vertical"
+                android:visibility="@{messageType == 7? View.VISIBLE : View.GONE}">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:src="@drawable/map_loc" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_address"
+                        style="@style/Widget.ShakoMako.Text"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="start"
+                        android:paddingStart="@dimen/_1sdp"
+                        android:paddingTop="@dimen/_6sdp"
+                        android:paddingEnd="@dimen/_12sdp"
+                        android:paddingBottom="@dimen/_4sdp"
+                        android:text="@{data.message.split(`&amp;`)[0],default=`Hey`}" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text.Tiny"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_gravity="end"
+                    android:gravity="end"
+                    android:paddingStart="@dimen/_2sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:text="9:00 AM" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@drawable/bg_chat_green_round_corner"
+                android:orientation="vertical"
+                android:visibility="@{messageType == 5 || messageType ==9? View.VISIBLE : View.GONE}">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:cardCornerRadius="@dimen/_15sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_product_two"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarMedium_two"
+                        style="?android:attr/progressBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:indeterminateTint="@color/colorPrimary"
+                        android:visibility="@{messageType == 9? View.GONE : View.VISIBLE}" />
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text.Tiny"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:gravity="center"
+                    android:text="@{data.price + ` IQD`}" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

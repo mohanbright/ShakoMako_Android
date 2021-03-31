@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewHandler"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <variable
+            name="viewModel"
+            type="com.io.app.shakomako.ui.home.HomeViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorGray">
+
+            <TextView
+                style="@style/Widget.ShakoMako.Text.Heading.Black.X"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="start|center_vertical"
+                android:paddingLeft="@dimen/_10sdp"
+                android:text="@string/chat"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_marginRight="@dimen/_8sdp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:src="@drawable/search"
+                    android:tint="@color/colorBlack" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text.Tiny.Black"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:gravity="center"
+                    android:text="@string/search" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_my_deal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:gravity="center"
+                android:onClick="@{viewHandler::onClick}"
+                android:orientation="vertical"
+                android:layout_marginRight="@dimen/_10sdp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:src="@drawable/ic_cart" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text.Tiny.Black"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:gravity="center"
+                    android:text="@string/deals" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorView" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_personal"
+                style="@style/Widget.ShakoMako.Text.Title"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{viewHandler::onClick}"
+                android:text="@string/personal"
+                android:textColor="@{viewModel.chatObserver.screenObserver == 0 ? @color/com_facebook_blue : @color/text_color}" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorView" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_business"
+                style="@style/Widget.ShakoMako.Text.Title"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{viewHandler::onClick}"
+                android:text="@string/business"
+                android:textColor="@{viewModel.chatObserver.screenObserver == 1 ? @color/com_facebook_blue : @color/text_color}" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_personal_chat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="@{viewModel.chatObserver.screenObserver == 0? View.VISIBLE : View.GONE}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="10"
+            tools:listitem="@layout/layout_personal_chat_item" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_business_chat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="@{viewModel.chatObserver.screenObserver == 1? View.VISIBLE : View.GONE}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="10"
+            tools:listitem="@layout/layout_business_chat_item" />
+
+    </LinearLayout>
+
+</layout>

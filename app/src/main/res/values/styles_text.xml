@@ -6,23 +6,50 @@
     <style name="Widget.ShakoMako" />
 
     <style name="Widget.ShakoMako.Text">
-        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">@dimen/text_size_body</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textStyle">normal</item>
         <item name="android:letterSpacing" tools:targetApi="lollipop">0.03125</item>
         <item name="android:textColorHint">@color/colorAccent</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+
     </style>
+
+    <style name="Widget.ShakoMako.Text.Black" parent="Widget.ShakoMako.Text">
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="Widget.ShakoMako.Text.Green" parent="Widget.ShakoMako.Text">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="Widget.ShakoMako.Text.Black.Bold" parent="Widget.ShakoMako.Text.Black">
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
+=    </style>
 
     <style name="Widget.ShakoMako.Text.Large" parent="Widget.ShakoMako.Text">
         <item name="android:textSize">@dimen/_18sdp</item>
-        <item name="android:textStyle">bold</item>
+
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
+        <item name="font">@font/poppins_regular</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:gravity">center</item>
-<!--        <item name="android:fontFamily">@font/lato_bold</item>-->
+        <!--        <item name="android:fontFamily">@font/lato_bold</item>-->
+    </style>
+
+    <style name="Widget.ShakoMako.Text.Large.Bold" parent="Widget.ShakoMako.Text.Large">
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
+    </style>
+
+    <style name="Widget.ShakoMako.Button.Default" parent="Widget.ShakoMako.Text">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textStyle">bold</item>
+
     </style>
 
     <style name="Widget.ShakoMako.Text.Heading" parent="Widget.ShakoMako.Text">
@@ -32,7 +59,9 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:gravity">center</item>
-<!--        <item name="android:fontFamily">@font/lato_regular</item>-->
+        <item name="fontFamily">@font/poppins_semibold</item>
+
+        <!--        <item name="android:fontFamily">@font/lato_regular</item>-->
     </style>
 
     <style name="Widget.ShakoMako.Text.Title" parent="Widget.ShakoMako.Text">
@@ -43,10 +72,15 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="Widget.ShakoMako.Text.Subtitle.Black" parent="Widget.ShakoMako.Text.Subtitle">
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
     <style name="Widget.ShakoMako.Text.Subtitle" parent="Widget.ShakoMako.Text">
         <item name="android:textSize">@dimen/_12sdp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
+        <item name="fontFamily">@font/poppins_regular</item>
     </style>
 
     <style name="Widget.ShakoMako.Text.Body" parent="Widget.ShakoMako.Text">
@@ -56,10 +90,14 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
+    <style name="Widget.ShakoMako.Text.Body.White" parent="Widget.ShakoMako.Text.Body">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
 
     <style name="Widget.ShakoMako.Text.Body.Black" parent="Widget.ShakoMako.Text.Body">
         <item name="android:textColor">@color/colorBlack</item>
     </style>
+
     <style name="Widget.ShakoMako.Text.Menu" parent="Widget.ShakoMako.Text">
         <item name="android:textSize">@dimen/_12sdp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -90,6 +128,31 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="Widget.ShakoMako.Text.Small.Black" parent="Widget.ShakoMako.Text.Black">
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="Widget.ShakoMako.Text.Small.White" parent="Widget.ShakoMako.Text">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Widget.ShakoMako.Text.Small.Green" parent="Widget.ShakoMako.Text.Small">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="Widget.ShakoMako.Text.Small.Red" parent="Widget.ShakoMako.Text.Black">
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+    </style>
+
+    <style name="Widget.ShakoMako.Text.Smaller" parent="Widget.ShakoMako.Text">
+        <item name="android:textSize">@dimen/_6sdp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
     <style name="Widget.ShakoMako.Text.Tiny" parent="Widget.ShakoMako.Text">
         <item name="android:textSize">@dimen/_8sdp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -97,338 +160,393 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
-<!--    <style name="Widget.ShakoMako.Text.FootNote" parent="Widget.ShakoMako.Text">-->
-<!--        <item name="android:textSize">@dimen/text_size_footnote</item>-->
-<!--        <item name="android:layout_height">wrap_content</item>-->
-<!--        <item name="android:layout_width">wrap_content</item>-->
-<!--        <item name="android:padding">@dimen/_3sdp</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.MediumTitle" parent="Widget.ShakoMako.Text">-->
-<!--        <item name="android:textSize">@dimen/text_size_title</item>-->
-<!--        <item name="android:layout_height">wrap_content</item>-->
-<!--        <item name="android:layout_width">match_parent</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.BigTitle" parent="Widget.ShakoMako.Text">-->
-<!--        <item name="android:textSize">@dimen/text_size_big_title</item>-->
-<!--        <item name="android:layout_height">wrap_content</item>-->
-<!--        <item name="android:layout_width">match_parent</item>-->
-<!--    </style>-->
-
-
-<!--    &lt;!&ndash;    white colored text&ndash;&gt;-->
-<!--    <style name="Widget.ShakoMako.Text.Large.White" parent="Widget.ShakoMako.Text.Large">-->
-<!--        <item name="android:textColor">@color/colorWhite</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Large.Black" parent="Widget.ShakoMako.Text.Large">-->
-<!--        <item name="android:textColor">@color/colorBlack</item>-->
-<!--        <item name="android:fontFamily">@font/lato_bold</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Large.Black.Shadow" parent="Widget.ShakoMako.Text.Large.Black">-->
-<!--        <item name="android:shadowColor">@color/colorBlack</item>-->
-<!--        <item name="android:shadowRadius">10</item>-->
-<!--        <item name="android:shadowDx">8</item>-->
-<!--        <item name="android:shadowDy">10</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Heading.White" parent="Widget.ShakoMako.Text.Heading">-->
-<!--        <item name="android:textColor">@color/colorWhite</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Heading.White.NotBold" parent="Widget.ShakoMako.Text.Heading.White">-->
-<!--        <item name="fontFamily">@font/lato_regular</item>-->
-<!--        <item name="android:textStyle">normal</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Title.White" parent="Widget.ShakoMako.Text.Title">-->
-<!--        <item name="android:textColor">@color/colorWhite</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Title.Gray.Bold" parent="Widget.ShakoMako.Text.Title.Black">-->
-<!--        <item name="fontFamily">@font/lato_bold</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.BigTitle.White" parent="Widget.ShakoMako.Text.BigTitle">-->
-<!--        <item name="android:textColor">@color/colorWhite</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Subtitle.White" parent="Widget.ShakoMako.Text.Subtitle">-->
-<!--        <item name="android:textColor">@color/colorWhite</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Body.White" parent="Widget.ShakoMako.Text.Body">-->
-<!--        <item name="android:textColor">@color/colorWhite</item>-->
-<!--    </style>-->
-
-<!--&lt;!&ndash;    <style name="Widget.ShakoMako.Text.Body.White.BorderBrown" parent="Widget.ShakoMako.Text.Body.White">&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="android:background">@drawable/shape_round_brown_border_gray_background</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="android:padding">@dimen/_8sdp</item>&ndash;&gt;-->
-<!--&lt;!&ndash;    </style>&ndash;&gt;-->
-
-<!--    <style name="Widget.ShakoMako.Text.Body.White.Bold" parent="Widget.ShakoMako.Text.Body.White">-->
-<!--        <item name="fontFamily">@font/lato_bold</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Menu.White" parent="Widget.ShakoMako.Text.Menu">-->
-<!--        <item name="android:textColor">@color/colorWhite</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Content.White" parent="Widget.ShakoMako.Text.Content">-->
-<!--        <item name="android:textColor">@color/colorWhite</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Toolbar.White" parent="Widget.ShakoMako.Text.Toolbar">-->
-<!--        <item name="android:textColor">@color/colorWhite</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Small.White" parent="Widget.ShakoMako.Text.Small">-->
-<!--        <item name="android:textColor">@color/colorWhite</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Small.White.Heavy" parent="Widget.ShakoMako.Text.Small.White">-->
-<!--        <item name="android:fontFamily">@font/lato_black</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Tiny.White" parent="Widget.ShakoMako.Text.Tiny">-->
-<!--        <item name="android:textColor">@color/colorWhite</item>-->
-<!--    </style>-->
-
-<!--&lt;!&ndash;    <style name="Widget.ShakoMako.Text.Tiny.Background" parent="Widget.ShakoMako.Text.Tiny.White">&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="background">@drawable/shape_rectangle_black</item>&ndash;&gt;-->
-<!--&lt;!&ndash;    </style>&ndash;&gt;-->
-
-<!--&lt;!&ndash;    <style name="Widget.ShakoMako.Text.Tiny.Background.Black" parent="Widget.ShakoMako.Text.Tiny.Background">&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="background">@drawable/shape_rectangle_black</item>&ndash;&gt;-->
-<!--&lt;!&ndash;    </style>&ndash;&gt;-->
-
-<!--    <style name="Widget.ShakoMako.Text.Tiny.Black" parent="Widget.ShakoMako.Text.Tiny">-->
-<!--        <item name="android:textColor">@color/colorBlack</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Tiny.GrayToBlue" parent="Widget.ShakoMako.Text.Tiny">-->
-<!--        <item name="android:textColor">@color/selector_gray_to_blue_for_text_view</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Small.GrayToBlue" parent="Widget.ShakoMako.Text.Small">-->
-<!--        <item name="android:textColor">@color/selector_gray_to_blue_for_text_view</item>-->
-<!--        <item name="tint">@color/selector_gray_to_blue_for_text_view</item>-->
-<!--        <item name="android:tint">@color/selector_gray_to_blue_for_text_view</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Tiny.Blue" parent="Widget.ShakoMako.Text.Tiny">-->
-<!--        <item name="android:textColor">@color/colorBlue</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Tiny.Blue.Heavy" parent="Widget.ShakoMako.Text.Tiny.Blue">-->
-<!--        <item name="android:fontFamily">@font/lato_black</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Tiny.Gray" parent="Widget.ShakoMako.Text.Tiny">-->
-<!--        <item name="android:textColor">@color/grayTextColor</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.FootNote.White" parent="Widget.ShakoMako.Text.FootNote">-->
-<!--        <item name="android:textColor">@color/colorWhite</item>-->
-<!--    </style>-->
-
-<!--    &lt;!&ndash;    black colored text&ndash;&gt;-->
-<!--    <style name="Widget.ShakoMako.Text.Heading.Black" parent="Widget.ShakoMako.Text.Heading">-->
-<!--        <item name="android:textColor">@color/colorBlack</item>-->
-<!--    </style>-->
-
-<!--&lt;!&ndash;    <style name="Widget.ShakoMako.Text.Heading.Green" parent="Widget.ShakoMako.Text.Heading">&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="android:textColor">@color/greenToWhiteColor</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="android:textSize">@dimen/text_size_large</item>&ndash;&gt;-->
-<!--&lt;!&ndash;    </style>&ndash;&gt;-->
-
-<!--    <style name="Widget.ShakoMako.Text.Title.Black" parent="Widget.ShakoMako.Text.Title">-->
-<!--        <item name="android:textColor">@color/colorBlack</item>-->
-<!--        <item name="android:fontFamily">@font/lato_black</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Title.Black.Regular" parent="Widget.ShakoMako.Text.Title">-->
-<!--        <item name="android:textColor">@color/colorBlack</item>-->
-<!--        <item name="android:fontFamily">@font/lato_regular</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Title.Blue" parent="Widget.ShakoMako.Text.Title">-->
-<!--        <item name="android:textColor">@color/colorBlue</item>-->
-<!--        <item name="android:fontFamily">@font/lato_bold</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.BigTitle.Black" parent="Widget.ShakoMako.Text.BigTitle">-->
-<!--        <item name="android:textColor">@color/colorBlack</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Subtitle.Black" parent="Widget.ShakoMako.Text.Subtitle">-->
-<!--        <item name="android:textColor">@color/colorBlack</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Body.Black" parent="Widget.ShakoMako.Text.Body">-->
-<!--        <item name="android:textColor">@color/colorBlack</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Body.Black.Heavy" parent="Widget.ShakoMako.Text.Body.Black">-->
-<!--        <item name="android:fontFamily">@font/lato_black</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Body.Blue" parent="Widget.ShakoMako.Text.Body">-->
-<!--        <item name="android:textColor">@color/colorBlue</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Body.Blue.Heavy" parent="Widget.ShakoMako.Text.Body.Blue">-->
-<!--        <item name="android:fontFamily">@font/lato_black</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Content.Black" parent="Widget.ShakoMako.Text.Content">-->
-<!--        <item name="android:textColor">@color/colorBlack</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Content.Green" parent="Widget.ShakoMako.Text.Content">-->
-<!--        <item name="android:textColor">@color/colorGreen</item>-->
-<!--    </style>-->
-
-
-<!--    <style name="Widget.ShakoMako.Text.Content.Black.Heavy" parent="Widget.ShakoMako.Text.Content.Black">-->
-<!--        <item name="android:fontFamily">@font/lato_black</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Content.Gray" parent="Widget.ShakoMako.Text.Content">-->
-<!--        <item name="android:textColor">@color/grayTextColor</item>-->
-<!--        <item name="android:fontFamily">@font/lato_regular</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Content.Gray.Heavy" parent="Widget.ShakoMako.Text.Content.Gray">-->
-<!--        <item name="android:textColor">@color/grayTextColor</item>-->
-<!--        <item name="android:fontFamily">@font/lato_black</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Content.Blue" parent="Widget.ShakoMako.Text.Content">-->
-<!--        <item name="android:textColor">@color/colorBlue</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Content.Blue.Heavy" parent="Widget.ShakoMako.Text.Content.Blue">-->
-<!--        <item name="android:fontFamily">@font/lato_black</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Body.Red" parent="Widget.ShakoMako.Text.Body">-->
-<!--        <item name="android:textColor">@color/lightRedHighlightColor</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Content.Red" parent="Widget.ShakoMako.Text.Content">-->
-<!--        <item name="android:textColor">@color/redColor</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Body.Black.Bold" parent="Widget.ShakoMako.Text.Body.Black">-->
-<!--        <item name="android:fontFamily">@font/lato_bold</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Body.Red.Bold" parent="Widget.ShakoMako.Text.Body.Red">-->
-<!--        <item name="android:fontFamily">@font/lato_bold</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Content.Red.Bold" parent="Widget.ShakoMako.Text.Content.Red">-->
-<!--        <item name="android:fontFamily">@font/lato_bold</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Body.Gray" parent="Widget.ShakoMako.Text.Body">-->
-<!--        <item name="android:textColor">@color/darkGrayColor</item>-->
-<!--    </style>-->
-
-<!--&lt;!&ndash;    <style name="Widget.ShakoMako.Text.Body.Red" parent="Widget.ShakoMako.Text.Body">&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="android:textColor">@color/colorRed</item>&ndash;&gt;-->
-<!--&lt;!&ndash;    </style>&ndash;&gt;-->
-
-<!--    <style name="Widget.ShakoMako.Text.Menu.Black" parent="Widget.ShakoMako.Text.Menu">-->
-<!--        <item name="android:textColor">@color/colorBlack</item>-->
-<!--    </style>-->
-
-
-<!--    <style name="Widget.ShakoMako.Text.Toolbar.Black" parent="Widget.ShakoMako.Text.Toolbar">-->
-<!--        <item name="android:textColor">@color/colorBlack</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Small.Black" parent="Widget.ShakoMako.Text.Small">-->
-<!--        <item name="android:textColor">@color/colorBlack</item>-->
-<!--        <item name="android:fontFamily">@font/lato_regular</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Small.Black.Heavy" parent="Widget.ShakoMako.Text.Small.Black">-->
-<!--        <item name="android:fontFamily">@font/lato_black</item>-->
-<!--    </style>-->
-
-<!--&lt;!&ndash;    <style name="Widget.ShakoMako.Text.Small.Red" parent="Widget.ShakoMako.Text.Small">&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="android:textColor">@color/colorRed</item>&ndash;&gt;-->
-<!--&lt;!&ndash;    </style>&ndash;&gt;-->
-
-<!--    <style name="Widget.ShakoMako.Text.FootNote.Black" parent="Widget.ShakoMako.Text.FootNote">-->
-<!--        <item name="android:textColor">@color/colorBlack</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Content.Primary" parent="Widget.ShakoMako.Text.Content">-->
-<!--        <item name="android:textColor">@color/colorPrimary</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Toolbar.Gray" parent="Widget.ShakoMako.Text.Toolbar">-->
-<!--        <item name="android:textColor">@color/colorBlack</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Small.Gray" parent="Widget.ShakoMako.Text.Small">-->
-<!--        <item name="android:textColor">@color/grayTextColor</item>-->
-<!--        <item name="android:fontFamily">@font/lato_regular</item>-->
-<!--        <item name="android:textSize">@dimen/text_size_footnote</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Small.Red" parent="Widget.ShakoMako.Text.Small">-->
-<!--        <item name="android:textColor">@color/redColor</item>-->
-<!--        <item name="android:fontFamily">@font/lato_regular</item>-->
-<!--        <item name="android:textSize">@dimen/text_size_footnote</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Small.Gray.Small" parent="Widget.ShakoMako.Text.Small.Gray">-->
-<!--        <item name="android:textColor">@color/grayTextColor</item>-->
-<!--        <item name="android:fontFamily">@font/lato_regular</item>-->
-<!--        <item name="android:textSize">@dimen/text_size_small</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Small.Gray.Heavy" parent="Widget.ShakoMako.Text.Small.Gray">-->
-<!--        <item name="android:fontFamily">@font/lato_black</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Small.Gray.Background" parent="Widget.ShakoMako.Text.Small.Gray">-->
-<!--        <item name="android:background">@drawable/shape_rectangle_gray_background_no_margin</item>-->
-<!--        <item name="android:padding">@dimen/_8sdp</item>-->
-<!--        <item name="android:textSize">@dimen/text_size_small</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Small.Gray.NoBackground" parent="Widget.ShakoMako.Text.Small.Gray">-->
-<!--        <item name="android:background">@android:color/transparent</item>-->
-<!--        <item name="android:padding">@dimen/_8sdp</item>-->
-<!--        <item name="android:textSize">@dimen/text_size_small</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Small.Black.Background" parent="Widget.ShakoMako.Text.Small.Black">-->
-<!--        <item name="android:background">@drawable/shape_rectangle_gray_background_no_margin</item>-->
-<!--        <item name="android:padding">@dimen/_8sdp</item>-->
-<!--        <item name="android:textSize">@dimen/text_size_small</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Small.Blue" parent="Widget.ShakoMako.Text.Small">-->
-<!--        <item name="android:textColor">@color/colorBlue</item>-->
-<!--        <item name="android:fontFamily">@font/lato_regular</item>-->
-<!--        <item name="android:textSize">@dimen/text_size_small</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.Small.Blue.Heavy" parent="Widget.ShakoMako.Text.Small.Blue">-->
-<!--        <item name="android:fontFamily">@font/lato_black</item>-->
-<!--    </style>-->
-
-<!--    <style name="Widget.ShakoMako.Text.FootNote.Gray" parent="Widget.ShakoMako.Text.FootNote">-->
-<!--        <item name="android:textColor">@color/colorBlack</item>-->
-<!--    </style>-->
+    <style name="Widget.ShakoMako.Text.Tiny.Black" parent="Widget.ShakoMako.Text.Tiny">
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="Widget.ShakoMako.Text.Large.Grey" parent="Widget.ShakoMako.Text.Large">
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+
+    <style name="Widget.ShakoMako.Text.Button" parent="Widget.ShakoMako.Text">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:background">@drawable/button_bg_primary</item>
+        <item name="android:layout_margin">@dimen/_20sdp</item>
+        <item name="android:padding">@dimen/_10sdp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+
+    </style>
+
+
+    <style name="Widget.ShakoMako.Text.Button.Border" parent="Widget.ShakoMako.Text.Button">
+        <item name="android:background">@drawable/button_border_primary</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textStyle">normal</item>
+
+    </style>
+
+
+    <style name="Widget.ShakoMako.Text.Title.Gray" parent="Widget.ShakoMako.Text.Title">
+        <item name="android:textColor">@android:color/darker_gray</item>
+
+    </style>
+
+    <!-- android:id="@+id/button_sms_verification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_20sdp"
+            android:gravity="center"
+            android:padding="@dimen/_10sdp"
+            android:textAllCaps="true"
+            android:textColor="@color/colorAccent"
+            android:background="@drawable/button_bg_primary"
+            android:text="@string/verification_code_text"
+            android:textStyle="bold" -->
+
+    <!--    <style name="Widget.ShakoMako.Text.FootNote" parent="Widget.ShakoMako.Text">-->
+    <!--        <item name="android:textSize">@dimen/text_size_footnote</item>-->
+    <!--        <item name="android:layout_height">wrap_content</item>-->
+    <!--        <item name="android:layout_width">wrap_content</item>-->
+    <!--        <item name="android:padding">@dimen/_3sdp</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.MediumTitle" parent="Widget.ShakoMako.Text">-->
+    <!--        <item name="android:textSize">@dimen/text_size_title</item>-->
+    <!--        <item name="android:layout_height">wrap_content</item>-->
+    <!--        <item name="android:layout_width">match_parent</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.BigTitle" parent="Widget.ShakoMako.Text">-->
+    <!--        <item name="android:textSize">@dimen/text_size_big_title</item>-->
+    <!--        <item name="android:layout_height">wrap_content</item>-->
+    <!--        <item name="android:layout_width">match_parent</item>-->
+    <!--    </style>-->
+
+
+    <!--    &lt;!&ndash;    white colored text&ndash;&gt;-->
+    <!--    <style name="Widget.ShakoMako.Text.Large.White" parent="Widget.ShakoMako.Text.Large">-->
+    <!--        <item name="android:textColor">@color/colorWhite</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Large.Black" parent="Widget.ShakoMako.Text.Large">-->
+    <!--        <item name="android:textColor">@color/colorBlack</item>-->
+    <!--        <item name="android:fontFamily">@font/lato_bold</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Large.Black.Shadow" parent="Widget.ShakoMako.Text.Large.Black">-->
+    <!--        <item name="android:shadowColor">@color/colorBlack</item>-->
+    <!--        <item name="android:shadowRadius">10</item>-->
+    <!--        <item name="android:shadowDx">8</item>-->
+    <!--        <item name="android:shadowDy">10</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Heading.White" parent="Widget.ShakoMako.Text.Heading">-->
+    <!--        <item name="android:textColor">@color/colorWhite</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Heading.White.NotBold" parent="Widget.ShakoMako.Text.Heading.White">-->
+    <!--        <item name="fontFamily">@font/lato_regular</item>-->
+    <!--        <item name="android:textStyle">normal</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Title.White" parent="Widget.ShakoMako.Text.Title">-->
+    <!--        <item name="android:textColor">@color/colorWhite</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Title.Gray.Bold" parent="Widget.ShakoMako.Text.Title.Black">-->
+    <!--        <item name="fontFamily">@font/lato_bold</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.BigTitle.White" parent="Widget.ShakoMako.Text.BigTitle">-->
+    <!--        <item name="android:textColor">@color/colorWhite</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Subtitle.White" parent="Widget.ShakoMako.Text.Subtitle">-->
+    <!--        <item name="android:textColor">@color/colorWhite</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Body.White" parent="Widget.ShakoMako.Text.Body">-->
+    <!--        <item name="android:textColor">@color/colorWhite</item>-->
+    <!--    </style>-->
+
+    <!--&lt;!&ndash;    <style name="Widget.ShakoMako.Text.Body.White.BorderBrown" parent="Widget.ShakoMako.Text.Body.White">&ndash;&gt;-->
+    <!--&lt;!&ndash;        <item name="android:background">@drawable/shape_round_brown_border_gray_background</item>&ndash;&gt;-->
+    <!--&lt;!&ndash;        <item name="android:padding">@dimen/_8sdp</item>&ndash;&gt;-->
+    <!--&lt;!&ndash;    </style>&ndash;&gt;-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Body.White.Bold" parent="Widget.ShakoMako.Text.Body.White">-->
+    <!--        <item name="fontFamily">@font/lato_bold</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Menu.White" parent="Widget.ShakoMako.Text.Menu">-->
+    <!--        <item name="android:textColor">@color/colorWhite</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Content.White" parent="Widget.ShakoMako.Text.Content">-->
+    <!--        <item name="android:textColor">@color/colorWhite</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Toolbar.White" parent="Widget.ShakoMako.Text.Toolbar">-->
+    <!--        <item name="android:textColor">@color/colorWhite</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Small.White" parent="Widget.ShakoMako.Text.Small">-->
+    <!--        <item name="android:textColor">@color/colorWhite</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Small.White.Heavy" parent="Widget.ShakoMako.Text.Small.White">-->
+    <!--        <item name="android:fontFamily">@font/lato_black</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Tiny.White" parent="Widget.ShakoMako.Text.Tiny">-->
+    <!--        <item name="android:textColor">@color/colorWhite</item>-->
+    <!--    </style>-->
+
+    <!--&lt;!&ndash;    <style name="Widget.ShakoMako.Text.Tiny.Background" parent="Widget.ShakoMako.Text.Tiny.White">&ndash;&gt;-->
+    <!--&lt;!&ndash;        <item name="background">@drawable/shape_rectangle_black</item>&ndash;&gt;-->
+    <!--&lt;!&ndash;    </style>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;    <style name="Widget.ShakoMako.Text.Tiny.Background.Black" parent="Widget.ShakoMako.Text.Tiny.Background">&ndash;&gt;-->
+    <!--&lt;!&ndash;        <item name="background">@drawable/shape_rectangle_black</item>&ndash;&gt;-->
+    <!--&lt;!&ndash;    </style>&ndash;&gt;-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Tiny.Black" parent="Widget.ShakoMako.Text.Tiny">-->
+    <!--        <item name="android:textColor">@color/colorBlack</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Tiny.GrayToBlue" parent="Widget.ShakoMako.Text.Tiny">-->
+    <!--        <item name="android:textColor">@color/selector_gray_to_blue_for_text_view</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Small.GrayToBlue" parent="Widget.ShakoMako.Text.Small">-->
+    <!--        <item name="android:textColor">@color/selector_gray_to_blue_for_text_view</item>-->
+    <!--        <item name="tint">@color/selector_gray_to_blue_for_text_view</item>-->
+    <!--        <item name="android:tint">@color/selector_gray_to_blue_for_text_view</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Tiny.Blue" parent="Widget.ShakoMako.Text.Tiny">-->
+    <!--        <item name="android:textColor">@color/colorBlue</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Tiny.Blue.Heavy" parent="Widget.ShakoMako.Text.Tiny.Blue">-->
+    <!--        <item name="android:fontFamily">@font/lato_black</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Tiny.Gray" parent="Widget.ShakoMako.Text.Tiny">-->
+    <!--        <item name="android:textColor">@color/grayTextColor</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.FootNote.White" parent="Widget.ShakoMako.Text.FootNote">-->
+    <!--        <item name="android:textColor">@color/colorWhite</item>-->
+    <!--    </style>-->
+
+    <!--    black colored text-->
+    <style name="Widget.ShakoMako.Text.Heading.Black" parent="Widget.ShakoMako.Text.Heading">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Widget.ShakoMako.Text.Heading.Black.X" parent="Widget.ShakoMako.Text.Heading.Black">
+        <item name="android:textSize">@dimen/_18sdp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Widget.ShakoMako.Text.Heading.X" parent="Widget.ShakoMako.Text.Heading">
+        <item name="android:textSize">@dimen/_18sdp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <!--&lt;!&ndash;    <style name="Widget.ShakoMako.Text.Heading.Green" parent="Widget.ShakoMako.Text.Heading">&ndash;&gt;-->
+    <!--&lt;!&ndash;        <item name="android:textColor">@color/greenToWhiteColor</item>&ndash;&gt;-->
+    <!--&lt;!&ndash;        <item name="android:textSize">@dimen/text_size_large</item>&ndash;&gt;-->
+    <!--&lt;!&ndash;    </style>&ndash;&gt;-->
+
+    <style name="Widget.ShakoMako.Text.Title.Black" parent="Widget.ShakoMako.Text.Title">
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <!--    <style name="Widget.ShakoMako.Text.Title.Black.Regular" parent="Widget.ShakoMako.Text.Title">-->
+    <!--        <item name="android:textColor">@color/colorBlack</item>-->
+    <!--        <item name="android:fontFamily">@font/lato_regular</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Title.Blue" parent="Widget.ShakoMako.Text.Title">-->
+    <!--        <item name="android:textColor">@color/colorBlue</item>-->
+    <!--        <item name="android:fontFamily">@font/lato_bold</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.BigTitle.Black" parent="Widget.ShakoMako.Text.BigTitle">-->
+    <!--        <item name="android:textColor">@color/colorBlack</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Subtitle.Black" parent="Widget.ShakoMako.Text.Subtitle">-->
+    <!--        <item name="android:textColor">@color/colorBlack</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Body.Black" parent="Widget.ShakoMako.Text.Body">-->
+    <!--        <item name="android:textColor">@color/colorBlack</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Body.Black.Heavy" parent="Widget.ShakoMako.Text.Body.Black">-->
+    <!--        <item name="android:fontFamily">@font/lato_black</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Body.Blue" parent="Widget.ShakoMako.Text.Body">-->
+    <!--        <item name="android:textColor">@color/colorBlue</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Body.Blue.Heavy" parent="Widget.ShakoMako.Text.Body.Blue">-->
+    <!--        <item name="android:fontFamily">@font/lato_black</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Content.Black" parent="Widget.ShakoMako.Text.Content">-->
+    <!--        <item name="android:textColor">@color/colorBlack</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Content.Green" parent="Widget.ShakoMako.Text.Content">-->
+    <!--        <item name="android:textColor">@color/colorGreen</item>-->
+    <!--    </style>-->
+
+
+    <!--    <style name="Widget.ShakoMako.Text.Content.Black.Heavy" parent="Widget.ShakoMako.Text.Content.Black">-->
+    <!--        <item name="android:fontFamily">@font/lato_black</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Content.Gray" parent="Widget.ShakoMako.Text.Content">-->
+    <!--        <item name="android:textColor">@color/grayTextColor</item>-->
+    <!--        <item name="android:fontFamily">@font/lato_regular</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Content.Gray.Heavy" parent="Widget.ShakoMako.Text.Content.Gray">-->
+    <!--        <item name="android:textColor">@color/grayTextColor</item>-->
+    <!--        <item name="android:fontFamily">@font/lato_black</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Content.Blue" parent="Widget.ShakoMako.Text.Content">-->
+    <!--        <item name="android:textColor">@color/colorBlue</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Content.Blue.Heavy" parent="Widget.ShakoMako.Text.Content.Blue">-->
+    <!--        <item name="android:fontFamily">@font/lato_black</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Body.Red" parent="Widget.ShakoMako.Text.Body">-->
+    <!--        <item name="android:textColor">@color/lightRedHighlightColor</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Content.Red" parent="Widget.ShakoMako.Text.Content">-->
+    <!--        <item name="android:textColor">@color/redColor</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Body.Black.Bold" parent="Widget.ShakoMako.Text.Body.Black">-->
+    <!--        <item name="android:fontFamily">@font/lato_bold</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Body.Red.Bold" parent="Widget.ShakoMako.Text.Body.Red">-->
+    <!--        <item name="android:fontFamily">@font/lato_bold</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Content.Red.Bold" parent="Widget.ShakoMako.Text.Content.Red">-->
+    <!--        <item name="android:fontFamily">@font/lato_bold</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Body.Gray" parent="Widget.ShakoMako.Text.Body">-->
+    <!--        <item name="android:textColor">@color/darkGrayColor</item>-->
+    <!--    </style>-->
+
+    <!--&lt;!&ndash;    <style name="Widget.ShakoMako.Text.Body.Red" parent="Widget.ShakoMako.Text.Body">&ndash;&gt;-->
+    <!--&lt;!&ndash;        <item name="android:textColor">@color/colorRed</item>&ndash;&gt;-->
+    <!--&lt;!&ndash;    </style>&ndash;&gt;-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Menu.Black" parent="Widget.ShakoMako.Text.Menu">-->
+    <!--        <item name="android:textColor">@color/colorBlack</item>-->
+    <!--    </style>-->
+
+
+    <!--    <style name="Widget.ShakoMako.Text.Toolbar.Black" parent="Widget.ShakoMako.Text.Toolbar">-->
+    <!--        <item name="android:textColor">@color/colorBlack</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Small.Black" parent="Widget.ShakoMako.Text.Small">-->
+    <!--        <item name="android:textColor">@color/colorBlack</item>-->
+    <!--        <item name="android:fontFamily">@font/lato_regular</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Small.Black.Heavy" parent="Widget.ShakoMako.Text.Small.Black">-->
+    <!--        <item name="android:fontFamily">@font/lato_black</item>-->
+    <!--    </style>-->
+
+    <!--&lt;!&ndash;    <style name="Widget.ShakoMako.Text.Small.Red" parent="Widget.ShakoMako.Text.Small">&ndash;&gt;-->
+    <!--&lt;!&ndash;        <item name="android:textColor">@color/colorRed</item>&ndash;&gt;-->
+    <!--&lt;!&ndash;    </style>&ndash;&gt;-->
+
+    <!--    <style name="Widget.ShakoMako.Text.FootNote.Black" parent="Widget.ShakoMako.Text.FootNote">-->
+    <!--        <item name="android:textColor">@color/colorBlack</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Content.Primary" parent="Widget.ShakoMako.Text.Content">-->
+    <!--        <item name="android:textColor">@color/colorPrimary</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Toolbar.Gray" parent="Widget.ShakoMako.Text.Toolbar">-->
+    <!--        <item name="android:textColor">@color/colorBlack</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Small.Gray" parent="Widget.ShakoMako.Text.Small">-->
+    <!--        <item name="android:textColor">@color/grayTextColor</item>-->
+    <!--        <item name="android:fontFamily">@font/lato_regular</item>-->
+    <!--        <item name="android:textSize">@dimen/text_size_footnote</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Small.Red" parent="Widget.ShakoMako.Text.Small">-->
+    <!--        <item name="android:textColor">@color/redColor</item>-->
+    <!--        <item name="android:fontFamily">@font/lato_regular</item>-->
+    <!--        <item name="android:textSize">@dimen/text_size_footnote</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Small.Gray.Small" parent="Widget.ShakoMako.Text.Small.Gray">-->
+    <!--        <item name="android:textColor">@color/grayTextColor</item>-->
+    <!--        <item name="android:fontFamily">@font/lato_regular</item>-->
+    <!--        <item name="android:textSize">@dimen/text_size_small</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Small.Gray.Heavy" parent="Widget.ShakoMako.Text.Small.Gray">-->
+    <!--        <item name="android:fontFamily">@font/lato_black</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Small.Gray.Background" parent="Widget.ShakoMako.Text.Small.Gray">-->
+    <!--        <item name="android:background">@drawable/shape_rectangle_gray_background_no_margin</item>-->
+    <!--        <item name="android:padding">@dimen/_8sdp</item>-->
+    <!--        <item name="android:textSize">@dimen/text_size_small</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Small.Gray.NoBackground" parent="Widget.ShakoMako.Text.Small.Gray">-->
+    <!--        <item name="android:background">@android:color/transparent</item>-->
+    <!--        <item name="android:padding">@dimen/_8sdp</item>-->
+    <!--        <item name="android:textSize">@dimen/text_size_small</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Small.Black.Background" parent="Widget.ShakoMako.Text.Small.Black">-->
+    <!--        <item name="android:background">@drawable/shape_rectangle_gray_background_no_margin</item>-->
+    <!--        <item name="android:padding">@dimen/_8sdp</item>-->
+    <!--        <item name="android:textSize">@dimen/text_size_small</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Small.Blue" parent="Widget.ShakoMako.Text.Small">-->
+    <!--        <item name="android:textColor">@color/colorBlue</item>-->
+    <!--        <item name="android:fontFamily">@font/lato_regular</item>-->
+    <!--        <item name="android:textSize">@dimen/text_size_small</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.Small.Blue.Heavy" parent="Widget.ShakoMako.Text.Small.Blue">-->
+    <!--        <item name="android:fontFamily">@font/lato_black</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="Widget.ShakoMako.Text.FootNote.Gray" parent="Widget.ShakoMako.Text.FootNote">-->
+    <!--        <item name="android:textColor">@color/colorBlack</item>-->
+    <!--    </style>-->
 
 
 </resources>

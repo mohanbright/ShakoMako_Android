@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="listener"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+    </data>
+
+
+    <LinearLayout
+        style="@style/LayoutStylePrimary.Transparent"
+        android:layout_height="?attr/actionBarSize">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:onClick="@{listener::onClick}"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/ic_left_arrow" />
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</layout>

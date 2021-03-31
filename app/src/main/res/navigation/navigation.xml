@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.io.app.shakomako.ui.home.fragments.HomeFragment"
+        android:label="HOME"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_to_my_deal"
+            app:destination="@id/navigation_my_deal" />
+
+        <action
+            android:id="@+id/action_to_product_detail"
+            app:destination="@id/navigation_product_detail" />
+
+        <action
+            android:id="@+id/action_to_navigation_shop_detail"
+            app:destination="@id/navigation_shop_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.io.app.shakomako.ui.profile.ProfileFragment"
+        android:label="PROFILE"
+        tools:layout="@layout/profile_fragment">
+        <action
+            android:id="@+id/action_to_verify_profile"
+            app:destination="@id/navigation_verify_personal" />
+
+        <action
+            android:id="@+id/action_to_delivery_address"
+            app:destination="@id/navigation_delivery_address" />
+
+        <action
+            android:id="@+id/action_to_edit_profile"
+            app:destination="@id/navigation_edit_profile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_chat"
+        android:name="com.io.app.shakomako.ui.chat.ChatFragment"
+        android:label="CHAT"
+        tools:layout="@layout/chat_fragment">
+        <action
+            android:id="@+id/action_to_my_deal"
+            app:destination="@id/navigation_my_deal" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_shop"
+        android:name="com.io.app.shakomako.ui.shop.ShopFragment"
+        android:label="SHOP"
+        tools:layout="@layout/shop_fragment">
+        <action
+            android:id="@+id/action_to_chat"
+            app:destination="@id/navigation_chat" />
+
+        <action
+            android:id="@+id/action_to_verify_business"
+            app:destination="@id/navigation_verify_business" />
+
+        <action
+            android:id="@+id/action_to_my_deal"
+            app:destination="@id/navigation_my_deal" />
+
+        <action
+            android:id="@+id/action_to_profile_analytics"
+            app:destination="@id/navigation_profile_analytics" />
+
+        <action
+            android:id="@+id/action_to_shop_item_detail"
+            app:destination="@id/navigation_shop_item" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_trending"
+        android:name="com.io.app.shakomako.ui.trending.TrendingFragment"
+        android:label="TRENDING"
+        tools:layout="@layout/trending_fragment">
+        <action
+            android:id="@+id/action_to_my_deal"
+            app:destination="@id/navigation_my_deal" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_verify_business"
+        android:name="com.io.app.shakomako.ui.shop.verify.VerifyBusinessFragment"
+        android:label="VERIFY_BUSINESS"
+        tools:layout="@layout/verify_business_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_my_deal"
+        android:name="com.io.app.shakomako.ui.deal.MyDealFragment"
+        android:label="MY_DEAL"
+        tools:layout="@layout/my_deal_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_profile_analytics"
+        android:name="com.io.app.shakomako.ui.profile_analytics.FragmentProfileAnalytics"
+        android:label="PROFILE_ANALYTICS"
+        tools:layout="@layout/fragment_profile_analytics">
+        <action
+            android:id="@+id/action_to_analytics"
+            app:destination="@id/navigation_analytics" />
+
+        <action
+            android:id="@+id/action_to_verify_business"
+            app:destination="@id/navigation_verify_business" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_analytics"
+        android:name="com.io.app.shakomako.ui.analytics.FragmentAnalytics"
+        android:label="ANALYTICS"
+        tools:layout="@layout/fragment_analytics" />
+
+    <fragment
+        android:id="@+id/navigation_verify_personal"
+        android:name="com.io.app.shakomako.ui.profile.verify.PersonalVerifyFragment"
+        android:label="VERIFY_PERSONAL"
+        tools:layout="@layout/personal_verify_fragment" />
+
+    <fragment
+        android:id="@+id/navigation_delivery_address"
+        android:name="com.io.app.shakomako.ui.delivery.DeliveryAddressFragment"
+        android:label="DELIVERY_ADDRESS"
+        tools:layout="@layout/fragment_delivery_address" />
+
+    <fragment
+        android:id="@+id/navigation_product_detail"
+        android:name="com.io.app.shakomako.ui.business.OtherBusinessProfile"
+        android:label="PRODUCT_DETAIL"
+        tools:layout="@layout/fragment_other_business_profile">
+        <action
+            android:id="@+id/action_to_chat"
+            app:destination="@id/navigation_chat" />
+
+        <action
+            android:id="@+id/action_to_shop_item_detail"
+            app:destination="@id/navigation_shop_item" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_edit_profile"
+        android:name="com.io.app.shakomako.ui.profile.edit.EditProfileFragment"
+        android:label="EDIT_PROFILE"
+        tools:layout="@layout/fragment_edit_profile">
+
+        <action
+            android:id="@+id/action_to_verify_profile"
+            app:destination="@id/navigation_verify_personal" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_shop_item"
+        android:name="com.io.app.shakomako.ui.shopitemdetails.ShopItemDetailFragment"
+        android:label="SHOP_ITEM"
+        tools:layout="@layout/fragment_shop_item_detail">
+
+        <action
+            android:id="@+id/action_to_my_deal"
+            app:destination="@id/navigation_my_deal" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_shop_detail"
+        android:name="com.io.app.shakomako.ui.shopdetail.FragmentShopItemDetail"
+        android:label="Detail"
+        tools:layout="@layout/fragment_shop_item" />
+
+</navigation>

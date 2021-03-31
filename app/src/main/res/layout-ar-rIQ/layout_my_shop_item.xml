@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewHandler"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorBlack" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorBlack" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_edit"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:onClick="@{viewHandler::onClick}"
+            android:src="@drawable/edit"
+            android:layout_marginRight="@dimen/_5sdp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_item"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_70sdp"
+             />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Widget.ShakoMako.Text"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/iv_item"
+            android:text="@string/_1200_iqd" />
+
+    </RelativeLayout>
+
+</layout>

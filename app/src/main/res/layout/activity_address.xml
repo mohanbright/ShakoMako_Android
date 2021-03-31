@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewHandler"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <variable
+            name="viewModel"
+            type="com.io.app.shakomako.ui.address.AddressViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.delivery.DeliveryAddressFragment">
+
+        <RelativeLayout
+            android:id="@+id/rl_header"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorGray">
+
+            <TextView
+                style="@style/Widget.ShakoMako.Text.Title.Black"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@string/add_delivery_address" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:onClick="@{viewHandler::onClick}"
+                android:scaleX=".8"
+                android:src="@drawable/ic_back_button" />
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/rl_header"
+            android:background="@color/colorView" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:background="#41000000" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Widget.ShakoMako.Text.Black"
+                        android:layout_width="@dimen/_120sdp"
+                        android:padding="@dimen/_2sdp"
+                        android:text="@string/shakomako_label" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@color/colorAccent"
+                        android:gravity="start"
+                        android:hint="@string/enter"
+                        android:text="@={viewModel.deliveryAddress.label}"
+                        android:textSize="@dimen/_13sdp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#41000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Widget.ShakoMako.Text.Black"
+                        android:layout_width="@dimen/_120sdp"
+                        android:padding="@dimen/_2sdp"
+                        android:text="@string/building_number" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@color/colorAccent"
+                        android:gravity="start"
+                        android:hint="@string/enter_building_number"
+                        android:text="@={viewModel.deliveryAddress.buildingNumber}"
+                        android:textSize="@dimen/_13sdp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#41000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Widget.ShakoMako.Text.Black"
+                        android:layout_width="@dimen/_120sdp"
+                        android:padding="@dimen/_2sdp"
+                        android:text="@string/street_name" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@color/colorAccent"
+                        android:gravity="start"
+                        android:hint="@string/enter_street_name"
+                        android:text="@={viewModel.deliveryAddress.streetName}"
+                        android:textSize="@dimen/_13sdp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#41000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Widget.ShakoMako.Text.Black"
+                        android:layout_width="@dimen/_120sdp"
+                        android:padding="@dimen/_2sdp"
+                        android:text="@string/district" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@color/colorAccent"
+                        android:gravity="start"
+                        android:hint="@string/enter_district"
+                        android:text="@={viewModel.deliveryAddress.district}"
+                        android:textSize="@dimen/_13sdp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#41000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Widget.ShakoMako.Text.Black"
+                        android:layout_width="@dimen/_120sdp"
+                        android:padding="@dimen/_2sdp"
+                        android:text="@string/city" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@color/colorAccent"
+                        android:gravity="start"
+                        android:hint="@string/enter_city"
+                        android:text="@={viewModel.deliveryAddress.city}"
+                        android:textSize="@dimen/_13sdp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#41000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Widget.ShakoMako.Text.Black"
+                        android:layout_width="@dimen/_120sdp"
+                        android:padding="@dimen/_2sdp"
+                        android:text="@string/country" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:background="@color/colorAccent"
+                        android:gravity="start"
+                        android:hint="@string/enter_country"
+                        android:text="@={viewModel.deliveryAddress.country}"
+                        android:textSize="@dimen/_13sdp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/ll_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:padding="@dimen/_20sdp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_save_address"
+                style="@style/Widget.ShakoMako.Text.Green"
+                android:layout_width="wrap_content"
+                android:layout_gravity="end"
+                android:background="@drawable/bg_green_round_border"
+                android:gravity="center"
+                android:onClick="@{viewHandler::onClick}"
+                android:paddingStart="@dimen/_40sdp"
+                android:paddingTop="@dimen/_12sdp"
+                android:paddingEnd="@dimen/_40sdp"
+                android:paddingBottom="@dimen/_12sdp"
+                android:text="@string/save_address" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>

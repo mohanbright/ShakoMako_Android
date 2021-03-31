@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="adapter"
+            type="com.io.app.shakomako.ui.filter.adapter.PagerAdapter" />
+    </data>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_filter"
+        style="@style/Widget.ShakoMako.Text.Heading.Black"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="@string/filterby"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_clear_24"
+        app:layout_constraintTop_toTopOf="@id/tv_filter"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_filter"/>
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab"
+        android:layout_width="0dp"
+        app:tabTextAppearance="@style/Widget.ShakoMako.Text.Tab"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:tabMode="fixed"
+        app:layout_constraintTop_toBottomOf="@id/tv_filter"/>
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adapter="@{adapter}"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tab"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

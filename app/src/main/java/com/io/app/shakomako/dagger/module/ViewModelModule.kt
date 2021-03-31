@@ -1,12 +1,49 @@
 package com.io.app.shakomako.dagger.module
 
+import androidx.lifecycle.ViewModel
+import com.io.app.shakomako.dagger.factory.BaseViewModelKey
+import com.io.app.shakomako.ui.address.AddressViewModel
+import com.io.app.shakomako.ui.chat.activity.ChatViewModel
+import com.io.app.shakomako.ui.home.HomeViewModel
+import com.io.app.shakomako.ui.login.LoginViewModel
+import com.io.app.shakomako.ui.main.MainViewModel
+import com.io.app.shakomako.ui.product.AddProductViewModel
+import dagger.Binds
 import dagger.Module
+import dagger.multibindings.IntoMap
 
 @Module
 abstract class ViewModelModule {
 
-    /* @Binds
+    @Binds
     @IntoMap
-    @BaseViewModelKey(SplashViewModel.class)
-    public abstract ViewModel provideSplashViewModel(SplashViewModel viewModel);*/
+    @BaseViewModelKey(MainViewModel::class)
+    abstract fun provideSplashViewModel(viewModel: MainViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @BaseViewModelKey(LoginViewModel::class)
+    abstract fun provideLoginViewModel(viewModel: LoginViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @BaseViewModelKey(HomeViewModel::class)
+    abstract fun provideHomeViewModel(viewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @BaseViewModelKey(AddProductViewModel::class)
+    abstract fun provideAddProductViewModel(viewModel: AddProductViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @BaseViewModelKey(AddressViewModel::class)
+    abstract fun provideAddressViewModel(viewModel: AddressViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @BaseViewModelKey(ChatViewModel::class)
+    abstract fun provideChatViewModel(viewModel: ChatViewModel): ViewModel
+
+
 }

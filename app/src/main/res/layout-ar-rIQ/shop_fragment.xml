@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewHandler"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text.Heading.Black.X"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/register_business" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorBlack" />
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:orientation="vertical"
+                    tools:context=".ui.shop.ShopFragment">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        style="@style/Widget.ShakoMako.Text"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/bg_green_dash"
+                        android:gravity="center"
+                        android:hint="@string/business_name"
+                        android:padding="@dimen/_10sdp"
+                        android:textColorHint="@color/colorBlack" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_beauty"
+                        style="@style/Widget.ShakoMako.Text.Black"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/bg_green_dash"
+                        android:gravity="center"
+                        android:onClick="@{viewHandler::onClick}"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/select_business_category" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        style="@style/Widget.ShakoMako.Text"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/bg_green_dash"
+                        android:gravity="center"
+                        android:hint="@string/business_location_zipcode"
+                        android:inputType="number"
+                        android:padding="@dimen/_10sdp"
+                        android:textColorHint="@color/colorBlack" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        style="@style/Widget.ShakoMako.Text"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/bg_green_dash"
+                        android:gravity="center"
+                        android:hint="@string/business_bio_10000_characters"
+                        android:lines="5"
+                        android:maxLines="5"
+                        android:padding="@dimen/_10sdp"
+                        android:textColorHint="@color/colorBlack" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Widget.ShakoMako.Text.Black"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/bg_green_dash"
+                        android:gravity="center"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/upload_bio_picture" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Widget.ShakoMako.Text.Black"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/bg_green_rect"
+                        android:gravity="center"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/submit"
+                        app:textAllCaps="true" />
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                layout="@layout/layout_my_shop"
+                app:viewHandler="@{viewHandler}" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</layout>

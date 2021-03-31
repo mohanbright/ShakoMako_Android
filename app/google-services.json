@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "613516465027",
+    "project_id": "shakomako-1609305601225",
+    "storage_bucket": "shakomako-1609305601225.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613516465027:android:b1aa09c969e2de20d49cb6",
+        "android_client_info": {
+          "package_name": "com.io.app.shakomako"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "613516465027-63o2mle0icqi1skcd4dup1su8k82cfmh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.io.app.shakomako",
+            "certificate_hash": "1d2fc1eae641be714948eae2bc553c9b98856a64"
+          }
+        },
+        {
+          "client_id": "613516465027-bvh3b0u3f5h3e234iu9rta4121usll3l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWhV3E_U4uGq0T8cDr1fyX1cFdx20bO1o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "613516465027-bvh3b0u3f5h3e234iu9rta4121usll3l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "613516465027-k6mgg8tb9dpradlecla409akfp4s4mji.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bright.ShakoMako"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

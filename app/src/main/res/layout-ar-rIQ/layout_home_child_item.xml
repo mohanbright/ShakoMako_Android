@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewHandler"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rl_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="@{viewHandler::onClick}"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/ic_my_shop"
+            app:civ_border_color="@color/colorBlack"
+            app:civ_border_width="1dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_marginStart="-18dp"
+            android:layout_marginLeft="-18dp"
+            android:layout_marginTop="-2dp"
+            android:layout_toEndOf="@id/profile_image"
+            android:layout_toRightOf="@id/profile_image"
+            android:src="@drawable/ic_verify" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Widget.ShakoMako.Text.Black"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/profile_image"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:text="@string/lipsticking" />
+
+    </RelativeLayout>
+
+</layout>

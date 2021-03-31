@@ -1,18 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <variable
+            name="viewHandler"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="@dimen/_20sdp"
+            android:scaleType="centerInside"
+            android:src="@drawable/logo"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_facebook"
+            style="@style/Widget.ShakoMako.Text.Body.White"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/faceebook_bg"
+            android:drawablePadding="@dimen/_10sdp"
+            android:onClick="@{viewHandler::onClick}"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/cont_facebook"
+            app:drawableLeftCompat="@drawable/ic_facebook_circular_logo" />
+
+
+        <TextView
+            android:id="@+id/tv_google"
+            style="@style/Widget.ShakoMako.Text.Body.Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/google_bg"
+            android:drawablePadding="@dimen/_10sdp"
+            android:onClick="@{viewHandler::onClick}"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/cont_google"
+            app:drawableLeftCompat="@drawable/ic_search" />
+
+
+        <TextView
+            android:id="@+id/tv_instagram"
+            style="@style/Widget.ShakoMako.Text.Body.White"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/insta_bg"
+            android:drawablePadding="@dimen/_10sdp"
+            android:onClick="@{viewHandler::onClick}"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/cont_insta"
+            app:drawableLeftCompat="@drawable/ic_instagram" />
+
+        <TextView
+            android:id="@+id/tv_number"
+            style="@style/Widget.ShakoMako.Text.Body.White"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/number_bg"
+            android:drawablePadding="@dimen/_10sdp"
+            android:onClick="@{viewHandler::onClick}"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/cont_number"
+            app:drawableLeftCompat="@drawable/ic_smartphone" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/terms"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+    </LinearLayout>
+
+
+</layout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewHandler"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:background="@color/colorView" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorView" />
+
+        <RelativeLayout
+            android:id="@+id/rl_item"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_centerInParent="true"
+            android:layout_height="@dimen/_70sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_item"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:layout_centerInParent="true" />
+
+            <ProgressBar
+                android:id="@+id/progressBarMedium"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:indeterminateTint="@color/colorPrimary" />
+
+        </RelativeLayout>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_product_price"
+            style="@style/Widget.ShakoMako.Text"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/rl_item"
+            android:layout_centerInParent="true"
+            android:text="1200 IQD" />
+
+    </RelativeLayout>
+
+</layout>

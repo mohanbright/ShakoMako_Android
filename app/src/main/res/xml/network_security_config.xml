@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">ec2-3-142-205-39.us-east-2.compute.amazonaws.com:5000</domain>
+    </domain-config>
+
+
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>
+
+<!--<network-security-config>
+    <domain-config>
+        <domain includeSubdomains="true">ec2-3-142-205-39.us-east-2.compute.amazonaws.com:5000</domain>
+        <base-config cleartextTrafficPermitted="true">
+            <trust-anchors>
+                <certificates src="system" />
+            </trust-anchors>
+        </base-config>
+    </domain-config>
+</network-security-config>-->

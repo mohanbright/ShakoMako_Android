@@ -3,4 +3,20 @@
 
     <dimen name="text_size_body">14dp</dimen>
 
+
+    <dimen name="otp_view_item_size">48dp</dimen>
+    <dimen name="otp_view_item_radius">5dp</dimen>
+    <dimen name="otp_view_item_spacing">5dp</dimen>
+    <dimen name="otp_view_item_line_width">2dp</dimen>
+    <dimen name="otp_view_cursor_width">2dp</dimen>
+
+    <dimen name="pickerview_topbar_height">44dp</dimen>
+    <!--paddingLeft -->
+    <dimen name="pickerview_topbar_paddingleft">20dp</dimen>
+    <!--paddingRight -->
+    <dimen name="pickerview_topbar_paddingright">30dp</dimen>
+    <dimen name="pickerview_topbar_btn_textsize">20sp</dimen>
+    <dimen name="pickerview_topbar_title_textsize">21sp</dimen>
+    <dimen name="pickerview_textsize">20sp</dimen>
+
 </resources>

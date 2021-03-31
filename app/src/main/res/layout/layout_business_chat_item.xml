@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+
+        <variable
+            name="viewHandler"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <import type="com.io.app.shakomako.utils.DateUtilsKt" />
+
+        <variable
+            name="businessdata"
+            type="com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse" />
+
+
+        <import
+            alias="v"
+            type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rl_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="@{viewHandler::onClick}"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp">
+
+            <ProgressBar
+                android:id="@+id/business_p_bar"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:indeterminate="true"
+                android:layout_centerInParent="true"
+                android:indeterminateTint="@color/colorPrimary"
+                android:rotation="100"
+                app:indicatorColor="@color/colorPrimary" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_gravity="center"
+                app:civ_border_color="@color/colorBlack"
+                app:civ_border_width="1dp" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:layout_marginStart="-10dp"
+                android:layout_marginLeft="-10dp"
+                android:layout_marginTop="-2dp"
+                android:visibility="@{businessdata.personVerification_status==`no`?v.GONE:v.VISIBLE}"
+                android:layout_toEndOf="@id/profile_image"
+                android:layout_toRightOf="@id/profile_image"
+                android:src="@drawable/ic_verify" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text.Subtitle.Black"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@{businessdata.user_name}"
+                    tools:text="Trendy Me" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:text="@{DateUtilsKt.dateFormat(businessdata.created_at)}"
+                    tools:text="11:34 am" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@{businessdata.seen==`unseen` ? @drawable/ic_seen : @drawable/ic_double_check}"
+                    android:visibility="@{businessdata.messageType==`text` ? v.VISIBLE:v.GONE}"
+                    tools:src="@drawable/ic_double_check" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:paddingStart="@dimen/_6sdp"
+                    android:paddingLeft="@dimen/_6sdp"
+                    android:text="@{businessdata.messageType==`text` ? businessdata.lastMessage : ``}"
+                    tools:text="Hi I'm interested in this, I would like three, can we do a booking." />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/colorView" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</layout>

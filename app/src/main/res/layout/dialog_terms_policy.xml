@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="clickHandler"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/_10sdp"
+
+        android:minHeight="@dimen/_180sdp"
+        android:background="@android:color/transparent"
+        tools:background="@color/colorPrimary">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cons_main"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/bg_dialog"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/tv_privacy"
+                style="@style/Widget.ShakoMako.Text.Title.Black"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center"
+                android:text="@string/privacy_policy"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/colorBlack"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_privacy" />
+
+
+            <TextView
+                android:id="@+id/tv_terms"
+                style="@style/Widget.ShakoMako.Text.Title.Black"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center"
+                android:text="@string/terms_condition"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            style="@style/Widget.ShakoMako.Text.Title.Black"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:gravity="center"
+            android:background="@drawable/bg_accent_rect"
+            android:text="@string/pickerview_cancel"
+            android:layout_margin="@dimen/_10sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cons_main" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
