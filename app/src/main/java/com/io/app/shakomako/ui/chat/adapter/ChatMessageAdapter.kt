@@ -16,6 +16,8 @@ import com.bumptech.glide.request.target.Target
 import com.io.app.shakomako.R
 import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
 import com.io.app.shakomako.databinding.LayoutChatListItemBinding
+import com.io.app.shakomako.helper.callback.RecyclerClickHandler
+import com.io.app.shakomako.helper.callback.ViewClickCallback
 import com.io.app.shakomako.utils.constants.AppConstant
 import com.io.app.shakomako.utils.constants.MessageConstant.Companion.BUSINESS
 import com.io.app.shakomako.utils.constants.MessageConstant.Companion.DELIVERY_ADDRESS
@@ -26,7 +28,11 @@ import com.io.app.shakomako.utils.constants.MessageConstant.Companion.PRODUCT
 import com.io.app.shakomako.utils.constants.MessageConstant.Companion.TEXT
 import kotlin.collections.ArrayList
 
-class ChatMessageAdapter(var context: Context, var type: Int) :
+class ChatMessageAdapter(
+    var context: Context,
+    var type: Int,
+    var clickHandler: RecyclerClickHandler<View, ChatMessageData, Int>
+) :
     RecyclerView.Adapter<ChatMessageAdapter.ChatViewHolder>() {
 
     var list: ArrayList<ChatMessageData> = ArrayList()
@@ -64,11 +70,16 @@ class ChatMessageAdapter(var context: Context, var type: Int) :
 
 
     inner class ChatViewHolder(var binding: LayoutChatListItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root), ViewClickCallback {
+
+        lateinit var data: ChatMessageData
+
         fun bind(data: ChatMessageData) {
+            this.data = data
+            binding.viewHandler = this
             when (data.type) {
                 TEXT -> {
-                    if (type == AppConstant.PERSONAL_CHAT)
+                    if (type == AppConstant.PERSONAL_CHAT || type == AppConstant.CREATE_CHAT)
                         if (data.sender == BUSINESS) {
                             binding.messageType = 1
                         } else {
@@ -83,7 +94,7 @@ class ChatMessageAdapter(var context: Context, var type: Int) :
                 }
 
                 ICI -> {
-                    if (type == AppConstant.PERSONAL_CHAT)
+                    if (type == AppConstant.PERSONAL_CHAT || type == AppConstant.CREATE_CHAT)
                         if (data.sender == BUSINESS)
                             binding.messageType = 3
                         else
@@ -96,26 +107,26 @@ class ChatMessageAdapter(var context: Context, var type: Int) :
                 }
 
                 PRODUCT -> {
-                    if (type == AppConstant.PERSONAL_CHAT)
+                    if (type == AppConstant.PERSONAL_CHAT || type == AppConstant.CREATE_CHAT)
                         if (data.sender == BUSINESS) {
                             binding.messageType = 5
-                            loadImage(data.attachment)
+                            loadImageTwo(data.attachment)
                         } else {
                             binding.messageType = 4
-                            loadImageTwo(data.attachment)
+                            loadImage(data.attachment)
                         }
                     else
                         if (data.sender == BUSINESS) {
                             binding.messageType = 4
-                            loadImageTwo(data.attachment)
+                            loadImage(data.attachment)
                         } else {
                             binding.messageType = 5
-                            loadImage(data.attachment)
+                            loadImageTwo(data.attachment)
                         }
                 }
 
                 DELIVERY_ADDRESS, LOCATION -> {
-                    if (type == AppConstant.PERSONAL_CHAT)
+                    if (type == AppConstant.PERSONAL_CHAT || type == AppConstant.CREATE_CHAT)
                         if (data.sender == BUSINESS)
                             binding.messageType = 7
                         else
@@ -127,22 +138,22 @@ class ChatMessageAdapter(var context: Context, var type: Int) :
                             binding.messageType = 7
                 }
 
-                IMAGE->{
-                    if (type == AppConstant.PERSONAL_CHAT)
+                IMAGE -> {
+                    if (type == AppConstant.PERSONAL_CHAT || type == AppConstant.CREATE_CHAT)
                         if (data.sender == BUSINESS) {
                             binding.messageType = 9
-                            loadImage(data.attachment)
+                            loadImageTwo(data.attachment)
                         } else {
                             binding.messageType = 8
-                            loadImageTwo(data.attachment)
+                            loadImage(data.attachment)
                         }
                     else
                         if (data.sender == BUSINESS) {
                             binding.messageType = 8
-                            loadImageTwo(data.attachment)
+                            loadImage(data.attachment)
                         } else {
                             binding.messageType = 9
-                            loadImage(data.attachment)
+                            loadImageTwo(data.attachment)
                         }
                 }
             }
@@ -201,6 +212,14 @@ class ChatMessageAdapter(var context: Context, var type: Int) :
                         return false
                     }
                 }).into(binding.ivProductTwo)
+        }
+
+        override fun onClick(v: View) {
+            when (v.id) {
+                R.id.ll_invoice_send -> {
+                    clickHandler.onClick(v, data, adapterPosition)
+                }
+            }
         }
     }
 

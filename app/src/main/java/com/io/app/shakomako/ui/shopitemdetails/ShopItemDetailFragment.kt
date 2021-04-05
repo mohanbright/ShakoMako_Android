@@ -1,18 +1,23 @@
 package com.io.app.shakomako.ui.shopitemdetails
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
 import com.io.app.shakomako.R
+import com.io.app.shakomako.api.pojo.chat_response.PersonalChatResponse
+import com.io.app.shakomako.api.pojo.chatroom.ChatRoomData
 import com.io.app.shakomako.api.pojo.product.ProductResponse
 import com.io.app.shakomako.databinding.FragmentShopItemDetailBinding
 import com.io.app.shakomako.helper.callback.ViewClickCallback
+import com.io.app.shakomako.ui.chat.activity.ChatActivity
 import com.io.app.shakomako.ui.home.HomeBaseFragment
 import com.io.app.shakomako.ui.shopitemdetails.adapter.SlidingImageAdapter
 import com.io.app.shakomako.utils.constants.ApiConstant
 import com.io.app.shakomako.utils.constants.AppConstant
+import com.io.app.shakomako.utils.session.SessionConstants
 
 class ShopItemDetailFragment : HomeBaseFragment<FragmentShopItemDetailBinding>(),
     ViewClickCallback {
@@ -92,6 +97,63 @@ class ShopItemDetailFragment : HomeBaseFragment<FragmentShopItemDetailBinding>()
             R.id.tv_overview -> {
                 viewModel.shopItemDetailObserver.screenObserver = 0
             }
+
+            R.id.ll_chat -> createChat()
+
+        }
+    }
+
+    private fun createChat() {
+        if (data.business_id == viewModel.userSession.getIntValue(SessionConstants.BUSINESS_ID)) {
+            viewModel.chatObserver.screenObserver = 1
+            openFragment(AppConstant.CHAT_FRAGMENT)
+        } else {
+            viewModel.createChatRoom(
+                apiListener(),
+                viewModel.userSession.getIntValue(SessionConstants.USER_ID),
+                this.data.business_id
+            ).observe(viewLifecycleOwner, Observer { response ->
+                run {
+                    when {
+                        response.status?.equals(ApiConstant.SUCCESS) == true -> {
+                            val data = PersonalChatResponse()
+                            data.room_id = (response.body ?: ChatRoomData()).roomId
+                            data.business_id = this.data.business_id
+                            data.lastMessage = this.data.product_id.toString()
+                            data.business_name =
+                                viewModel.otherBusinessObserver.otherBusinessProfile.businessName
+                            data.business_picture =
+                                viewModel.otherBusinessObserver.otherBusinessProfile.businessPicture // getting this data from other business profile. Setting value in Other Business Profile
+
+                            startActivity(
+                                Intent(getBaseActivity(), ChatActivity::class.java).putExtra(
+                                    AppConstant.PARCEL_DATA,
+                                    data
+                                ).putExtra(AppConstant.TYPE, AppConstant.CREATE_CHAT)
+                                    .putExtra(AppConstant.EXTRA_DATA, this.data)
+                            )
+                        }
+                        response.status?.equals(201) == true -> {
+                            val data = PersonalChatResponse()
+                            data.room_id = (response.body ?: ChatRoomData()).roomId
+                            data.business_name =
+                                viewModel.otherBusinessObserver.otherBusinessProfile.businessName
+                            data.business_picture =
+                                viewModel.otherBusinessObserver.otherBusinessProfile.businessPicture // getting this data from other business profile. Setting value in Other Business Profile
+                            startActivity(
+                                Intent(getBaseActivity(), ChatActivity::class.java).putExtra(
+                                    AppConstant.PARCEL_DATA,
+                                    data
+                                ).putExtra(AppConstant.TYPE, AppConstant.PERSONAL_CHAT)
+                                    .putExtra(AppConstant.EXTRA_DATA, this.data)
+                            )
+                        }
+                        else -> showToast(
+                            response.message ?: resources.getString(R.string.msg_something_went_wrong)
+                        )
+                    }
+                }
+            })
         }
     }
 

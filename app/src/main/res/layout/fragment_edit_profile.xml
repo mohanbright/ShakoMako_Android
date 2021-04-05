@@ -379,7 +379,8 @@
                         android:padding="@dimen/_2sdp"
                         android:text="@string/gender" />
 
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_gender"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -387,6 +388,8 @@
                         android:background="@color/colorAccent"
                         android:gravity="start"
                         android:hint="@string/enter"
+                        android:onClick="@{viewHandler::onClick}"
+                        android:text="@{data.userGender}"
                         android:textSize="@dimen/_13sdp" />
 
                 </LinearLayout>
@@ -410,7 +413,8 @@
                         android:padding="@dimen/_2sdp"
                         android:text="@string/date_of_birth" />
 
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_date_of_birth"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -418,6 +422,8 @@
                         android:background="@color/colorAccent"
                         android:gravity="start"
                         android:hint="@string/enter"
+                        android:onClick="@{viewHandler::onClick}"
+                        android:text="@{data.dateOfBirth}"
                         android:textSize="@dimen/_13sdp" />
 
                 </LinearLayout>

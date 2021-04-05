@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewHandler"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_10sdp">
+
+        <LinearLayout
+            android:id="@+id/ll_chat_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_male"
+                android:onClick="@{viewHandler::onClick}"
+                style="@style/Widget.ShakoMako.Text.Subtitle.Black"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/male" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_female"
+                android:onClick="@{viewHandler::onClick}"
+                style="@style/Widget.ShakoMako.Text.Subtitle.Black"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/female" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_other"
+                android:onClick="@{viewHandler::onClick}"
+                style="@style/Widget.ShakoMako.Text.Subtitle.Black"
+                android:gravity="center"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/other" />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</layout>

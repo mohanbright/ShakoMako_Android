@@ -98,7 +98,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_personal"
-                style="@style/Widget.ShakoMako.Text.Title"
+                style="@style/Widget.ShakoMako.Text.Subtitle"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
@@ -114,7 +114,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_business"
-                style="@style/Widget.ShakoMako.Text.Title"
+                style="@style/Widget.ShakoMako.Text.Subtitle"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
@@ -129,6 +129,22 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/colorView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_empty_message"
+            style="@style/Widget.ShakoMako.Text.Black"
+            android:visibility="gone"
+            android:gravity="center"
+            android:layout_margin="@dimen/_8sdp"
+            android:text="No Chat Found"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_empty_message_Business"
+            style="@style/Widget.ShakoMako.Text.Black"
+            android:visibility="gone"
+            android:gravity="center"
+            android:layout_margin="@dimen/_8sdp"
+            android:text="No Chat Found"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_personal_chat"

@@ -2,8 +2,11 @@ package com.io.app.shakomako.ui.chat.activity
 
 import android.content.Context
 import androidx.databinding.BaseObservable
+import bolts.Bolts
 import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
+import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
 import com.io.app.shakomako.api.pojo.chat_response.PersonalChatResponse
+import com.io.app.shakomako.api.pojo.product.ProductResponse
 import com.io.app.shakomako.api.repo.ApiRepository
 import com.io.app.shakomako.ui.base.BaseViewModel
 import com.io.app.shakomako.utils.session.SessionConstants
@@ -22,6 +25,7 @@ class ChatViewModel @Inject constructor(
     }
 
     var observer: ChatObserver = ChatObserver()
+    var allMessageList: List<ChatMessageData> = ArrayList()
 
     inner class ChatObserver : BaseObservable() {
         var chatType: Int = 0
@@ -75,6 +79,7 @@ class ChatViewModel @Inject constructor(
                 field = value
                 notifyChange()
             }
+
         var userId: Int = userSession.getIntValue(SessionConstants.USER_ID)
 
         var sender: String = ""
@@ -84,6 +89,30 @@ class ChatViewModel @Inject constructor(
             }
 
         var message: String = ""
+            set(value) {
+                field = value
+                notifyChange()
+            }
+
+        var productResponse: ProductResponse = ProductResponse()
+            set(value) {
+                field = value
+                notifyChange()
+            }
+
+        var invoiceId: Int = 0
+            set(value) {
+                field = value
+                notifyChange()
+            }
+
+        var isInvoiceRequest: Boolean = false
+            set(value) {
+                field = value
+                notifyChange()
+            }
+
+        var latestInvoiceId: Int = 0
             set(value) {
                 field = value
                 notifyChange()
@@ -106,7 +135,7 @@ class ChatViewModel @Inject constructor(
         fun setBusinessData(data: BusinessChatResponse) {
             createdAt = data.created_at
             lastMessage = data.lastMessage
-            type = data.messageType
+            type = data.type
             businessVerificationStatus = data.personVerification_status
             roomId = data.room_id
             seen = data.seen
@@ -114,6 +143,19 @@ class ChatViewModel @Inject constructor(
             name = data.user_name
             picture = data.user_image
             sender = "business"
+        }
+
+        fun setData(data: PersonalChatResponse) {
+            createdAt = data.created_at
+            lastMessage = data.lastMessage
+            type = data.type
+            businessVerificationStatus = data.businessVerificationStatus
+            roomId = data.room_id
+            seen = data.seen
+            businessId = data.business_id
+            name = data.business_name
+            picture = data.business_picture
+            sender = "user"
         }
     }
 }

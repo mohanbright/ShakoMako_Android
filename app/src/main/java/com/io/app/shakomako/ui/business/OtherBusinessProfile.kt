@@ -61,6 +61,8 @@ class OtherBusinessProfile : HomeBaseFragment<FragmentOtherBusinessProfileBindin
                 run {
                     if (response.status?.equals(ApiConstant.SUCCESS) == true) {
                         viewDataBinding.data = response.body?.businessProfile
+                        viewModel.otherBusinessObserver.otherBusinessProfile =
+                            (response.body ?: OtherBusinessProfileResponse()).businessProfile
                         setData(response.body ?: OtherBusinessProfileResponse())
                     } else showToast(
                         response.message

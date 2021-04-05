@@ -6,7 +6,11 @@ import com.io.app.shakomako.api.pojo.business.OtherBusinessProfileResponse
 import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
 import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
 import com.io.app.shakomako.api.pojo.chat_response.PersonalChatResponse
+import com.io.app.shakomako.api.pojo.chatroom.ChatRoomData
+import com.io.app.shakomako.api.pojo.deal.CreateDealData
+import com.io.app.shakomako.api.pojo.deal.DealResponse
 import com.io.app.shakomako.api.pojo.home.HomeData
+import com.io.app.shakomako.api.pojo.invoice.*
 import com.io.app.shakomako.api.pojo.login.LoginRequest
 import com.io.app.shakomako.api.pojo.login.TokenResponse
 import com.io.app.shakomako.api.pojo.product.ProductRequest
@@ -73,6 +77,19 @@ interface RestApi {
     @POST("api/likeUnlikeProduct")
     fun likeUnlikeProduct(@Field("product_id") id: Int): Observable<ApiResponse<JsonObject>>
 
+    @FormUrlEncoded
+    @POST("api/createChatRoom")
+    fun createChatRoom(
+        @Field("user_id") userId: Int,
+        @Field("business_id") businessId: Int
+    ): Observable<ApiResponse<ChatRoomData>>
+
+    @POST("api/saveInvoiceData")
+    fun saveInvoiceData(@Body saveInvoiceData: SaveInvoiceData): Observable<ApiResponse<SaveInvoiceResponse>>
+
+    @POST("api/createDeal")
+    fun createDeal(@Body createDealData: CreateDealData): Observable<ApiResponse<DealResponse>>
+
 
     /** GET APIS*/
 
@@ -103,5 +120,20 @@ interface RestApi {
 
     @GET("api/getAllChats")
     fun getAllChats(@Query("room_id") roomId: Int): Observable<ApiResponse<List<ChatMessageData>>>
+
+    @GET("api/getChatInvoiceProduct")
+    fun getChatInvoiceProduct(@Query("room_id") roomId: Int): Observable<ApiResponse<List<ChatInvoiceProductData>>>
+
+    @GET("api/getInvoiceSubmitData")
+    fun getInvoiceSubmitData(
+        @Query("user_id") userId: Int,
+        @Query("product_id") productId: Int,
+        @Query("room_id") roomId: Int
+    ): Observable<ApiResponse<InvoiceSubmitData>>
+
+    @GET("api/getInvoiceById")
+    fun getInvoiceById(
+        @Query("invoice_id") invoiceId: Int
+    ): Observable<ApiResponse<InvoiceData>>
 
 }

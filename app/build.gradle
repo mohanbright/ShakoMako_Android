@@ -151,4 +151,15 @@ dependencies {
     //swipe delete
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
 
+    //places
+    implementation 'com.google.android.gms:play-services-places:17.0.0'
+    implementation 'com.google.android.libraries.places:places:2.4.0'
+//    implementation 'com.google.android.libraries.places:places:2.3.0'
+//
+    //location
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+
+    //play service- map
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
 }

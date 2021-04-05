@@ -3,10 +3,15 @@ package com.io.app.shakomako.utils.constants
 class AppConstant {
 
     companion object {
+
         const val PARCEL_DATA = "parcel_data"
+        const val EXTRA_DATA = "extra_data"
         const val BUSINESS_ID = "business_id"
         const val PRODUCT_ID = "product_id"
         const val TYPE = "type"
+        const val ROOM_ID = "room_id"
+        const val INVOICE_ID = "invoice_id"
+        const val LOCATION = 99
 
         /**Edit product Constant*/
         const val EDIT_PRODUCT = 10
@@ -19,7 +24,13 @@ class AppConstant {
         /**Chat Activity Constant*/
         const val PERSONAL_CHAT = 10
         const val BUSINESS_CHAT = 11
+        const val CREATE_CHAT = 12
 
+        /**Invoice Activity Constant*/
+        const val CREATE_INVOICE = 10
+        const val VIEW_INVOICE = 11
+        const val VIEW_INVOICE_PERSONAL = 12
+        const val VIEW_INVOICE_BUSINESS = 13
 
 
         const val RC_SIGN_IN = 1001

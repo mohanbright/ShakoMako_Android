@@ -55,8 +55,9 @@
 
 
         <androidx.appcompat.widget.AppCompatTextView
-            style="@style/Widget.ShakoMako.Text.Tiny.Black"
-            android:layout_width="@dimen/_50sdp"
+            style="@style/Widget.ShakoMako.Text.Small.Black"
+            android:layout_width="@dimen/_60sdp"
+            android:textSize="@dimen/_9sdp"
             android:layout_below="@id/rl_image"
             android:layout_centerInParent="true"
             android:layout_marginTop="@dimen/_6sdp"

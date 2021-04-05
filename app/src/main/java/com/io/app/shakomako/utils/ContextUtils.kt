@@ -4,14 +4,18 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.location.Address
+import android.location.Geocoder
 import android.os.Build
 import android.os.Environment
 
 import android.os.LocaleList
+import android.util.Log
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
+import java.io.IOException
 import java.util.*
 
 
@@ -92,6 +96,42 @@ class ContextUtils(base : Context) : ContextWrapper(base){
             if (fileName.contains(" ")) fileName = fileName.replace(" ".toRegex(), "")
             val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), mFile)
             return MultipartBody.Part.createFormData("media", fileName, requestFile)
+        }
+
+        /**
+         * Method returns the digits containing by int
+         *
+         * @param value
+         */
+        fun getDigits(value: Int): Int {
+            var value = value
+            var count = 0
+            while (value != 0) {
+                value /= 10
+                count++
+            }
+            return count
+        }
+
+        fun getAddressFromLatLng(
+            context: Context?,
+            lat: Double,
+            lng: Double
+        ): Address? {
+            val geocoder = Geocoder(context)
+            var address: Address? = null
+            try {
+                val addresses =
+                    geocoder.getFromLocation(lat, lng, 1)
+                if (addresses != null && !addresses.isEmpty()) {
+                    address = addresses[0]
+                } else {
+                    Log.e("TAG", "Unable to find zip code")
+                }
+            } catch (e: IOException) {
+                Log.e("TAG", e.localizedMessage)
+            }
+            return address
         }
 
     }

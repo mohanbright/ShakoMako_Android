@@ -117,6 +117,7 @@ abstract class BaseActivity : DaggerAppCompatActivity(), BaseHandler {
         }
     }
 
+
     @SuppressLint("CheckResult")
     override fun checkThePermission(
         title: String,

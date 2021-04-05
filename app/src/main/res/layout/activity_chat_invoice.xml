@@ -8,6 +8,16 @@
         <variable
             name="viewHandler"
             type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <variable
+            name="data"
+            type="com.io.app.shakomako.api.pojo.invoice.SaveInvoiceData" />
+
+        <variable
+            name="viewModel"
+            type="com.io.app.shakomako.ui.invoice.ChatInvoiceViewModel" />
+
+        <import type="com.io.app.shakomako.utils.constants.AppConstant"/>
     </data>
 
     <LinearLayout
@@ -18,162 +28,170 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorGray">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                style="@style/Widget.ShakoMako.Text.Heading.X"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:gravity="center"
-                android:text="In-Chat-Invoice (ICI)" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_close"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:onClick="@{viewHandler::onClick}"
-                android:src="@drawable/cancel" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorView" />
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorGray">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text.Heading.X"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:text="In-Chat-Invoice (ICI)" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_close"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:onClick="@{viewHandler::onClick}"
+                    android:src="@drawable/cancel" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorView" />
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorGray"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:orientation="horizontal">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            style="@style/Widget.ShakoMako.Text.Black"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:paddingLeft="@dimen/_15sdp"
-                            android:text="@string/design_shoe" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tv_share"
-                            style="@style/Widget.ShakoMako.Text.Black"
-                            android:layout_margin="@dimen/_10sdp"
-                            android:layout_weight="1"
-                            android:background="@drawable/bg_green_broder"
-                            android:gravity="center"
-                            android:onClick="@{viewHandler::onClick}"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:paddingTop="@dimen/_3sdp"
-                            android:paddingEnd="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_3sdp"
-                            android:text="@string/follow" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/profile_image"
-                            android:layout_width="@dimen/_80sdp"
-                            android:layout_height="@dimen/_80sdp"
-                            android:layout_gravity="center"
-                            android:padding="@dimen/_10sdp"
-                            android:src="@drawable/ic_my_shop"
-                            app:civ_border_color="@color/colorBlack"
-                            app:civ_border_width="1dp" />
-
+                        android:background="@color/colorGray"
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:gravity="center"
                             android:orientation="horizontal">
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/Widget.ShakoMako.Text.Black"
+                                android:layout_gravity="center"
                                 android:layout_weight="1"
+                                android:paddingLeft="@dimen/_15sdp"
+                                android:text="@string/design_shoe" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_share"
+                                style="@style/Widget.ShakoMako.Text.Black"
+                                android:layout_margin="@dimen/_10sdp"
+                                android:layout_weight="1"
+                                android:background="@drawable/bg_green_broder"
                                 android:gravity="center"
-                                android:orientation="vertical">
+                                android:onClick="@{viewHandler::onClick}"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:paddingTop="@dimen/_3sdp"
+                                android:paddingEnd="@dimen/_10sdp"
+                                android:paddingBottom="@dimen/_3sdp"
+                                android:text="@string/follow" />
 
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    style="@style/Widget.ShakoMako.Text.Black"
-                                    android:gravity="center"
-                                    android:text="@string/_0" />
+                        </LinearLayout>
 
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    style="@style/Widget.ShakoMako.Text.Black"
-                                    android:layout_marginTop="@dimen/_5sdp"
-                                    android:gravity="center"
-                                    android:text="@string/deals_" />
-                            </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/profile_image"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_80sdp"
+                                android:layout_gravity="center"
+                                android:padding="@dimen/_10sdp"
+                                android:src="@drawable/ic_my_shop"
+                                app:civ_border_color="@color/colorBlack"
+                                app:civ_border_width="1dp" />
+
 
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
+                                android:layout_marginTop="@dimen/_10sdp"
                                 android:gravity="center"
-                                android:orientation="vertical">
+                                android:orientation="horizontal">
 
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    style="@style/Widget.ShakoMako.Text.Black"
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text="@string/_0" />
+                                    android:orientation="vertical">
 
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    style="@style/Widget.ShakoMako.Text.Black"
-                                    android:layout_marginTop="@dimen/_5sdp"
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        style="@style/Widget.ShakoMako.Text.Black"
+                                        android:gravity="center"
+                                        android:text="@string/_0" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        style="@style/Widget.ShakoMako.Text.Black"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:gravity="center"
+                                        android:text="@string/deals_" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text="@string/followers" />
-                            </LinearLayout>
+                                    android:orientation="vertical">
 
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        style="@style/Widget.ShakoMako.Text.Black"
+                                        android:gravity="center"
+                                        android:text="@string/_0" />
 
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    style="@style/Widget.ShakoMako.Text.Black"
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        style="@style/Widget.ShakoMako.Text.Black"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:gravity="center"
+                                        android:text="@string/followers" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text="@string/_0" />
+                                    android:orientation="vertical">
 
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    style="@style/Widget.ShakoMako.Text.Black"
-                                    android:layout_marginTop="@dimen/_5sdp"
-                                    android:gravity="center"
-                                    android:text="@string/ratings" />
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        style="@style/Widget.ShakoMako.Text.Black"
+                                        android:gravity="center"
+                                        android:text="@string/_0" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        style="@style/Widget.ShakoMako.Text.Black"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:gravity="center"
+                                        android:text="@string/ratings" />
+                                </LinearLayout>
+
+
                             </LinearLayout>
 
 
@@ -182,315 +200,320 @@
 
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:background="@color/colorView" />
 
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_6sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:background="@color/colorView" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_8sdp">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="@dimen/_120sdp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/username" />
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_8sdp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="0dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/design_shoe" />
-                </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="@dimen/_120sdp"
+                            android:gravity="center"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/username" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_8sdp">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/design_shoe" />
+                    </LinearLayout>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="@dimen/_120sdp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/text_full_name" />
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_8sdp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="0dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/design_shoe" />
-                </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="@dimen/_120sdp"
+                            android:gravity="center"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/text_full_name" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_8sdp">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/design_shoe" />
+                    </LinearLayout>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="@dimen/_120sdp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/text_customer_id" />
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_8sdp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="0dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/design_shoe" />
-                </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="@dimen/_120sdp"
+                            android:gravity="center"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/text_customer_id" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_8sdp">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/design_shoe" />
+                    </LinearLayout>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="@dimen/_120sdp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/text_delivery_address" />
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_8sdp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="0dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/design_shoe" />
-                </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="@dimen/_120sdp"
+                            android:gravity="center"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/text_delivery_address" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_8sdp">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/design_shoe" />
+                    </LinearLayout>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="@dimen/_120sdp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/product" />
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_8sdp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="0dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/design_shoe" />
-                </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="@dimen/_120sdp"
+                            android:gravity="center"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/product" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_8sdp">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/design_shoe" />
+                    </LinearLayout>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="@dimen/_120sdp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/product_id" />
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_8sdp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="0dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/design_shoe" />
-                </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="@dimen/_120sdp"
+                            android:gravity="center"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/product_id" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_8sdp">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/design_shoe" />
+                    </LinearLayout>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="@dimen/_120sdp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/quantity" />
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_8sdp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="0dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/design_shoe" />
-                </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="@dimen/_120sdp"
+                            android:gravity="center"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/quantity" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_8sdp">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/design_shoe" />
+                    </LinearLayout>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="@dimen/_120sdp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/notes" />
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_8sdp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="0dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/design_shoe" />
-                </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="@dimen/_120sdp"
+                            android:gravity="center"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/notes" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_8sdp">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/design_shoe" />
+                    </LinearLayout>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="@dimen/_120sdp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/product_deal_price" />
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_8sdp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="0dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/design_shoe" />
-                </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="@dimen/_120sdp"
+                            android:gravity="center"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/product_deal_price" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_8sdp">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/design_shoe" />
+                    </LinearLayout>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="@dimen/_120sdp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/delivery_fee" />
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_8sdp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text"
-                        android:layout_width="0dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/design_shoe" />
-                </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="@dimen/_120sdp"
+                            android:gravity="center"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/delivery_fee" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_6sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:background="@color/colorView" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text"
+                            android:layout_width="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/design_shoe" />
+                    </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_8sdp">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:background="@color/colorView" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text.Black"
-                        android:layout_width="@dimen/_120sdp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/total_deal_price"
-                        android:textSize="@dimen/_15sdp" />
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_8sdp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/Widget.ShakoMako.Text.Black"
-                        android:layout_width="0dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_weight="1"
-                        android:gravity="start"
-                        android:padding="@dimen/_2sdp"
-                        android:text="134,000 IQD"
-                        android:textSize="@dimen/_15sdp" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text.Black"
+                            android:layout_width="@dimen/_120sdp"
+                            android:gravity="center"
+                            android:padding="@dimen/_2sdp"
+                            android:text="@string/total_deal_price"
+                            android:textSize="@dimen/_15sdp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text.Black"
+                            android:layout_width="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            android:padding="@dimen/_2sdp"
+                            android:text="134,000 IQD"
+                            android:textSize="@dimen/_15sdp" />
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-        </androidx.core.widget.NestedScrollView>
+            </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+
+        <include
+            android:id="@+id/include_chat_invoice_generate"
+            layout="@layout/layout_chat_invoice_generate"
+            app:viewModel="@{viewModel}"
+            app:data="@{data}"
+            app:viewHandler="@{viewHandler}" />
 
 
     </LinearLayout>

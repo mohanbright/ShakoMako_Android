@@ -11,6 +11,7 @@ import com.io.app.shakomako.ui.login.InstagramWebActivity
 import com.io.app.shakomako.ui.login.LoginActivity
 import com.io.app.shakomako.ui.main.IntroActivity
 import com.io.app.shakomako.ui.main.MainActivity
+import com.io.app.shakomako.ui.map.MapActivity
 import com.io.app.shakomako.ui.otp.OtpActivity
 import com.io.app.shakomako.ui.product.AddProductActivity
 import dagger.Binds
@@ -55,4 +56,7 @@ abstract class UiModule {
 
     @ContributesAndroidInjector
     abstract fun contributeChatActivity(): ChatActivity
+
+    @ContributesAndroidInjector
+    abstract fun contributeMapActivity(): MapActivity
 }

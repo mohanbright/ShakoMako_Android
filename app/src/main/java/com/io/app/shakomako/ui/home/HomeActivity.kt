@@ -121,7 +121,10 @@ class HomeActivity : DataBindingActivity<ActivityHomeBinding>() {
         homeViewModel.getUserProfile(apiListener()).observe(this, Observer { response ->
             run {
                 if (response.status?.equals(ApiConstant.SUCCESS) == true) {
-
+                    homeViewModel.userSession.save(
+                        SessionConstants.BUSINESS_ID,
+                        (response.body ?: ProfileResponse()).businessId
+                    )
                     homeViewModel.userSession.save(
                         SessionConstants.USER_ID,
                         (response.body ?: ProfileResponse()).userId

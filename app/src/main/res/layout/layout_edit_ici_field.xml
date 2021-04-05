@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewHandler"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="hint"
+            type="String" />
+
+        <variable
+            name="type"
+            type="int" />
+
+        <import type="android.text.InputType"/>
+    </data>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/editBackground"
+        app:cardCornerRadius="@dimen/_10sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/Widget.ShakoMako.Text.Title.Black.Bold"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:text="@string/edit" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/Widget.ShakoMako.Text.Black"
+                android:gravity="center"
+                android:text="@{title,default=`Edit Delivery Address`}" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_edit"
+                style="@style/Widget.ShakoMako.Text"
+                android:layout_margin="@dimen/_15sdp"
+                android:background="@drawable/et_background"
+                android:inputType="@{type == 1 || type == 3? InputType.TYPE_CLASS_TEXT: InputType.TYPE_CLASS_NUMBER}"
+                android:hint="@{hint,default=`Edit Delivery Address`}"
+                android:padding="@dimen/_8sdp"
+                android:textColorHint="@color/colorView" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorView" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_save"
+                    android:onClick="@{viewHandler::onClick}"
+                    style="@style/Widget.ShakoMako.Text.Subtitle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Save"
+                    android:textColor="@color/com_facebook_blue" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorView" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/iv_cancel"
+                    style="@style/Widget.ShakoMako.Text.Subtitle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick="@{viewHandler::onClick}"
+                    android:padding="@dimen/_10sdp"
+                    android:text="@string/cancel"
+                    android:textColor="@color/com_facebook_blue" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</layout>

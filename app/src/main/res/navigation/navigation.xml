@@ -168,6 +168,10 @@
             android:id="@+id/action_to_my_deal"
             app:destination="@id/navigation_my_deal" />
 
+        <action
+            android:id="@+id/action_to_chat"
+            app:destination="@id/navigation_chat" />
+
     </fragment>
 
     <fragment

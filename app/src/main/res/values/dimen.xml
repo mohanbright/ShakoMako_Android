@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="text_size_body">14dp</dimen>
+    <dimen name="text_size_body">15dp</dimen>
 
 
     <dimen name="otp_view_item_size">48dp</dimen>

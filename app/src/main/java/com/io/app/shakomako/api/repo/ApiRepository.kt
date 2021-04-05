@@ -7,7 +7,11 @@ import com.io.app.shakomako.api.pojo.business.OtherBusinessProfileResponse
 import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
 import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
 import com.io.app.shakomako.api.pojo.chat_response.PersonalChatResponse
+import com.io.app.shakomako.api.pojo.chatroom.ChatRoomData
+import com.io.app.shakomako.api.pojo.deal.CreateDealData
+import com.io.app.shakomako.api.pojo.deal.DealResponse
 import com.io.app.shakomako.api.pojo.home.HomeData
+import com.io.app.shakomako.api.pojo.invoice.*
 import com.io.app.shakomako.api.pojo.login.LoginRequest
 import com.io.app.shakomako.api.pojo.login.TokenResponse
 import com.io.app.shakomako.api.pojo.product.ProductRequest
@@ -204,6 +208,40 @@ class ApiRepository @Inject constructor(
             ?.subscribe(observer)
     }
 
+    fun createChatRoom(
+        userId: Int,
+        businessId: Int,
+        observer: Observer<ApiResponse<ChatRoomData>>
+    ) {
+        getHeaderApi()
+            ?.createChatRoom(userId, businessId)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun saveInvoiceData(
+        saveInvoiceData: SaveInvoiceData,
+        observer: Observer<ApiResponse<SaveInvoiceResponse>>
+    ) {
+        getHeaderApi()
+            ?.saveInvoiceData(saveInvoiceData)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun createDeal(
+        createDealData: CreateDealData,
+        observer: Observer<ApiResponse<DealResponse>>
+    ) {
+        getHeaderApi()
+            ?.createDeal(createDealData)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
 
     /*--------------------------------------------- ------------- ----------------------------------------*/
     /*--------------------------------------------- Get Type Api ----------------------------------------*/
@@ -280,6 +318,41 @@ class ApiRepository @Inject constructor(
     fun getAllChats(roomId: Int, observer: Observer<ApiResponse<List<ChatMessageData>>>) {
         getHeaderApi()
             ?.getAllChats(roomId)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun getChatInvoiceProduct(
+        roomId: Int,
+        observer: Observer<ApiResponse<List<ChatInvoiceProductData>>>
+    ) {
+        getHeaderApi()
+            ?.getChatInvoiceProduct(roomId)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun getInvoiceSubmitData(
+        userId: Int,
+        productId: Int,
+        roomId: Int,
+        observer: Observer<ApiResponse<InvoiceSubmitData>>
+    ) {
+        getHeaderApi()
+            ?.getInvoiceSubmitData(userId, productId, roomId)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun getInvoiceById(
+        invoiceId: Int,
+        observer: Observer<ApiResponse<InvoiceData>>
+    ) {
+        getHeaderApi()
+            ?.getInvoiceById(invoiceId)
             ?.subscribeOn(Schedulers.single())
             ?.observeOn(AndroidSchedulers.mainThread())
             ?.subscribe(observer)

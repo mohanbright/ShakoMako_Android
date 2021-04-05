@@ -1,31 +1,35 @@
 package com.io.app.shakomako.ui.profile.edit
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.graphics.drawable.Drawable
-import android.inputmethodservice.Keyboard
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.DatePicker
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.io.app.shakomako.R
 import com.io.app.shakomako.databinding.FragmentEditProfileBinding
-import com.io.app.shakomako.helper.callback.ApiListener
+import com.io.app.shakomako.databinding.LayoutChatOptionsBinding
+import com.io.app.shakomako.databinding.LayoutGenderSelectionBinding
 import com.io.app.shakomako.helper.callback.DataItemCallBack
 import com.io.app.shakomako.helper.callback.ViewClickCallback
 import com.io.app.shakomako.ui.base.BaseUtils
 import com.io.app.shakomako.ui.home.HomeBaseFragment
+import com.io.app.shakomako.utils.ContextUtils
 import com.io.app.shakomako.utils.constants.ApiConstant
 import com.io.app.shakomako.utils.constants.AppConstant
-import java.net.URI
+import java.util.*
 
 class EditProfileFragment : HomeBaseFragment<FragmentEditProfileBinding>(), ViewClickCallback {
 
@@ -127,6 +131,12 @@ class EditProfileFragment : HomeBaseFragment<FragmentEditProfileBinding>(), View
                 onBackPressed()
             }
 
+            R.id.tv_date_of_birth -> {
+                showDobDialog()
+            }
+
+            R.id.tv_gender -> showBottomSheet()
+
             R.id.text_submit -> {
                 viewModel.profileObserver.profileObserverData.shakoMakoUserName = usernameString
                 if (viewModel.profileObserver.profileObserverData.userImage == ""
@@ -167,5 +177,54 @@ class EditProfileFragment : HomeBaseFragment<FragmentEditProfileBinding>(), View
                 })
             }
         }
+    }
+
+    private fun showDobDialog() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            val datePickerDialog = DatePickerDialog(getBaseActivity(), R.style.AlertStyle)
+            datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
+            datePickerDialog.setOnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                val date: String
+                val month: Int = monthOfYear + 1
+                date =
+                    if (ContextUtils.getDigits(month) < 2 && ContextUtils.getDigits(dayOfMonth) < 2) {
+                        "$year-0$month-0$dayOfMonth"
+                    } else if (ContextUtils.getDigits(month) < 2) {
+                        "$year-0$month-$dayOfMonth"
+                    } else if (ContextUtils.getDigits(dayOfMonth) < 2) {
+                        "$year-$month-0$dayOfMonth"
+                    } else {
+                        "$year-$month-$dayOfMonth"
+                    }
+                viewModel.profileObserver.profileObserverData.dateOfBirth = date
+            }
+            datePickerDialog.show()
+        }
+    }
+
+    private fun showBottomSheet() {
+        val dialogFragment =
+            BottomSheetDialog(getBaseActivity(), R.style.Widget_ShakoMako_BottomSheetStyle)
+        val bottomSheetBinding: LayoutGenderSelectionBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(getBaseActivity()),
+            R.layout.layout_gender_selection,
+            null,
+            false
+        )
+        bottomSheetBinding.viewHandler = object : ViewClickCallback {
+            override fun onClick(v: View) {
+                when (v.id) {
+                    R.id.tv_male -> viewModel.profileObserver.profileObserverData.userGender =
+                        resources.getString(R.string.male)
+                    R.id.tv_female -> viewModel.profileObserver.profileObserverData.userGender =
+                        resources.getString(R.string.female)
+                    R.id.tv_other -> viewModel.profileObserver.profileObserverData.userGender =
+                        resources.getString(R.string.other)
+                }
+                dialogFragment.dismiss()
+            }
+        }
+        dialogFragment.setContentView(bottomSheetBinding.root)
+        dialogFragment.show()
     }
 }

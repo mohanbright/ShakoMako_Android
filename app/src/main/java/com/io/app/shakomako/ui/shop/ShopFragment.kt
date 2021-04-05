@@ -105,6 +105,7 @@ class ShopFragment : HomeBaseFragment<ShopFragmentBinding>(), ViewClickCallback 
             }
 
             R.id.tv_chat -> {
+                viewModel.chatObserver.screenObserver = 1
                 openFragment(AppConstant.CHAT_FRAGMENT)
             }
 

@@ -11,6 +11,7 @@ import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
 import com.io.app.shakomako.api.pojo.chat_response.PersonalChatResponse
 import com.io.app.shakomako.databinding.LayoutPersonalChatItemBinding
 import com.io.app.shakomako.helper.callback.RecyclerClickHandler
+import com.io.app.shakomako.utils.constants.MessageConstant
 
 class PersonalChatAdapter(
     var context: Context,
@@ -30,7 +31,14 @@ class PersonalChatAdapter(
 
         fun bind(data: PersonalChatResponse) {
             layoutPersonalChatItemBinding.personalData = data
-            layoutPersonalChatItemBinding.executePendingBindings()
+            when(data.type){
+                MessageConstant.IMAGE-> layoutPersonalChatItemBinding.tvMessage.text = "Image Sent"
+                MessageConstant.TEXT-> layoutPersonalChatItemBinding.tvMessage.text = data.lastMessage
+                MessageConstant.PRODUCT-> layoutPersonalChatItemBinding.tvMessage.text = "Product sent"
+                MessageConstant.LOCATION-> layoutPersonalChatItemBinding.tvMessage.text = data.lastMessage
+                MessageConstant.DELIVERY_ADDRESS-> layoutPersonalChatItemBinding.tvMessage.text = data.lastMessage
+            }
+
             Glide.with(layoutPersonalChatItemBinding.root.context).load(data.business_picture)
                 .into(layoutPersonalChatItemBinding.profileImage)
 
@@ -55,8 +63,6 @@ class PersonalChatAdapter(
 
     override fun onBindViewHolder(holder: PersonalChatViewHandler, position: Int) {
         holder.bind(personalChatList[position])
-
-
     }
 
     override fun getItemCount(): Int {

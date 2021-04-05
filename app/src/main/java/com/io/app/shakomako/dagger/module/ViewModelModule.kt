@@ -5,8 +5,10 @@ import com.io.app.shakomako.dagger.factory.BaseViewModelKey
 import com.io.app.shakomako.ui.address.AddressViewModel
 import com.io.app.shakomako.ui.chat.activity.ChatViewModel
 import com.io.app.shakomako.ui.home.HomeViewModel
+import com.io.app.shakomako.ui.invoice.ChatInvoiceViewModel
 import com.io.app.shakomako.ui.login.LoginViewModel
 import com.io.app.shakomako.ui.main.MainViewModel
+import com.io.app.shakomako.ui.map.MapViewModel
 import com.io.app.shakomako.ui.product.AddProductViewModel
 import dagger.Binds
 import dagger.Module
@@ -44,6 +46,16 @@ abstract class ViewModelModule {
     @IntoMap
     @BaseViewModelKey(ChatViewModel::class)
     abstract fun provideChatViewModel(viewModel: ChatViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @BaseViewModelKey(MapViewModel::class)
+    abstract fun provideMapViewModel(viewModel: MapViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @BaseViewModelKey(ChatInvoiceViewModel::class)
+    abstract fun provideChatInvoiceViewModel(viewModel: ChatInvoiceViewModel): ViewModel
 
 
 }

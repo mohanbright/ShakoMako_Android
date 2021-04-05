@@ -9,8 +9,14 @@
             type="com.io.app.shakomako.api.pojo.chat_response.ChatMessageData" />
 
         <variable
+            name="viewHandler"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <variable
             name="messageType"
             type="int" />
+
+        <import type="com.io.app.shakomako.utils.DateUtilsKt" />
 
         <import type="android.view.View" />
     </data>
@@ -55,22 +61,25 @@
                     android:gravity="end"
                     android:paddingStart="@dimen/_2sdp"
                     android:paddingEnd="@dimen/_10sdp"
-                    android:text="9:00 AM" />
+                    android:text="@{DateUtilsKt.dateFormat(data.created_at), default=`9:00 AM`}"
+                    />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="@dimen/_100sdp"
+                android:layout_width="@dimen/_120sdp"
                 android:layout_height="@dimen/_100sdp"
                 android:layout_marginStart="@dimen/_30sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@drawable/bg_chat_green_round_corner"
                 android:orientation="vertical"
-                android:visibility="@{messageType == 4 || messageType ==8? View.VISIBLE : View.GONE}">
+                android:visibility="@{messageType == 4 || messageType == 8? View.VISIBLE : View.GONE}">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="@dimen/_90sdp"
-                    android:layout_height="@dimen/_70sdp"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="@dimen/_8sdp"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_8sdp"
                     app:cardCornerRadius="@dimen/_15sdp">
@@ -96,7 +105,7 @@
                     style="@style/Widget.ShakoMako.Text.Tiny"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginBottom="@dimen/_4sdp"
                     android:gravity="center"
                     android:text="@{data.price + ` IQD`}"
                     android:visibility="@{messageType == 8? View.GONE : View.VISIBLE}" />
@@ -130,9 +139,9 @@
                         android:id="@+id/tv_user_address"
                         style="@style/Widget.ShakoMako.Text"
                         android:layout_width="wrap_content"
+                        android:layout_centerInParent="true"
                         android:layout_gravity="center"
                         android:layout_toEndOf="@id/iv_loc"
-                        android:layout_centerInParent="true"
                         android:gravity="end"
                         android:paddingStart="@dimen/_3sdp"
                         android:paddingTop="@dimen/_6sdp"
@@ -148,13 +157,15 @@
                     android:gravity="end"
                     android:paddingStart="@dimen/_2sdp"
                     android:paddingEnd="@dimen/_10sdp"
-                    android:text="9:00 AM" />
+                    android:text="@{DateUtilsKt.dateFormat(data.created_at), default=`9:00 AM`}"/>
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_invoice_send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
+                android:onClick="@{viewHandler::onClick}"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@drawable/bg_chat_send_backgound"
@@ -198,7 +209,7 @@
                     android:gravity="end"
                     android:paddingStart="@dimen/_2sdp"
                     android:paddingEnd="@dimen/_10sdp"
-                    android:text="9:00 AM" />
+                    android:text="@{DateUtilsKt.dateFormat(data.created_at), default=`9:00 AM`}"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -235,7 +246,7 @@
                     android:gravity="end"
                     android:paddingStart="@dimen/_2sdp"
                     android:paddingEnd="@dimen/_10sdp"
-                    android:text="9:00 AM" />
+                    android:text="@{DateUtilsKt.dateFormat(data.created_at), default=`9:00 AM`}"/>
             </LinearLayout>
 
             <LinearLayout
@@ -285,7 +296,7 @@
                     android:gravity="end"
                     android:paddingStart="@dimen/_2sdp"
                     android:paddingEnd="@dimen/_10sdp"
-                    android:text="9:00 AM" />
+                    android:text="@{DateUtilsKt.dateFormat(data.created_at), default=`9:00 AM`}" />
             </LinearLayout>
 
             <LinearLayout
@@ -329,11 +340,11 @@
                     android:gravity="end"
                     android:paddingStart="@dimen/_2sdp"
                     android:paddingEnd="@dimen/_10sdp"
-                    android:text="9:00 AM" />
+                    android:text="@{DateUtilsKt.dateFormat(data.created_at), default=`9:00 AM`}" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="@dimen/_100sdp"
+                android:layout_width="@dimen/_120sdp"
                 android:layout_height="@dimen/_100sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
@@ -343,9 +354,11 @@
                 android:visibility="@{messageType == 5 || messageType ==9? View.VISIBLE : View.GONE}">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="@dimen/_90sdp"
-                    android:layout_height="@dimen/_70sdp"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_8sdp"
                     app:cardCornerRadius="@dimen/_15sdp">
 
@@ -371,7 +384,7 @@
                     style="@style/Widget.ShakoMako.Text.Tiny"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginBottom="@dimen/_4sdp"
                     android:gravity="center"
                     android:text="@{data.price + ` IQD`}" />
             </LinearLayout>

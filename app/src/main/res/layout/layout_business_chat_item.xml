@@ -42,8 +42,8 @@
                 style="@style/Widget.AppCompat.ProgressBar"
                 android:layout_width="@dimen/_10sdp"
                 android:layout_height="@dimen/_10sdp"
-                android:indeterminate="true"
                 android:layout_centerInParent="true"
+                android:indeterminate="true"
                 android:indeterminateTint="@color/colorPrimary"
                 android:rotation="100"
                 app:indicatorColor="@color/colorPrimary" />
@@ -60,13 +60,11 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="@dimen/_10sdp"
                 android:layout_height="@dimen/_10sdp"
-                android:layout_marginStart="-10dp"
-                android:layout_marginLeft="-10dp"
-                android:layout_marginTop="-2dp"
-                android:visibility="@{businessdata.personVerification_status==`no`?v.GONE:v.VISIBLE}"
+                android:layout_marginStart="-14dp"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:layout_toEndOf="@id/profile_image"
-                android:layout_toRightOf="@id/profile_image"
-                android:src="@drawable/ic_verify" />
+                android:src="@drawable/ic_verify"
+                android:visibility="@{businessdata.personVerification_status==`no`?v.GONE:v.VISIBLE}" />
 
         </RelativeLayout>
 
@@ -110,16 +108,16 @@
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
                     android:src="@{businessdata.seen==`unseen` ? @drawable/ic_seen : @drawable/ic_double_check}"
-                    android:visibility="@{businessdata.messageType==`text` ? v.VISIBLE:v.GONE}"
+                    android:visibility="@{businessdata.type==`text` ? v.VISIBLE:v.GONE}"
                     tools:src="@drawable/ic_double_check" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_business_message"
                     style="@style/Widget.ShakoMako.Text"
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:paddingStart="@dimen/_6sdp"
                     android:paddingLeft="@dimen/_6sdp"
-                    android:text="@{businessdata.messageType==`text` ? businessdata.lastMessage : ``}"
                     tools:text="Hi I'm interested in this, I would like three, can we do a booking." />
 
 

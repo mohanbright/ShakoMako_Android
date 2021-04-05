@@ -28,6 +28,8 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/ll_share_delivery_address"
+                android:onClick="@{viewHandler::onClick}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -51,6 +53,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/issue_in_chat_invoice"
+                android:onClick="@{viewHandler::onClick}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -74,7 +78,9 @@
 
 
             <LinearLayout
+                android:id="@+id/ll_camera"
                 android:layout_width="match_parent"
+                android:onClick="@{viewHandler::onClick}"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
@@ -95,8 +101,10 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_photo_and_view_library"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="@{viewHandler::onClick}"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:orientation="horizontal">
@@ -115,6 +123,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_location"
+                android:onClick="@{viewHandler::onClick}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -136,6 +146,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_cash_on_delivery"
+                android:onClick="@{viewHandler::onClick}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"

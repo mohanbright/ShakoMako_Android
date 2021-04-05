@@ -5,7 +5,7 @@ import java.io.Serializable
 data class BusinessChatResponse(
     val created_at: String = "",
     val lastMessage: String = "",
-    val messageType: String = "",
+    val type: String = "",
     val personVerification_status: String = "",
     val room_id: Int = 0,
     val seen: String = "",

@@ -3,6 +3,7 @@ package com.io.app.shakomako.ui.home
 import android.content.Context
 import androidx.databinding.BaseObservable
 import com.io.app.shakomako.api.pojo.business.OtherBusinessProduct
+import com.io.app.shakomako.api.pojo.business.OtherBusinessProfile
 import com.io.app.shakomako.api.pojo.business.OtherBusinessProfileResponse
 import com.io.app.shakomako.api.pojo.home.HomeItem
 import com.io.app.shakomako.api.pojo.home.item.HomeFashionData
@@ -99,6 +100,12 @@ class HomeViewModel @Inject constructor(
             }
 
         var otherBusinessProduct: OtherBusinessProduct = OtherBusinessProduct()
+            set(value) {
+                field = value
+                notifyChange()
+            }
+
+        var otherBusinessProfile: OtherBusinessProfile = OtherBusinessProfile()
             set(value) {
                 field = value
                 notifyChange()

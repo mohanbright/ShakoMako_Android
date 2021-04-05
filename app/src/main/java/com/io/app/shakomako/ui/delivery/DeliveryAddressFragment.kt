@@ -93,7 +93,7 @@ class DeliveryAddressFragment : HomeBaseFragment<FragmentDeliveryAddressBinding>
                     Intent(getBaseActivity(), AddressActivity::class.java).putExtra(
                         AppConstant.TYPE,
                         AppConstant.ADD_ADDRESS
-                    )
+                    ).putExtra(AppConstant.PARCEL_DATA, DeliveryAddress())
                 )
             }
         }

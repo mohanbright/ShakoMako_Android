@@ -6,7 +6,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
-        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="fontFamily">@font/font_medium</item>
     </style>
 
     <style name="Widget.ShakoMako.BottomSheetStyle">
@@ -18,16 +18,34 @@
     <style name="Widget.ShakoMako.Text.Tab" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
         <item name="android:textAllCaps">false</item>
-        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="fontFamily">@font/font_medium</item>
 
     </style>
 
+    <!--alert dialog style-->
+    <style name="AlertStyle" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+
+    <style name="AlertStyleDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 
     <style name="BaseAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorAccent</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="fontFamily">@font/font_medium</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
         <item name="android:windowBackground">@color/colorAccent</item>
         <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
@@ -37,7 +55,7 @@
     <style name="yourStyle" parent="BaseAppTheme">
         <item name="colorAccent">@color/tick_green</item>
         <item name="android:textColorSecondary">@color/tick_green</item>
-        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="fontFamily">@font/font_medium</item>
 
     </style>
 
@@ -64,19 +82,19 @@
         <item name="android:background">@null</item>
         <item name="android:minHeight">0dp</item>
         <item name="android:maxLines">1</item>
-        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="fontFamily">@font/font_medium</item>
 
     </style>
 
     <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">10sp</item>
-        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="fontFamily">@font/font_medium</item>
 
     </style>
 
     <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">11sp</item>
-        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="fontFamily">@font/font_medium</item>
 
     </style>
 

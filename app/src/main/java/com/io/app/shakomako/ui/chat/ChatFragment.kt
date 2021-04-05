@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.lifecycle.Observer
 import com.io.app.shakomako.R
 import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
@@ -24,6 +26,8 @@ class ChatFragment : HomeBaseFragment<ChatFragmentBinding>(), ViewClickCallback 
 
     lateinit var businessAdapter: BusinessChatAdapter
     lateinit var personalChatAdapter: PersonalChatAdapter
+    var personalSize: Int = 0
+    var businessSize: Int = 0
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -78,32 +82,50 @@ class ChatFragment : HomeBaseFragment<ChatFragmentBinding>(), ViewClickCallback 
     private fun initObserver() {
         viewModel.getBusinessChatList(apiListener()).observe(viewLifecycleOwner, Observer {
             businessAdapter.businessChatList = it as ArrayList<BusinessChatResponse>
-            Log.e("test", "${it.size}")
-            businessAdapter.notifyDataSetChanged()
-
+            businessSize = it.size
+            handleBusinessEmptyVisibility()
         })
     }
 
 
     private fun initPersonalObserver() {
         viewModel.getpersonalChatList(apiListener()).observe(viewLifecycleOwner, Observer {
-            Log.e("test", "${it.size}")
             personalChatAdapter.personalChatList = it as ArrayList<PersonalChatResponse>
-            personalChatAdapter.notifyDataSetChanged()
-
+            personalSize = it.size
+            handlePersonalEmptyVisibility()
         })
     }
 
     override fun onClick(v: View) {
         when (v.id) {
             R.id.tv_personal -> {
+                handlePersonalEmptyVisibility()
                 viewModel.chatObserver.screenObserver = 0
             }
 
             R.id.tv_business -> {
+                handleBusinessEmptyVisibility()
                 viewModel.chatObserver.screenObserver = 1
             }
+
+            R.id.ll_my_deal -> openFragment(AppConstant.MY_DEAL)
         }
+    }
+
+    private fun handlePersonalEmptyVisibility(){
+        Log.e("TAG", "$personalSize")
+        viewDataBinding.tvEmptyMessageBusiness?.visibility = GONE
+        if (personalSize == 0) {
+            viewDataBinding.tvEmptyMessage?.visibility = VISIBLE
+        } else viewDataBinding.tvEmptyMessage?.visibility = GONE
+    }
+
+    private fun handleBusinessEmptyVisibility(){
+        Log.e("TAG", "$businessAdapter")
+        viewDataBinding.tvEmptyMessage?.visibility = GONE
+        if (businessSize == 0) {
+            viewDataBinding.tvEmptyMessageBusiness?.visibility = VISIBLE
+        } else viewDataBinding.tvEmptyMessageBusiness?.visibility = GONE
     }
 
 }

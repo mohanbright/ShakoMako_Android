@@ -14,6 +14,14 @@ class ProfileResponse : BaseObservable() {
             notifyChange()
         }
 
+    @SerializedName("business_id")
+    @Expose
+    var businessId: Int = 0
+        set(value) {
+            field = value
+            notifyChange()
+        }
+
     @SerializedName("user_name")
     @Expose
     var userName: String = ""

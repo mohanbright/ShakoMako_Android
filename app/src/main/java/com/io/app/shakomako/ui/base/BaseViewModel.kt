@@ -12,7 +12,11 @@ import com.io.app.shakomako.api.pojo.business.OtherBusinessProfileResponse
 import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
 import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
 import com.io.app.shakomako.api.pojo.chat_response.PersonalChatResponse
+import com.io.app.shakomako.api.pojo.chatroom.ChatRoomData
+import com.io.app.shakomako.api.pojo.deal.CreateDealData
+import com.io.app.shakomako.api.pojo.deal.DealResponse
 import com.io.app.shakomako.api.pojo.home.HomeData
+import com.io.app.shakomako.api.pojo.invoice.*
 import com.io.app.shakomako.api.pojo.login.LoginRequest
 import com.io.app.shakomako.api.pojo.login.TokenResponse
 import com.io.app.shakomako.api.pojo.product.ProductRequest
@@ -31,6 +35,7 @@ import io.reactivex.disposables.Disposable
 import java.io.File
 
 open class BaseViewModel : ViewModel() {
+
     protected lateinit var context: Context
     protected lateinit var apiRepository: ApiRepository
 
@@ -730,6 +735,219 @@ open class BaseViewModel : ViewModel() {
                     }
 
                     override fun onNext(t: ApiResponse<List<ChatMessageData>>) {
+                        listener.showProgress(false)
+                        result.value = t
+                    }
+
+                    override fun onError(e: Throwable) {
+                        listener.showProgress(false)
+                        listener.msg(e.localizedMessage)
+                    }
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+    }
+
+    fun createChatRoom(
+        listener: ApiListener,
+        userId: Int,
+        businessId: Int
+    ): LiveData<ApiResponse<ChatRoomData>> {
+        val result: MutableLiveData<ApiResponse<ChatRoomData>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.createChatRoom(
+                userId, businessId,
+                object : Observer<ApiResponse<ChatRoomData>> {
+                    override fun onComplete() {
+
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<ChatRoomData>) {
+                        listener.showProgress(false)
+                        result.value = t
+                    }
+
+                    override fun onError(e: Throwable) {
+                        listener.showProgress(false)
+                        listener.msg(e.localizedMessage)
+                    }
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+    }
+
+    fun getChatInvoiceProduct(
+        listener: ApiListener,
+        roomId: Int
+    ): LiveData<ApiResponse<List<ChatInvoiceProductData>>> {
+        val result: MutableLiveData<ApiResponse<List<ChatInvoiceProductData>>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.getChatInvoiceProduct(
+                roomId,
+                object : Observer<ApiResponse<List<ChatInvoiceProductData>>> {
+                    override fun onComplete() {
+
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<List<ChatInvoiceProductData>>) {
+                        listener.showProgress(false)
+                        result.value = t
+                    }
+
+                    override fun onError(e: Throwable) {
+                        listener.showProgress(false)
+                        listener.msg(e.localizedMessage)
+                    }
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+    }
+
+    fun getInvoiceSubmitData(
+        listener: ApiListener,
+        userId: Int,
+        productId: Int,
+        roomId: Int
+    ): LiveData<ApiResponse<InvoiceSubmitData>> {
+        val result: MutableLiveData<ApiResponse<InvoiceSubmitData>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.getInvoiceSubmitData(
+                userId, productId, roomId,
+                object : Observer<ApiResponse<InvoiceSubmitData>> {
+                    override fun onComplete() {
+
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<InvoiceSubmitData>) {
+                        listener.showProgress(false)
+                        result.value = t
+                    }
+
+                    override fun onError(e: Throwable) {
+                        listener.showProgress(false)
+                        listener.msg(e.localizedMessage)
+                    }
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+    }
+
+    fun saveInvoiceData(
+        listener: ApiListener,
+        saveInvoiceData: SaveInvoiceData
+    ): LiveData<ApiResponse<SaveInvoiceResponse>> {
+        val result: MutableLiveData<ApiResponse<SaveInvoiceResponse>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.saveInvoiceData(
+                saveInvoiceData,
+                object : Observer<ApiResponse<SaveInvoiceResponse>> {
+                    override fun onComplete() {
+
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<SaveInvoiceResponse>) {
+                        listener.showProgress(false)
+                        result.value = t
+                    }
+
+                    override fun onError(e: Throwable) {
+                        listener.showProgress(false)
+                        listener.msg(e.localizedMessage)
+                    }
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+    }
+
+    fun createDeal(
+        listener: ApiListener,
+        createDealData: CreateDealData
+    ): LiveData<ApiResponse<DealResponse>> {
+        val result: MutableLiveData<ApiResponse<DealResponse>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.createDeal(
+                createDealData,
+                object : Observer<ApiResponse<DealResponse>> {
+                    override fun onComplete() {
+
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<DealResponse>) {
+                        listener.showProgress(false)
+                        result.value = t
+                    }
+
+                    override fun onError(e: Throwable) {
+                        listener.showProgress(false)
+                        listener.msg(e.localizedMessage)
+                    }
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+    }
+
+    fun getInvoiceById(
+        listener: ApiListener,
+        invoiceId: Int
+    ): LiveData<ApiResponse<InvoiceData>> {
+        val result: MutableLiveData<ApiResponse<InvoiceData>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.getInvoiceById(
+                invoiceId,
+                object : Observer<ApiResponse<InvoiceData>> {
+                    override fun onComplete() {
+
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<InvoiceData>) {
                         listener.showProgress(false)
                         result.value = t
                     }

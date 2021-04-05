@@ -18,6 +18,8 @@
         <import
             alias="v"
             type="android.view.View" />
+
+        <import type="com.io.app.shakomako.utils.constants.MessageConstant" />
     </data>
 
     <LinearLayout
@@ -61,6 +63,7 @@
                 android:layout_marginStart="-10dp"
                 android:layout_marginLeft="-10dp"
                 android:layout_marginTop="-2dp"
+                android:visibility="invisible"
                 android:layout_toEndOf="@id/profile_image"
                 android:layout_toRightOf="@id/profile_image"
                 android:src="@drawable/ic_verify" />
@@ -111,13 +114,14 @@
                     tools:src="@drawable/ic_seen" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_message"
                     style="@style/Widget.ShakoMako.Text"
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:paddingStart="@dimen/_6sdp"
-                    android:paddingLeft="@dimen/_6sdp"
-                    android:text="@{personalData.type==`text` ? personalData.lastMessage : ``}"
+                    tools:ignore="RtlSymmetry"
                     tools:text="Hi I'm interested in this, I would like three, can we do a booking." />
+                    <!--android:text="@{personalData.type == MessageConstant.TEXT? personalData.lastMessage : ``}"-->
 
 
             </LinearLayout>

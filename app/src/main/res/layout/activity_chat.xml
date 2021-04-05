@@ -12,6 +12,10 @@
         <variable
             name="viewModel"
             type="com.io.app.shakomako.ui.chat.activity.ChatViewModel" />
+
+        <import type="com.io.app.shakomako.utils.constants.AppConstant" />
+
+        <import type="android.view.View" />
     </data>
 
     <LinearLayout
@@ -30,9 +34,9 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:padding="@dimen/_4sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:onClick="@{viewHandler::onClick}"
+                android:padding="@dimen/_4sdp"
                 android:scaleX=".8"
                 android:src="@drawable/ic_back_button" />
 
@@ -46,8 +50,7 @@
                     android:id="@+id/user_image"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_30sdp"
-                    android:layout_centerInParent="true"
-                    />
+                    android:layout_centerInParent="true" />
 
                 <ProgressBar
                     android:id="@+id/progressBarMedium"
@@ -58,17 +61,33 @@
                     android:indeterminateTint="@color/colorPrimary" />
             </RelativeLayout>
 
-
-            <TextView
-                style="@style/Widget.ShakoMako.Text.Heading.Black.X"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@{viewModel.observer.name}"
-                android:textAlignment="center"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="RtlCompat" />
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/Widget.ShakoMako.Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Business"
+                    android:textAlignment="center"
+                    android:visibility="@{viewModel.observer.chatType == AppConstant.BUSINESS_CHAT?View.VISIBLE:View.GONE}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlCompat" />
+
+                <TextView
+                    style="@style/Widget.ShakoMako.Text.Heading.Black.X"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@{viewModel.observer.name}"
+                    android:textAlignment="center"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlCompat" />
+            </LinearLayout>
 
 
             <LinearLayout
@@ -117,10 +136,10 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_plus"
                 android:layout_width="@dimen/_15sdp"
-                android:onClick="@{viewHandler::onClick}"
                 android:layout_height="@dimen/_15sdp"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/_10sdp"
+                android:onClick="@{viewHandler::onClick}"
                 android:src="@drawable/ic_plus" />
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -139,11 +158,13 @@
                 android:textSize="@dimen/_12sdp" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_ici"
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_25sdp"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
+                android:onClick="@{viewHandler::onClick}"
                 android:src="@drawable/ic_ici_gray" />
 
             <androidx.appcompat.widget.AppCompatImageView

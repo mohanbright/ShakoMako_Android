@@ -1,6 +1,6 @@
 package com.io.app.shakomako.api.pojo.product
 
-import androidx.databinding.BaseObservable
+import java.io.Serializable
 
 data class ProductResponse(
     val avgRatings: String = "",
@@ -20,4 +20,4 @@ data class ProductResponse(
     val total4Stars: Int = 0,
     val total5Stars: Int = 0,
     val user_id: Int = 0
-)
+):Serializable
