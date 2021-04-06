@@ -1,5 +1,6 @@
 package com.io.app.shakomako.ui.chat
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -29,6 +30,10 @@ class ChatFragment : HomeBaseFragment<ChatFragmentBinding>(), ViewClickCallback 
     var personalSize: Int = 0
     var businessSize: Int = 0
 
+    companion object {
+        const val DEAL_REQUEST = 888
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -50,11 +55,11 @@ class ChatFragment : HomeBaseFragment<ChatFragmentBinding>(), ViewClickCallback 
         businessAdapter = BusinessChatAdapter(getBaseActivity(),
             object : RecyclerClickHandler<Int, BusinessChatResponse, Int> {
                 override fun onClick(k: Int, l: BusinessChatResponse, m: Int) {
-                    startActivity(
+                    startActivityForResult(
                         Intent(getBaseActivity(), ChatActivity::class.java).putExtra(
                             AppConstant.PARCEL_DATA,
                             l
-                        ).putExtra(AppConstant.TYPE, AppConstant.BUSINESS_CHAT)
+                        ).putExtra(AppConstant.TYPE, AppConstant.BUSINESS_CHAT), DEAL_REQUEST
                     )
                 }
             })
@@ -64,11 +69,11 @@ class ChatFragment : HomeBaseFragment<ChatFragmentBinding>(), ViewClickCallback 
             getBaseActivity(),
             object : RecyclerClickHandler<Int, PersonalChatResponse, Int> {
                 override fun onClick(k: Int, l: PersonalChatResponse, m: Int) {
-                    startActivity(
+                    startActivityForResult(
                         Intent(getBaseActivity(), ChatActivity::class.java).putExtra(
                             AppConstant.PARCEL_DATA,
                             l
-                        ).putExtra(AppConstant.TYPE, AppConstant.PERSONAL_CHAT)
+                        ).putExtra(AppConstant.TYPE, AppConstant.PERSONAL_CHAT), DEAL_REQUEST
                     )
                 }
             })
@@ -112,7 +117,7 @@ class ChatFragment : HomeBaseFragment<ChatFragmentBinding>(), ViewClickCallback 
         }
     }
 
-    private fun handlePersonalEmptyVisibility(){
+    private fun handlePersonalEmptyVisibility() {
         Log.e("TAG", "$personalSize")
         viewDataBinding.tvEmptyMessageBusiness?.visibility = GONE
         if (personalSize == 0) {
@@ -120,12 +125,25 @@ class ChatFragment : HomeBaseFragment<ChatFragmentBinding>(), ViewClickCallback 
         } else viewDataBinding.tvEmptyMessage?.visibility = GONE
     }
 
-    private fun handleBusinessEmptyVisibility(){
+    private fun handleBusinessEmptyVisibility() {
         Log.e("TAG", "$businessAdapter")
         viewDataBinding.tvEmptyMessage?.visibility = GONE
         if (businessSize == 0) {
             viewDataBinding.tvEmptyMessageBusiness?.visibility = VISIBLE
         } else viewDataBinding.tvEmptyMessageBusiness?.visibility = GONE
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == DEAL_REQUEST && resultCode == Activity.RESULT_OK) {
+            val type = data?.getIntExtra(AppConstant.TYPE, -1)
+            if (type == AppConstant.PERSONAL_CHAT) {
+                viewModel.chatObserver.screenObserver = 0
+            } else {
+                viewModel.chatObserver.screenObserver = 1
+            }
+            openFragment(AppConstant.MY_DEAL)
+        }
     }
 
 }

@@ -257,13 +257,13 @@
                             android:id="@+id/tv_add_product_"
                             style="@style/Widget.ShakoMako.Text.Black"
                             android:layout_margin="@dimen/_10sdp"
-                            android:layout_weight=".9"
+                            android:layout_weight=".8"
                             android:background="@drawable/bg_green_broder"
                             android:gravity="center"
                             android:onClick="@{viewHandler::onClick}"
-                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingStart="@dimen/_8sdp"
                             android:paddingTop="@dimen/_3sdp"
-                            android:paddingEnd="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_8sdp"
                             android:paddingBottom="@dimen/_3sdp"
                             android:text="@string/add_product" />
 
@@ -275,9 +275,9 @@
                             android:background="@drawable/bg_green_broder"
                             android:gravity="center"
                             android:onClick="@{viewHandler::onClick}"
-                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingStart="@dimen/_8sdp"
                             android:paddingTop="@dimen/_3sdp"
-                            android:paddingEnd="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_8sdp"
                             android:paddingBottom="@dimen/_3sdp"
                             android:text="@string/chat_" />
 

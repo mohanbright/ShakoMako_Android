@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewHandler"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <variable
+            name="data"
+            type="com.io.app.shakomako.api.pojo.invoice.InvoiceData" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_12sdp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_10sdp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_invoice"
+                    style="@style/Widget.ShakoMako.Text.Title.Black"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/in_chat_invoice_ici"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_clear"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:src="@drawable/com_facebook_close"
+                    android:onClick="@{viewHandler::onClick}"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_invoice"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_invoice" />
+
+                <View
+                    android:id="@+id/divider1"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_invoice"
+                    app:layout_constraintRight_toRightOf="@id/iv_clear"
+                    app:layout_constraintTop_toBottomOf="@id/tv_invoice" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_shop_name"
+                    style="@style/Widget.ShakoMako.Text.Small.Black"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick="@{viewHandler::onClick}"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@{data.businessDetails.business_name}"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_invoice"
+                    app:layout_constraintTop_toBottomOf="@id/divider1"
+
+                    tools:text="Mohini's Shop" />
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/item_image"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/camera"
+                    app:civ_border_color="@color/colorBlack"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_shop_name"
+                    app:layout_constraintRight_toRightOf="@id/tv_shop_name"
+                    app:layout_constraintTop_toBottomOf="@id/tv_shop_name" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_follow"
+                    style="@style/Widget.ShakoMako.Text.Black"
+                    android:layout_width="0dp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@drawable/bg_green_broder"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:onClick="@{viewHandler::onClick}"
+                    android:paddingTop="@dimen/_3sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_3sdp"
+                    android:text="@{data.businessDetails.selfFollow.equals(`yes`)? @string/unfollow : @string/follow }"
+                    app:layout_constraintLeft_toRightOf="@id/tv_shop_name"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_invoice"
+                    tools:text="@string/unfollow" />
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_follow"
+                    app:layout_constraintRight_toRightOf="@id/tv_follow"
+
+
+                    app:layout_constraintTop_toTopOf="@id/item_image">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text.Black"
+                            android:gravity="center"
+                            android:text="@{``+data.businessDetails.deals}"
+                            tools:text="@string/_0" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text.Tiny.Black.L"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:gravity="center"
+                            android:text="@string/deals_" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text.Black"
+                            android:gravity="center"
+                            android:text="@{``+data.businessDetails.followers}"
+                            tools:text="@string/_0" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text.Tiny.Black.L"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:gravity="center"
+                            android:text="@string/followers" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text.Black"
+                            android:gravity="center"
+                            android:text="@{``+data.businessDetails.ratings}"
+                            tools:text="@string/_0" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/Widget.ShakoMako.Text.Tiny.Black.L"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:gravity="center"
+                            android:text="@string/ratings" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:background="@color/black"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_invoice"
+                    app:layout_constraintRight_toRightOf="@id/iv_clear"
+                    app:layout_constraintTop_toBottomOf="@id/item_image" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_icinumber"
+                    style="@style/Widget.ShakoMako.Text.Small"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@string/ici_number"
+                    android:textColor="@color/com_facebook_blue"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_invoice"
+                    app:layout_constraintTop_toBottomOf="@id/divider2" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_invoice_number_detail"
+                    style="@style/Widget.ShakoMako.Text.Small"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@{``+data.invoice_number}"
+                    android:textColor="@color/com_facebook_blue"
+                    app:layout_constraintRight_toRightOf="@id/tv_invoice"
+                    app:layout_constraintTop_toTopOf="@id/tv_icinumber"
+                    tools:text="@string/ici_number_detail" />
+
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:background="@color/black"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_invoice"
+                    app:layout_constraintRight_toRightOf="@id/iv_clear"
+                    app:layout_constraintTop_toBottomOf="@id/tv_icinumber" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_product_code"
+                    style="@style/Widget.ShakoMako.Text.Tiny.Black.L"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:padding="@dimen/_3sdp"
+                    android:text="@string/product_code"
+                    app:layout_constraintLeft_toLeftOf="@id/divider3"
+                    app:layout_constraintTop_toBottomOf="@id/divider3" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_product_code_value"
+                    style="@style/Widget.ShakoMako.Text.Tiny.Black.L"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:inputType="number"
+                    android:padding="@dimen/_3sdp"
+                    android:text="@{``+data.product_id}"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_invoice_number_detail"
+                    app:layout_constraintTop_toBottomOf="@id/divider3"
+                    tools:text="1" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_quantity"
+                    style="@style/Widget.ShakoMako.Text.Tiny.Black.L"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:padding="@dimen/_3sdp"
+                    android:text="@string/quantity"
+                    app:layout_constraintLeft_toLeftOf="@id/divider3"
+                    app:layout_constraintTop_toBottomOf="@id/tv_product_code" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_quantity_value"
+                    style="@style/Widget.ShakoMako.Text.Tiny.Black.L"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:inputType="number"
+                    android:padding="@dimen/_3sdp"
+                    android:text="@{``+data.quantity}"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_invoice_number_detail"
+                    app:layout_constraintTop_toBottomOf="@id/tv_product_code_value"
+                    tools:text="1" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_product_detail_price"
+                    style="@style/Widget.ShakoMako.Text.Tiny.Black.L"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:padding="@dimen/_3sdp"
+                    android:text="@string/product_deal_price"
+                    app:layout_constraintLeft_toLeftOf="@id/divider3"
+                    app:layout_constraintTop_toBottomOf="@id/tv_quantity" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_product_detail_price_value"
+                    style="@style/Widget.ShakoMako.Text.Tiny.Black.L"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:inputType="number"
+                    android:padding="@dimen/_3sdp"
+                    android:text="@{``+data.deal_price}"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_invoice_number_detail"
+                    app:layout_constraintTop_toBottomOf="@id/tv_quantity_value"
+                    tools:text="1" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_delivery_fee"
+                    style="@style/Widget.ShakoMako.Text.Tiny.Black.L"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:padding="@dimen/_3sdp"
+                    android:text="@string/delivery_fee"
+                    app:layout_constraintLeft_toLeftOf="@id/divider3"
+                    app:layout_constraintTop_toBottomOf="@id/tv_product_detail_price" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_delivery_fee_data"
+                    style="@style/Widget.ShakoMako.Text.Tiny.Black.L"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:inputType="number"
+                    android:padding="@dimen/_5sdp"
+                    android:text="@{``+data.delivery_fee}"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_invoice_number_detail"
+                    app:layout_constraintTop_toBottomOf="@id/tv_product_detail_price_value"
+                    tools:text="1" />
+
+
+                <View
+                    android:id="@+id/divider4"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:background="@color/black"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_invoice"
+                    app:layout_constraintRight_toRightOf="@id/iv_clear"
+                    app:layout_constraintTop_toBottomOf="@id/tv_delivery_fee" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_total_amount"
+                    style="@style/Widget.ShakoMako.Text.Tiny.Black.L.Bold"
+                    android:layout_width="wrap_content"
+                    android:padding="@dimen/_3sdp"
+                    android:text="@string/total_amount"
+
+                    app:layout_constraintLeft_toLeftOf="@id/divider4"
+                    app:layout_constraintTop_toBottomOf="@id/divider4" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_total_amount_data"
+                    style="@style/Widget.ShakoMako.Text.Tiny.Black.L"
+                    android:layout_width="wrap_content"
+                    android:inputType="number"
+                    android:padding="@dimen/_3sdp"
+                    android:text="@{``+data.total_price}"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_invoice_number_detail"
+                    app:layout_constraintTop_toBottomOf="@id/divider4" />
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_10sdp"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_invoice_number_detail"
+                    app:layout_constraintTop_toBottomOf="@id/tv_total_amount_data" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+    </RelativeLayout>
+</layout>

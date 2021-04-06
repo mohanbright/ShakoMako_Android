@@ -2,6 +2,7 @@ package com.io.app.shakomako.ui.base
 
 import android.content.Context
 import android.util.Log
+import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,12 +12,17 @@ import com.io.app.shakomako.api.pojo.address.DeliveryAddress
 import com.io.app.shakomako.api.pojo.business.OtherBusinessProfileResponse
 import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
 import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
+import com.io.app.shakomako.api.pojo.chat_response.OpenDealsData
 import com.io.app.shakomako.api.pojo.chat_response.PersonalChatResponse
 import com.io.app.shakomako.api.pojo.chatroom.ChatRoomData
+import com.io.app.shakomako.api.pojo.codapproval.CodApprovalData
 import com.io.app.shakomako.api.pojo.deal.CreateDealData
 import com.io.app.shakomako.api.pojo.deal.DealResponse
+import com.io.app.shakomako.api.pojo.deal.PendingDealsResponse
 import com.io.app.shakomako.api.pojo.home.HomeData
 import com.io.app.shakomako.api.pojo.invoice.*
+import com.io.app.shakomako.api.pojo.like.LikedBusinessData
+import com.io.app.shakomako.api.pojo.like.LikedProductData
 import com.io.app.shakomako.api.pojo.login.LoginRequest
 import com.io.app.shakomako.api.pojo.login.TokenResponse
 import com.io.app.shakomako.api.pojo.product.ProductRequest
@@ -962,5 +968,262 @@ open class BaseViewModel : ViewModel() {
         }
 
         return result
+    }
+
+    fun codApproval(
+        listener: ApiListener,
+        codeApprovalData: CodApprovalData
+    ): LiveData<ApiResponse<JsonObject>> {
+        val result: MutableLiveData<ApiResponse<JsonObject>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.codApproval(
+                codeApprovalData,
+                object : Observer<ApiResponse<JsonObject>> {
+                    override fun onComplete() {
+
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<JsonObject>) {
+                        listener.showProgress(false)
+                        result.value = t
+                    }
+
+                    override fun onError(e: Throwable) {
+                        listener.showProgress(false)
+                        listener.msg(e.localizedMessage)
+                    }
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+    }
+
+    fun getLatestOpenDeals(
+        listener: ApiListener,
+        roomId: Int,
+        getFor: String
+    ): LiveData<ApiResponse<List<OpenDealsData>>> {
+        val result: MutableLiveData<ApiResponse<List<OpenDealsData>>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.getLatestOpenDeals(
+                roomId, getFor,
+                object : Observer<ApiResponse<List<OpenDealsData>>> {
+                    override fun onComplete() {
+
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<List<OpenDealsData>>) {
+                        listener.showProgress(false)
+                        result.value = t
+                    }
+
+                    override fun onError(e: Throwable) {
+                        listener.showProgress(false)
+                        listener.msg(e.localizedMessage)
+                    }
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+    }
+
+    fun getPendingDeals(
+        listener: ApiListener,
+        dealStatus: String
+    ): LiveData<ApiResponse<List<PendingDealsResponse>>> {
+        val result: MutableLiveData<ApiResponse<List<PendingDealsResponse>>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.getPendingDeals(dealStatus,
+                object : Observer<ApiResponse<List<PendingDealsResponse>>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+
+                    }
+
+                    override fun onNext(t: ApiResponse<List<PendingDealsResponse>>) {
+                        Log.e("onNext", "$t")
+                        result.postValue(t)
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.e("onError", e.localizedMessage)
+                        listener.showProgress(false)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+    }
+
+    fun getBusinessDeals(
+        listener: ApiListener,
+        dealStatus: String
+    ): LiveData<ApiResponse<List<PendingDealsResponse>>> {
+        val result: MutableLiveData<ApiResponse<List<PendingDealsResponse>>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.getBusinessDeals(dealStatus,
+                object : Observer<ApiResponse<List<PendingDealsResponse>>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+
+                    }
+
+                    override fun onNext(t: ApiResponse<List<PendingDealsResponse>>) {
+                        Log.e("onNext", "$t")
+                        result.postValue(t)
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.e("onError", e.localizedMessage)
+                        listener.showProgress(false)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+    }
+
+    fun getLikedProducts(
+        listener: ApiListener,
+        limit: Int,
+        offset: Int
+    ): LiveData<ApiResponse<List<LikedProductData>>> {
+        val result: MutableLiveData<ApiResponse<List<LikedProductData>>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.getLikedProducts(limit, offset,
+                object : Observer<ApiResponse<List<LikedProductData>>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<List<LikedProductData>>) {
+                        Log.e("onNext", "$t")
+                        result.value = t
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.e("onError", e.localizedMessage)
+                        listener.showProgress(false)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+    }
+
+    fun getLikedBusiness(
+        listener: ApiListener,
+        limit: Int,
+        offset: Int
+    ): LiveData<ApiResponse<List<LikedBusinessData>>> {
+        val result: MutableLiveData<ApiResponse<List<LikedBusinessData>>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.getLikedBusiness(limit, offset,
+                object : Observer<ApiResponse<List<LikedBusinessData>>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<List<LikedBusinessData>>) {
+                        Log.e("onNext", "$t")
+                        result.value = t
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.e("onError", e.localizedMessage)
+                        listener.showProgress(false)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+    }
+
+    fun userFollow(listener: ApiListener, view: TextView, business_id: Int) {
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.followUnfollwBusiness(business_id,
+                object : Observer<ApiResponse<JsonObject>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<JsonObject>) {
+                        Log.e("onNext", "$t")
+                        if (t.message.equals("Business followed successfully.")) {
+                            view.text = context.resources.getString(R.string.unfollow)
+                        } else {
+                            view.text = context.resources.getString(R.string.follow)
+                        }
+                    }
+
+                    override fun onError(e: Throwable) {
+                        listener.showProgress(false)
+                        listener.msg(e.message!!)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
     }
 }

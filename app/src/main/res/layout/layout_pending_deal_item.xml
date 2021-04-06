@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="viewHandler"
             type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <variable
+            name="dealsData"
+            type="com.io.app.shakomako.api.pojo.deal.PendingDealsResponse" />
+
     </data>
 
     <LinearLayout
@@ -24,10 +30,31 @@
             android:orientation="horizontal"
             android:padding="@dimen/_10sdp">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <RelativeLayout
                 android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"
-                android:src="@drawable/shoe_one" />
+                android:layout_height="@dimen/_50sdp">
+
+                <ProgressBar
+                    android:id="@+id/progressBarMedium"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:indeterminateTint="@color/colorPrimary" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/shoe_one" />
+
+
+
+
+
+            </RelativeLayout>
+
+
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -40,11 +67,13 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/Widget.ShakoMako.Text.Small.Black"
                     android:layout_width="wrap_content"
-                    android:text="@string/design_shoe" />
+                    android:text="@{dealsData.business_name}"
+                    tools:text="@string/design_shoe" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/Widget.ShakoMako.Text.Tiny.Black"
-                    android:text="@string/item_463" />
+                    android:text="@{@string/item_463 + dealsData.product_id}"
+                    tools:text="@string/item_463" />
             </LinearLayout>
 
 

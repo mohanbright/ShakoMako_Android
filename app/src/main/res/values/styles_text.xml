@@ -203,6 +203,13 @@
         <item name="android:textColor">@android:color/darker_gray</item>
 
     </style>
+    <style name="Widget.ShakoMako.Text.Tiny.Black.L.Bold" parent="Widget.ShakoMako.Text.Tiny.Black.L">
+        <item name="android:fontFamily">@font/font_semibold</item>
+    </style>
+
+    <style name="Widget.ShakoMako.Text.Tiny.Black.L" parent="Widget.ShakoMako.Text.Tiny.Black">
+        <item name="android:textSize">13.7sp</item>
+    </style>
 
     <!-- android:id="@+id/button_sms_verification"
             android:layout_width="match_parent"

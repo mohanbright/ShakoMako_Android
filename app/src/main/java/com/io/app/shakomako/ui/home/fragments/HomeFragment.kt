@@ -1,5 +1,6 @@
 package com.io.app.shakomako.ui.home.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
@@ -17,6 +18,7 @@ import com.io.app.shakomako.ui.home.HomeActivity
 import com.io.app.shakomako.ui.home.HomeBaseFragment
 import com.io.app.shakomako.ui.home.HomeViewModel
 import com.io.app.shakomako.ui.home.adapter.HomeAdapter
+import com.io.app.shakomako.ui.like.LikesActivity
 import com.io.app.shakomako.utils.constants.ApiConstant
 import com.io.app.shakomako.utils.constants.AppConstant
 
@@ -108,6 +110,10 @@ class HomeFragment : HomeBaseFragment<FragmentHomeBinding>(), ViewClickCallback 
         when (v.id) {
             R.id.ll_my_deal -> {
                 openFragment(AppConstant.MY_DEAL)
+            }
+
+            R.id.ll_likes -> {
+                startActivity(Intent(getBaseActivity(), LikesActivity::class.java))
             }
         }
     }

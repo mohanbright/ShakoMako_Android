@@ -200,6 +200,13 @@
     <string name="select_location">Select Location</string>
     <string name="chat_">Chat</string>
     <string name="delivery_address_not_shared">Delivery address not shared</string>
+    <string name="cod_exchanged">COD Exchanged</string>
+    <string name="yes">YES</string>
+    <string name="my_likes">My Likes</string>
+    <string name="unfollow">Unfollow</string>
 
-
+    <string name="ici_number">ICI Number</string>
+    <string name="ici_number_detail">6KJDBFDSEFHI</string>
+    <string name="product_code">Product Code</string>
+    <string name="total_amount">Total Amount</string>
 </resources>

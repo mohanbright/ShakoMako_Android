@@ -117,7 +117,11 @@ class SaveInvoiceData : BaseObservable(), Serializable {
     fun setData(data: InvoiceSubmitData) {
         customerId = data.customer_id
         dealPrice = data.product_asking_price
-        deliveryAddress = data.deliveryAddress
+        deliveryAddress = try {
+            data.deliveryAddress.split("&")[0]
+        }catch (e:Exception){
+            data.deliveryAddress
+        }
         invoiceNumber = data.invoice_number
         productId = data.product_id
         productImages = data.product_images

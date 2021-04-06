@@ -61,8 +61,7 @@
                     android:gravity="end"
                     android:paddingStart="@dimen/_2sdp"
                     android:paddingEnd="@dimen/_10sdp"
-                    android:text="@{DateUtilsKt.dateFormat(data.created_at), default=`9:00 AM`}"
-                    />
+                    android:text="@{DateUtilsKt.dateFormat(data.created_at), default=`9:00 AM`}" />
             </LinearLayout>
 
             <LinearLayout
@@ -78,10 +77,10 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginBottom="@dimen/_8sdp"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:layout_weight="1"
                     app:cardCornerRadius="@dimen/_15sdp">
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -157,7 +156,7 @@
                     android:gravity="end"
                     android:paddingStart="@dimen/_2sdp"
                     android:paddingEnd="@dimen/_10sdp"
-                    android:text="@{DateUtilsKt.dateFormat(data.created_at), default=`9:00 AM`}"/>
+                    android:text="@{DateUtilsKt.dateFormat(data.created_at), default=`9:00 AM`}" />
             </LinearLayout>
 
             <LinearLayout
@@ -165,10 +164,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:onClick="@{viewHandler::onClick}"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@drawable/bg_chat_send_backgound"
+                android:onClick="@{viewHandler::onClick}"
                 android:orientation="vertical"
                 android:visibility="@{messageType == 2? View.VISIBLE : View.GONE}">
 
@@ -209,7 +208,7 @@
                     android:gravity="end"
                     android:paddingStart="@dimen/_2sdp"
                     android:paddingEnd="@dimen/_10sdp"
-                    android:text="@{DateUtilsKt.dateFormat(data.created_at), default=`9:00 AM`}"/>
+                    android:text="@{DateUtilsKt.dateFormat(data.created_at), default=`9:00 AM`}" />
             </LinearLayout>
         </LinearLayout>
 
@@ -240,22 +239,25 @@
                     android:text="@{data.message,default=`Hey i want these fishes`}" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_time"
                     style="@style/Widget.ShakoMako.Text.Tiny"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_gravity="end"
                     android:gravity="end"
                     android:paddingStart="@dimen/_2sdp"
                     android:paddingEnd="@dimen/_10sdp"
-                    android:text="@{DateUtilsKt.dateFormat(data.created_at), default=`9:00 AM`}"/>
+                    android:text="@{DateUtilsKt.dateFormat(data.created_at), default=`9:00 AM`}" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_invoice_receive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_30sdp"
                 android:background="@drawable/bg_chat_received_message"
+                android:onClick="@{viewHandler::onClick}"
                 android:orientation="vertical"
                 android:visibility="@{messageType == 3? View.VISIBLE : View.GONE}">
 
@@ -356,10 +358,10 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:layout_weight="1"
                     app:cardCornerRadius="@dimen/_15sdp">
 
                     <androidx.appcompat.widget.AppCompatImageView

@@ -6,6 +6,7 @@ import bolts.Bolts
 import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
 import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
 import com.io.app.shakomako.api.pojo.chat_response.PersonalChatResponse
+import com.io.app.shakomako.api.pojo.codapproval.CodApprovalData
 import com.io.app.shakomako.api.pojo.product.ProductResponse
 import com.io.app.shakomako.api.repo.ApiRepository
 import com.io.app.shakomako.ui.base.BaseViewModel
@@ -28,6 +29,13 @@ class ChatViewModel @Inject constructor(
     var allMessageList: List<ChatMessageData> = ArrayList()
 
     inner class ChatObserver : BaseObservable() {
+
+        var codApprovalData: CodApprovalData = CodApprovalData()
+            set(value) {
+                field = value
+                notifyChange()
+            }
+
         var chatType: Int = 0
             set(value) {
                 field = value

@@ -1,6 +1,5 @@
 package com.io.app.shakomako.ui.business
 
-import android.inputmethodservice.Keyboard
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -21,7 +20,6 @@ class OtherBusinessProfile : HomeBaseFragment<FragmentOtherBusinessProfileBindin
     ViewClickCallback {
 
     private lateinit var productAdapter: ProductAdapter
-    //lateinit var keyboard: Keyboard
 
     override fun layoutRes(): Int {
         return R.layout.fragment_other_business_profile

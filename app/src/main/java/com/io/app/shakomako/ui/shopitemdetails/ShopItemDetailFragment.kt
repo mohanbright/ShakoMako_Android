@@ -14,6 +14,7 @@ import com.io.app.shakomako.databinding.FragmentShopItemDetailBinding
 import com.io.app.shakomako.helper.callback.ViewClickCallback
 import com.io.app.shakomako.ui.chat.activity.ChatActivity
 import com.io.app.shakomako.ui.home.HomeBaseFragment
+import com.io.app.shakomako.ui.like.LikesActivity
 import com.io.app.shakomako.ui.shopitemdetails.adapter.SlidingImageAdapter
 import com.io.app.shakomako.utils.constants.ApiConstant
 import com.io.app.shakomako.utils.constants.AppConstant
@@ -100,6 +101,8 @@ class ShopItemDetailFragment : HomeBaseFragment<FragmentShopItemDetailBinding>()
 
             R.id.ll_chat -> createChat()
 
+            R.id.ll_likes -> startNewActivity(LikesActivity::class.java)
+
         }
     }
 
@@ -149,7 +152,8 @@ class ShopItemDetailFragment : HomeBaseFragment<FragmentShopItemDetailBinding>()
                             )
                         }
                         else -> showToast(
-                            response.message ?: resources.getString(R.string.msg_something_went_wrong)
+                            response.message
+                                ?: resources.getString(R.string.msg_something_went_wrong)
                         )
                     }
                 }

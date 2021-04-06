@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,12 +16,10 @@ import com.io.app.shakomako.api.exception.RequiredFieldExceptions
 import com.io.app.shakomako.api.pojo.deal.CreateDealData
 import com.io.app.shakomako.api.pojo.invoice.InvoiceData
 import com.io.app.shakomako.api.pojo.invoice.InvoiceSubmitData
-import com.io.app.shakomako.api.pojo.invoice.SaveInvoiceData
 import com.io.app.shakomako.api.pojo.invoice.SaveInvoiceResponse
 import com.io.app.shakomako.databinding.ActivityChatInvoiceBinding
 import com.io.app.shakomako.databinding.LayoutEditIciFieldBinding
 import com.io.app.shakomako.helper.callback.ViewClickCallback
-import com.io.app.shakomako.ui.base.BaseUtils
 import com.io.app.shakomako.ui.base.DataBindingActivity
 import com.io.app.shakomako.ui.map.MapActivity
 import com.io.app.shakomako.utils.ContextUtils
@@ -73,6 +70,21 @@ class ChatInvoiceActivity : DataBindingActivity<ActivityChatInvoiceBinding>(), V
                 Glide.with(dataBinding.root).load(viewModel.observer.saveInvoiceData.productImages)
                     .into(
                         dataBinding.includeChatInvoiceGenerate?.ivProduct!!
+                    )
+            }
+
+            AppConstant.VIEW_INVOICE_PERSONAL ->{
+                viewModel.observer.data =
+                    intent.getSerializableExtra(AppConstant.PARCEL_DATA) as InvoiceData
+                viewModel.observer.saveInvoiceData.setData(viewModel.observer.data)
+                Glide.with(dataBinding.root).load(viewModel.observer.saveInvoiceData.productImages)
+                    .into(
+                        dataBinding.ivProduct!!
+                    )
+
+                Glide.with(dataBinding.root).load(viewModel.observer.data.businessDetails.business_picture)
+                    .into(
+                        dataBinding.profileImage
                     )
             }
         }

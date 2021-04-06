@@ -5,12 +5,17 @@ import com.io.app.shakomako.api.pojo.address.DeliveryAddress
 import com.io.app.shakomako.api.pojo.business.OtherBusinessProfileResponse
 import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
 import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
+import com.io.app.shakomako.api.pojo.chat_response.OpenDealsData
 import com.io.app.shakomako.api.pojo.chat_response.PersonalChatResponse
 import com.io.app.shakomako.api.pojo.chatroom.ChatRoomData
+import com.io.app.shakomako.api.pojo.codapproval.CodApprovalData
 import com.io.app.shakomako.api.pojo.deal.CreateDealData
 import com.io.app.shakomako.api.pojo.deal.DealResponse
+import com.io.app.shakomako.api.pojo.deal.PendingDealsResponse
 import com.io.app.shakomako.api.pojo.home.HomeData
 import com.io.app.shakomako.api.pojo.invoice.*
+import com.io.app.shakomako.api.pojo.like.LikedBusinessData
+import com.io.app.shakomako.api.pojo.like.LikedProductData
 import com.io.app.shakomako.api.pojo.login.LoginRequest
 import com.io.app.shakomako.api.pojo.login.TokenResponse
 import com.io.app.shakomako.api.pojo.product.ProductRequest
@@ -90,6 +95,14 @@ interface RestApi {
     @POST("api/createDeal")
     fun createDeal(@Body createDealData: CreateDealData): Observable<ApiResponse<DealResponse>>
 
+    @POST("api/codApproval")
+    fun codApproval(@Body codeApprovalData: CodApprovalData): Observable<ApiResponse<JsonObject>>
+
+    @FormUrlEncoded
+    @POST("api/followUnfollowBusiness")
+    fun businessFollow(
+        @Field("business_id") businessId: Int
+    ): Observable<ApiResponse<JsonObject>>
 
     /** GET APIS*/
 
@@ -135,5 +148,35 @@ interface RestApi {
     fun getInvoiceById(
         @Query("invoice_id") invoiceId: Int
     ): Observable<ApiResponse<InvoiceData>>
+
+    @GET("api/getLatestOpenDeals")
+    fun getLatestOpenDeals(
+        @Query("room_id") roomId: Int,
+        @Query("getFor") getFor: String
+    ): Observable<ApiResponse<List<OpenDealsData>>>
+
+    @GET("api/getPersonalDeals")
+    fun getDealsPersonal(
+        @Query("deal_status") dealStatus: String
+    ): Observable<ApiResponse<List<PendingDealsResponse>>>
+
+
+    @GET("api/getPersonalDeals")
+    fun getBusinessDeals(
+        @Query("deal_status") dealStatus: String
+    ): Observable<ApiResponse<List<PendingDealsResponse>>>
+
+    @GET("api/getLikedProducts")
+    fun getLikedProducts(
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int
+    ): Observable<ApiResponse<List<LikedProductData>>>
+
+
+    @GET("api/getLikedBusiness")
+    fun getLikedBusiness(
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int
+    ): Observable<ApiResponse<List<LikedBusinessData>>>
 
 }

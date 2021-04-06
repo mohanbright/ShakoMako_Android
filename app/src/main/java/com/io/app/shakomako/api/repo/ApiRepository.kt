@@ -6,12 +6,17 @@ import com.io.app.shakomako.api.pojo.address.DeliveryAddress
 import com.io.app.shakomako.api.pojo.business.OtherBusinessProfileResponse
 import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
 import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
+import com.io.app.shakomako.api.pojo.chat_response.OpenDealsData
 import com.io.app.shakomako.api.pojo.chat_response.PersonalChatResponse
 import com.io.app.shakomako.api.pojo.chatroom.ChatRoomData
+import com.io.app.shakomako.api.pojo.codapproval.CodApprovalData
 import com.io.app.shakomako.api.pojo.deal.CreateDealData
 import com.io.app.shakomako.api.pojo.deal.DealResponse
+import com.io.app.shakomako.api.pojo.deal.PendingDealsResponse
 import com.io.app.shakomako.api.pojo.home.HomeData
 import com.io.app.shakomako.api.pojo.invoice.*
+import com.io.app.shakomako.api.pojo.like.LikedBusinessData
+import com.io.app.shakomako.api.pojo.like.LikedProductData
 import com.io.app.shakomako.api.pojo.login.LoginRequest
 import com.io.app.shakomako.api.pojo.login.TokenResponse
 import com.io.app.shakomako.api.pojo.product.ProductRequest
@@ -242,6 +247,29 @@ class ApiRepository @Inject constructor(
             ?.subscribe(observer)
     }
 
+    fun codApproval(
+        codeApprovalData: CodApprovalData,
+        observer: Observer<ApiResponse<JsonObject>>
+    ) {
+        getHeaderApi()
+            ?.codApproval(codeApprovalData)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+
+    fun followUnfollwBusiness(
+        busineeId: Int,
+        observer: Observer<ApiResponse<JsonObject>>
+    ) {
+        getHeaderApi()
+            ?.businessFollow(businessId= busineeId)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
 
     /*--------------------------------------------- ------------- ----------------------------------------*/
     /*--------------------------------------------- Get Type Api ----------------------------------------*/
@@ -353,6 +381,64 @@ class ApiRepository @Inject constructor(
     ) {
         getHeaderApi()
             ?.getInvoiceById(invoiceId)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun getLatestOpenDeals(
+        roomId: Int,
+        getFor: String,
+        observer: Observer<ApiResponse<List<OpenDealsData>>>
+    ) {
+        getHeaderApi()
+            ?.getLatestOpenDeals(roomId, getFor)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun getPendingDeals(
+        dealStatus: String,
+        observer: Observer<ApiResponse<List<PendingDealsResponse>>>
+    ) {
+        getHeaderApi()
+            ?.getDealsPersonal(dealStatus = dealStatus)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun getBusinessDeals(
+        dealStatus: String,
+        observer: Observer<ApiResponse<List<PendingDealsResponse>>>
+    ) {
+        getHeaderApi()
+            ?.getBusinessDeals(dealStatus = dealStatus)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun getLikedProducts(
+        limit: Int,
+        offset: Int,
+        observer: Observer<ApiResponse<List<LikedProductData>>>
+    ) {
+        getHeaderApi()
+            ?.getLikedProducts(limit, offset)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun getLikedBusiness(
+        limit: Int,
+        offset: Int,
+        observer: Observer<ApiResponse<List<LikedBusinessData>>>
+    ) {
+        getHeaderApi()
+            ?.getLikedBusiness(limit, offset)
             ?.subscribeOn(Schedulers.single())
             ?.observeOn(AndroidSchedulers.mainThread())
             ?.subscribe(observer)

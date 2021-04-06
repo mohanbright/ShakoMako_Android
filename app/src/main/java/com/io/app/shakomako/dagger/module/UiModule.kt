@@ -7,6 +7,7 @@ import com.io.app.shakomako.ui.chat.activity.ChatActivity
 import com.io.app.shakomako.ui.filter.FilterActivity
 import com.io.app.shakomako.ui.home.HomeActivity
 import com.io.app.shakomako.ui.invoice.ChatInvoiceActivity
+import com.io.app.shakomako.ui.like.LikesActivity
 import com.io.app.shakomako.ui.login.InstagramWebActivity
 import com.io.app.shakomako.ui.login.LoginActivity
 import com.io.app.shakomako.ui.main.IntroActivity
@@ -59,4 +60,7 @@ abstract class UiModule {
 
     @ContributesAndroidInjector
     abstract fun contributeMapActivity(): MapActivity
+
+    @ContributesAndroidInjector
+    abstract fun contributeLikeActivity(): LikesActivity
 }

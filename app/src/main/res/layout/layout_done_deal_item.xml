@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+            name="dealsData"
+            type="com.io.app.shakomako.api.pojo.deal.PendingDealsResponse" />
 
         <variable
             name="viewHandler"
@@ -40,11 +45,13 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/Widget.ShakoMako.Text.Small.Black"
                     android:layout_width="wrap_content"
-                    android:text="Design Shoe" />
+                    android:text="@{dealsData.business_name}"
+                    tools:text="Design Shoe" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/Widget.ShakoMako.Text.Tiny.Black"
-                    android:text="Item:463" />
+                    android:text="@{@string/item_463 + dealsData.product_id}"
+                    />
             </LinearLayout>
 
 

@@ -6,6 +6,7 @@ import com.io.app.shakomako.ui.address.AddressViewModel
 import com.io.app.shakomako.ui.chat.activity.ChatViewModel
 import com.io.app.shakomako.ui.home.HomeViewModel
 import com.io.app.shakomako.ui.invoice.ChatInvoiceViewModel
+import com.io.app.shakomako.ui.like.LikeViewModel
 import com.io.app.shakomako.ui.login.LoginViewModel
 import com.io.app.shakomako.ui.main.MainViewModel
 import com.io.app.shakomako.ui.map.MapViewModel
@@ -56,6 +57,11 @@ abstract class ViewModelModule {
     @IntoMap
     @BaseViewModelKey(ChatInvoiceViewModel::class)
     abstract fun provideChatInvoiceViewModel(viewModel: ChatInvoiceViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @BaseViewModelKey(LikeViewModel::class)
+    abstract fun provideLikeViewModel(viewModel: LikeViewModel): ViewModel
 
 
 }

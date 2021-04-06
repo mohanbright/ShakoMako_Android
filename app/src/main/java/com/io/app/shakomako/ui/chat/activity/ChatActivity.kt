@@ -2,6 +2,7 @@ package com.io.app.shakomako.ui.chat.activity
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
@@ -31,6 +32,7 @@ import com.io.app.shakomako.R
 import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
 import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
 import com.io.app.shakomako.api.pojo.chat_response.PersonalChatResponse
+import com.io.app.shakomako.api.pojo.codapproval.CodApprovalData
 import com.io.app.shakomako.api.pojo.invoice.ChatInvoiceProductData
 import com.io.app.shakomako.api.pojo.invoice.InvoiceData
 import com.io.app.shakomako.api.pojo.invoice.InvoiceSubmitData
@@ -38,11 +40,13 @@ import com.io.app.shakomako.api.pojo.product.ProductResponse
 import com.io.app.shakomako.api.pojo.upload.UploadResponse
 import com.io.app.shakomako.application.ShakoMakoApplication
 import com.io.app.shakomako.databinding.ActivityChatBinding
+import com.io.app.shakomako.databinding.LayoutCashExchangedDialogBinding
 import com.io.app.shakomako.databinding.LayoutChatOptionsBinding
 import com.io.app.shakomako.helper.callback.DataItemCallBack
 import com.io.app.shakomako.helper.callback.RecyclerClickHandler
 import com.io.app.shakomako.helper.callback.ViewClickCallback
 import com.io.app.shakomako.ui.base.DataBindingActivity
+import com.io.app.shakomako.ui.chat.ChatFragment
 import com.io.app.shakomako.ui.chat.adapter.ChatMessageAdapter
 import com.io.app.shakomako.ui.invoice.ChatInvoiceActivity
 import com.io.app.shakomako.ui.map.MapActivity
@@ -54,6 +58,7 @@ import com.io.app.shakomako.utils.constants.MessageConstant.Companion.PRODUCT
 import com.io.app.shakomako.utils.constants.MessageConstant.Companion.TEXT
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
+import kotlinx.android.synthetic.main.activity_home.*
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.util.*
@@ -69,8 +74,9 @@ class ChatActivity : DataBindingActivity<ActivityChatBinding>(), ViewClickCallba
     companion object {
 
         const val CAMERA_REQUEST = 1001
-
         const val INVOICE_REQUEST = 1002
+        const val GET_FOR_USER = "user"
+        const val GET_FOR_BUSINESS = "business"
     }
 
     override fun layoutRes(): Int {
@@ -142,10 +148,19 @@ class ChatActivity : DataBindingActivity<ActivityChatBinding>(), ViewClickCallba
                 when (k.id) {
                     R.id.ll_invoice_send -> {
                         try {
-                            getInvoiceById(l.message.toInt())
+                            getInvoiceById(l.message.toInt(), AppConstant.VIEW_INVOICE_BUSINESS)
                         } catch (e: java.lang.Exception) {
 
                         }
+                    }
+
+                    R.id.ll_invoice_receive -> {
+                        try {
+                            getInvoiceById(l.message.toInt(), AppConstant.VIEW_INVOICE_PERSONAL)
+                        } catch (e: java.lang.Exception) {
+
+                        }
+
                     }
                 }
             }
@@ -227,12 +242,100 @@ class ChatActivity : DataBindingActivity<ActivityChatBinding>(), ViewClickCallba
             }
 
             R.id.iv_ici -> {
-                getInvoiceById(viewModel.observer.latestInvoiceId)
+                if (viewModel.observer.chatType == AppConstant.BUSINESS_CHAT)
+                    getInvoiceById(
+                        viewModel.observer.latestInvoiceId,
+                        AppConstant.VIEW_INVOICE_BUSINESS
+                    )
+                else
+                    getInvoiceById(
+                        viewModel.observer.latestInvoiceId,
+                        AppConstant.VIEW_INVOICE_PERSONAL
+                    )
+            }
+
+            R.id.iv_cash -> {
+                showCashDeliveredDialog()
+            }
+
+            R.id.ll_my_deal -> {
+                val intent = Intent()
+                intent.putExtra(AppConstant.TYPE, viewModel.observer.chatType)
+                setResult(Activity.RESULT_OK, intent)
+                finish()
             }
         }
     }
 
-    private fun getInvoiceById(id: Int) {
+    private fun showCashDeliveredDialog() {
+        val dialog = Dialog(this, R.style.AlertStyleDialog)
+        val layout: LayoutCashExchangedDialogBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(this),
+            R.layout.layout_cash_exchanged_dialog,
+            null,
+            false
+        )
+
+        layout.viewHandler = object : ViewClickCallback {
+            override fun onClick(v: View) {
+                when (v.id) {
+                    R.id.tv_yes -> {
+                        getLatestOpenDeals()
+                    }
+                    R.id.tv_cancel -> {
+
+                    }
+                }
+                dialog.dismiss()
+            }
+        }
+
+        dialog.setContentView(layout.root)
+        dialog.setCancelable(false)
+        dialog.show()
+    }
+
+    private fun getLatestOpenDeals() {
+        viewModel.getLatestOpenDeals(
+            apiListener(),
+            viewModel.observer.roomId,
+            if (viewModel.observer.chatType == AppConstant.PERSONAL_CHAT || viewModel.observer.chatType == AppConstant.CREATE_CHAT) GET_FOR_USER else GET_FOR_BUSINESS
+        ).observe(this,
+            Observer { response ->
+                run {
+                    if (response.status?.equals(ApiConstant.SUCCESS) == true) {
+                        if ((response.body ?: ArrayList()).isEmpty()) {
+                            showToast("No Deals Are Available")
+                            return@run
+                        }
+                        try {
+                            val data = (response.body ?: ArrayList())[0]
+                            viewModel.observer.codApprovalData.dealId = data.deal_id
+                            codApproval()
+                        } catch (e: IndexOutOfBoundsException) {
+
+                        }
+                    } else showToast(
+                        response.message ?: resources.getString(R.string.msg_something_went_wrong)
+                    )
+                }
+            })
+    }
+
+    private fun codApproval() {
+        viewModel.observer.codApprovalData.type =
+            if (viewModel.observer.chatType == AppConstant.PERSONAL_CHAT || viewModel.observer.chatType == AppConstant.CREATE_CHAT) GET_FOR_USER else GET_FOR_BUSINESS
+        viewModel.codApproval(apiListener(), viewModel.observer.codApprovalData).observe(this,
+            Observer { response ->
+                run {
+                    showToast(
+                        response.message ?: resources.getString(R.string.msg_something_went_wrong)
+                    )
+                }
+            })
+    }
+
+    private fun getInvoiceById(id: Int, type: Int) {
         viewModel.getInvoiceById(apiListener(), id)
             .observe(this,
                 Observer { response ->
@@ -244,7 +347,7 @@ class ChatActivity : DataBindingActivity<ActivityChatBinding>(), ViewClickCallba
                                     ChatInvoiceActivity::class.java
                                 ).putExtra(
                                     AppConstant.TYPE,
-                                    AppConstant.VIEW_INVOICE_BUSINESS
+                                    type
                                 ).putExtra(
                                     AppConstant.PARCEL_DATA,
                                     (response.body ?: InvoiceData())
@@ -313,6 +416,7 @@ class ChatActivity : DataBindingActivity<ActivityChatBinding>(), ViewClickCallba
                 data.price = messageJson.getString("price")
                 data.room_id = messageJson.getInt("room_id")
                 data.message_id = messageJson.getInt("message_id")
+                data.created_at = messageJson.getString("created_at")
                 runOnUiThread {
                     adapter.addMessage(data)
                     viewModel.observer.message = ""
@@ -405,7 +509,8 @@ class ChatActivity : DataBindingActivity<ActivityChatBinding>(), ViewClickCallba
             null,
             false
         )
-        bottomSheetBinding.isPersonal = viewModel.observer.chatType == AppConstant.PERSONAL_CHAT
+        bottomSheetBinding.isPersonal =
+            viewModel.observer.chatType == AppConstant.PERSONAL_CHAT || viewModel.observer.chatType == AppConstant.CREATE_CHAT
 
         bottomSheetBinding.viewHandler = object : ViewClickCallback {
             override fun onClick(v: View) {
@@ -438,7 +543,10 @@ class ChatActivity : DataBindingActivity<ActivityChatBinding>(), ViewClickCallba
                         startActivityForResult(intent, AppConstant.LOCATION)
                     }
                     R.id.ll_cash_on_delivery -> {
+                        showCashDeliveredDialog()
                     }
+
+
                 }
                 dialogFragment.dismiss()
             }
@@ -448,10 +556,10 @@ class ChatActivity : DataBindingActivity<ActivityChatBinding>(), ViewClickCallba
     }
 
     private fun isAddressAvailable(): Boolean {
-        for (data in viewModel.allMessageList) {
-            if(data.type == MessageConstant.DELIVERY_ADDRESS){
+        for (data in adapter.list) {
+            if (data.type == MessageConstant.DELIVERY_ADDRESS) {
                 return true
-            }else{
+            } else {
                 continue
             }
         }

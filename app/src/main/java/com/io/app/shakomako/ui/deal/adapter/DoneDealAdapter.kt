@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.io.app.shakomako.R
+import com.io.app.shakomako.api.pojo.deal.PendingDealsResponse
 import com.io.app.shakomako.databinding.LayoutDoneDealItemBinding
 import com.io.app.shakomako.helper.callback.RecyclerClickHandler
 import com.io.app.shakomako.helper.callback.ViewClickCallback
@@ -16,6 +17,12 @@ class DoneDealAdapter(
     var clickHandler: RecyclerClickHandler<Int, Int, Int>
 ) :
     RecyclerView.Adapter<DoneDealAdapter.DoneDealViewHolder>() {
+
+    var dealsList: List<PendingDealsResponse> = ArrayList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DoneDealViewHolder {
@@ -31,18 +38,20 @@ class DoneDealAdapter(
     }
 
     override fun onBindViewHolder(holder: DoneDealViewHolder, position: Int) {
-        holder.bind()
+        holder.bind(dealsList[position])
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return dealsList.size
     }
 
     inner class DoneDealViewHolder(var layoutDoneDealItemBinding: LayoutDoneDealItemBinding) :
         RecyclerView.ViewHolder(layoutDoneDealItemBinding.root), ViewClickCallback {
 
-        fun bind() {
+        fun bind(data: PendingDealsResponse) {
             layoutDoneDealItemBinding.viewHandler = this
+            layoutDoneDealItemBinding.dealsData = data
+            layoutDoneDealItemBinding.executePendingBindings()
         }
 
         override fun onClick(v: View) {

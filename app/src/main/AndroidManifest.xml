@@ -21,6 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.like.LikesActivity"></activity>
         <activity
             android:name=".ui.map.MapActivity"
             android:screenOrientation="portrait" />

@@ -3,6 +3,7 @@ package com.io.app.shakomako.ui.chat.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,7 +44,7 @@ class ChatMessageAdapter(
 
     fun addMessage(data: ChatMessageData) {
         list.add(data)
-        notifyDataSetChanged()
+        notifyItemInserted(itemCount)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatViewHolder {
@@ -216,7 +217,7 @@ class ChatMessageAdapter(
 
         override fun onClick(v: View) {
             when (v.id) {
-                R.id.ll_invoice_send -> {
+                R.id.ll_invoice_send, R.id.ll_invoice_receive -> {
                     clickHandler.onClick(v, data, adapterPosition)
                 }
             }
