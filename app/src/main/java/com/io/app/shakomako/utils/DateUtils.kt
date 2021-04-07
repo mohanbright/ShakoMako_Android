@@ -29,5 +29,9 @@ fun dateFormat(dateString: String): String {
 
 }
 
+fun isValid(value: String?): Boolean {
+    return value == null || value.isEmpty()
+}
+
 
 

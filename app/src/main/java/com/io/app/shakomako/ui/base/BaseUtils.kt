@@ -55,7 +55,5 @@ object BaseUtils {
 
     fun showMessage(context:Context,message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-
-
     }
 }

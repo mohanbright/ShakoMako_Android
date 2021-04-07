@@ -89,6 +89,8 @@
     <string name="search">Search</string>
     <string name="item_463">Item:463</string>
     <string name="pending_verification">Pending Verification</string>
+    <string name="completed">Completed</string>
+    <string name="in_completed">Incompleted</string>
     <string name="complete">Complete</string>
     <string name="business_verify">Business | Verify</string>
     <string name="_30_done_deal_status">30 Done Deal Status:</string>

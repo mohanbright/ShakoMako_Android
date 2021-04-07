@@ -214,5 +214,7 @@
     <string name="ici_number_detail">6KJDBFDSEFHI</string>
     <string name="product_code">Product Code</string>
     <string name="total_amount">Total Amount</string>
+    <string name="completed">Completed</string>
+    <string name="in_completed">Incompleted</string>
 </resources>
 

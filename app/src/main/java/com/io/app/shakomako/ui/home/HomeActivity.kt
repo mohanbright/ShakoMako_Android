@@ -33,7 +33,6 @@ class HomeActivity : DataBindingActivity<ActivityHomeBinding>() {
     }
 
     private fun init() {
-
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation_main)
 
         val navHostFragment =
@@ -121,14 +120,17 @@ class HomeActivity : DataBindingActivity<ActivityHomeBinding>() {
         homeViewModel.getUserProfile(apiListener()).observe(this, Observer { response ->
             run {
                 if (response.status?.equals(ApiConstant.SUCCESS) == true) {
+                    val data = (response.body ?: ProfileResponse())
                     homeViewModel.userSession.save(
                         SessionConstants.BUSINESS_ID,
-                        (response.body ?: ProfileResponse()).businessId
+                        data.businessId
                     )
                     homeViewModel.userSession.save(
                         SessionConstants.USER_ID,
-                        (response.body ?: ProfileResponse()).userId
+                        data.userId
                     )
+
+                    homeViewModel.userSession.save(SessionConstants.USER_PROFILE, data.userImage)
                 }
             }
         })

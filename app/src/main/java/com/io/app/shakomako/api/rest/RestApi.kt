@@ -25,6 +25,10 @@ import com.io.app.shakomako.api.pojo.response.ApiResponse
 import com.io.app.shakomako.api.pojo.shop.BusinessDetail
 import com.io.app.shakomako.api.pojo.shop.BusinessProfile
 import com.io.app.shakomako.api.pojo.upload.UploadResponse
+import com.io.app.shakomako.api.pojo.verification.BusinessVerificationData
+import com.io.app.shakomako.api.pojo.verification.BusinessVerifySubmission
+import com.io.app.shakomako.api.pojo.verification.PersonalVerificationData
+import com.io.app.shakomako.api.pojo.verification.PersonalVerifySubmission
 import io.reactivex.Observable
 import okhttp3.MultipartBody
 import retrofit2.http.*
@@ -104,6 +108,14 @@ interface RestApi {
         @Field("business_id") businessId: Int
     ): Observable<ApiResponse<JsonObject>>
 
+    @FormUrlEncoded
+    @POST("api/businessVerifySubmission")
+    fun businessVerifySubmission(@Field("business_id") businessId: Int): Observable<ApiResponse<JsonObject>>
+
+    @POST("api/userVerifySubmission")
+    fun userVerifySubmission(@Body data: PersonalVerifySubmission): Observable<ApiResponse<JsonObject>>
+
+
     /** GET APIS*/
 
     @GET("api/getUserProfile")
@@ -178,5 +190,11 @@ interface RestApi {
         @Query("limit") limit: Int,
         @Query("offset") offset: Int
     ): Observable<ApiResponse<List<LikedBusinessData>>>
+
+    @GET("api/getBusinessVerificationData")
+    fun getBusinessVerificationData(): Observable<ApiResponse<BusinessVerificationData>>
+
+    @GET("api/getpersonalVerificationData")
+    fun getPersonalVerificationData(): Observable<ApiResponse<PersonalVerificationData>>
 
 }

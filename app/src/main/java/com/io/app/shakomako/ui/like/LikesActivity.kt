@@ -72,7 +72,7 @@ class LikesActivity : DataBindingActivity<ActivityLikesBinding>(), ViewClickCall
             PaginationListener(gridLayoutManager) {
             override fun loadMoreItems() {
                 isLoading = true
-                OFFSET += 1
+                OFFSET += LIMIT
                 productAdapter.addLoading();
                 getLikedProducts()
             }
@@ -92,7 +92,7 @@ class LikesActivity : DataBindingActivity<ActivityLikesBinding>(), ViewClickCall
             PaginationListener(linearLayoutManager) {
             override fun loadMoreItems() {
                 isBusinessLoading = true
-                BUSINESS_OFFSET += 1
+                BUSINESS_OFFSET += BUSINESS_LIMIT
                 businessAdapter.addLoading()
                 getLikedBusiness()
             }

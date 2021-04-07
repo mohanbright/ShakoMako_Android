@@ -32,6 +32,9 @@ import com.io.app.shakomako.api.pojo.response.ApiResponse
 import com.io.app.shakomako.api.pojo.shop.BusinessDetail
 import com.io.app.shakomako.api.pojo.shop.BusinessProfile
 import com.io.app.shakomako.api.pojo.upload.UploadResponse
+import com.io.app.shakomako.api.pojo.verification.BusinessVerificationData
+import com.io.app.shakomako.api.pojo.verification.PersonalVerificationData
+import com.io.app.shakomako.api.pojo.verification.PersonalVerifySubmission
 import com.io.app.shakomako.api.repo.ApiRepository
 import com.io.app.shakomako.helper.callback.ApiListener
 import com.io.app.shakomako.utils.ApiUtils
@@ -1225,5 +1228,151 @@ open class BaseViewModel : ViewModel() {
         } else {
             listener.msg(context.getString(R.string.no_internet))
         }
+    }
+
+    fun getBusinessVerificationData(listener: ApiListener): LiveData<ApiResponse<BusinessVerificationData>> {
+        val result: MutableLiveData<ApiResponse<BusinessVerificationData>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.getBusinessVerificationData(
+                object : Observer<ApiResponse<BusinessVerificationData>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<BusinessVerificationData>) {
+                        Log.e("onNext", "$t")
+                        result.value = t
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.e("onError", e.localizedMessage)
+                        listener.showProgress(false)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+
+    }
+
+    fun getPersonalVerificationData(listener: ApiListener): LiveData<ApiResponse<PersonalVerificationData>> {
+        val result: MutableLiveData<ApiResponse<PersonalVerificationData>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.getPersonalVerificationData(
+                object : Observer<ApiResponse<PersonalVerificationData>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<PersonalVerificationData>) {
+                        Log.e("onNext", "$t")
+                        result.value = t
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.e("onError", e.localizedMessage)
+                        listener.showProgress(false)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+
+    }
+
+    fun userVerifySubmission(
+        listener: ApiListener,
+        data: PersonalVerifySubmission
+    ): LiveData<ApiResponse<JsonObject>> {
+        val result: MutableLiveData<ApiResponse<JsonObject>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.userVerifySubmission(data,
+                object : Observer<ApiResponse<JsonObject>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<JsonObject>) {
+                        Log.e("onNext", "$t")
+                        result.value = t
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.e("onError", e.localizedMessage)
+                        listener.showProgress(false)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+
+    }
+
+    fun businessVerifySubmission(
+        listener: ApiListener,
+        businessId: Int
+    ): LiveData<ApiResponse<JsonObject>> {
+        val result: MutableLiveData<ApiResponse<JsonObject>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.businessVerifySubmission(businessId,
+                object : Observer<ApiResponse<JsonObject>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<JsonObject>) {
+                        Log.e("onNext", "$t")
+                        result.value = t
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.e("onError", e.localizedMessage)
+                        listener.showProgress(false)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+
     }
 }

@@ -54,6 +54,9 @@ class AppConstant {
         const val PERMISSION_ACCEPTED = 201
         const val PERMISSION_DENIED = 202
 
+        const val YES = "yes"
+        const val NO = "no"
+
 
         const val BASE_URL = "https://api.instagram.com/"
         const val TOKEN_URL = "https://api.instagram.com/oauth/access_token"

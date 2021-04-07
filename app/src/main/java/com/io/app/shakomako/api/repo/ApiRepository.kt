@@ -26,6 +26,10 @@ import com.io.app.shakomako.api.pojo.response.ApiResponse
 import com.io.app.shakomako.api.pojo.shop.BusinessDetail
 import com.io.app.shakomako.api.pojo.shop.BusinessProfile
 import com.io.app.shakomako.api.pojo.upload.UploadResponse
+import com.io.app.shakomako.api.pojo.verification.BusinessVerificationData
+import com.io.app.shakomako.api.pojo.verification.BusinessVerifySubmission
+import com.io.app.shakomako.api.pojo.verification.PersonalVerificationData
+import com.io.app.shakomako.api.pojo.verification.PersonalVerifySubmission
 import com.io.app.shakomako.api.rest.RestApi
 import com.io.app.shakomako.utils.session.UserSession
 import io.reactivex.Observer
@@ -264,7 +268,31 @@ class ApiRepository @Inject constructor(
         observer: Observer<ApiResponse<JsonObject>>
     ) {
         getHeaderApi()
-            ?.businessFollow(businessId= busineeId)
+            ?.businessFollow(businessId = busineeId)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun businessVerifySubmission(
+        businessId: Int,
+        observer: Observer<ApiResponse<JsonObject>>
+    ) {
+
+        getHeaderApi()
+            ?.businessVerifySubmission(businessId)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun userVerifySubmission(
+        data: PersonalVerifySubmission,
+        observer: Observer<ApiResponse<JsonObject>>
+    ) {
+
+        getHeaderApi()
+            ?.userVerifySubmission(data)
             ?.subscribeOn(Schedulers.single())
             ?.observeOn(AndroidSchedulers.mainThread())
             ?.subscribe(observer)
@@ -444,5 +472,20 @@ class ApiRepository @Inject constructor(
             ?.subscribe(observer)
     }
 
+    fun getBusinessVerificationData(observer: Observer<ApiResponse<BusinessVerificationData>>) {
+        getHeaderApi()
+            ?.getBusinessVerificationData()
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun getPersonalVerificationData(observer: Observer<ApiResponse<PersonalVerificationData>>) {
+        getHeaderApi()
+            ?.getPersonalVerificationData()
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
 
 }

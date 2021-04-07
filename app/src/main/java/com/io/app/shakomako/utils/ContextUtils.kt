@@ -19,13 +19,13 @@ import java.io.IOException
 import java.util.*
 
 
-class ContextUtils(base : Context) : ContextWrapper(base){
+class ContextUtils(base: Context) : ContextWrapper(base) {
 
     init {
 
     }
 
-    companion object{
+    companion object {
 
         fun updateLocale(
             context: Context,
@@ -134,8 +134,9 @@ class ContextUtils(base : Context) : ContextWrapper(base){
             return address
         }
 
-    }
 
+
+    }
 
 
 }

@@ -28,39 +28,28 @@ import java.util.concurrent.TimeUnit;
 
 public class WheelView extends View {
 
-    public enum ACTION {
-        // 点击，滑翔(滑到尽头)，拖拽事件
-        CLICK, FLING, DAGGLE
-    }
+    static final float lineSpacingMultiplier = 1.4F;
+    private static final int VELOCITYFLING = 5;
+    private static final float SCALECONTENT = 0.8F;
+    private static final float CENTERCONTENTOFFSET = 6;
+    private static final String GETPICKERVIEWTEXT = "getPickerViewText";
     Context context;
-
     Handler handler;
-    private GestureDetector gestureDetector;
     OnItemSelectedListener onItemSelectedListener;
-
     // Timer mTimer;
     ScheduledExecutorService mExecutor = Executors.newSingleThreadScheduledExecutor();
-    private ScheduledFuture<?> mFuture;
-
     Paint paintOuterText;
     Paint paintCenterText;
     Paint paintIndicator;
-
     WheelAdapter adapter;
-
-    private String label;//附加单位
     int textSize;//选项的文字大小
     boolean customTextSize;//自定义文字大小，为true则用于使setTextSize函数无效，只能通过xml修改
     int maxTextWidth;
     int maxTextHeight;
     float itemHeight;//每行高度
-
     int textColorOut;
     int textColorCenter;
     int dividerColor;
-
-
-    static final float lineSpacingMultiplier = 1.4F;
     boolean isLoop;
 
 
@@ -73,38 +62,24 @@ public class WheelView extends View {
     int totalScrollY;
 
     int initPosition;
-
-    private int selectedItem;
     int preCurrentIndex;
-
     int change;
-
-
     int itemsVisible = 11;
-
     int measuredHeight;
     int measuredWidth;
-
-
     int halfCircumference;
-
     int radius;
-
+    long startTime = 0;
+    int widthMeasureSpec;
+    private GestureDetector gestureDetector;
+    private ScheduledFuture<?> mFuture;
+    private String label;//附加单位
+    private int selectedItem;
     private int mOffset = 0;
     private float previousY = 0;
-    long startTime = 0;
-
-
-    private static final int VELOCITYFLING = 5;
-    int widthMeasureSpec;
-
     private int mGravity = Gravity.CENTER;
     private int drawCenterContentStart = 0;
     private int drawOutContentStart = 0;
-    private static final float SCALECONTENT = 0.8F;
-    private static final float CENTERCONTENTOFFSET = 6;
-    private static final String GETPICKERVIEWTEXT = "getPickerViewText";
-
     public WheelView(Context context) {
         this(context, null);
     }
@@ -116,13 +91,13 @@ public class WheelView extends View {
         dividerColor = getResources().getColor(R.color.pickerview_wheelview_textcolor_divider);
         textSize = getResources().getDimensionPixelSize(R.dimen.pickerview_textsize);
         customTextSize = getResources().getBoolean(R.bool.pickerview_customTextSize);
-        if(attrs != null) {
-            TypedArray a = context.obtainStyledAttributes(attrs,R.styleable.wheelview,0,0);
+        if (attrs != null) {
+            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.wheelview, 0, 0);
             mGravity = a.getInt(R.styleable.wheelview_gravity, Gravity.CENTER);
             textColorOut = a.getColor(R.styleable.wheelview_textColorOut, textColorOut);
-            textColorCenter = a.getColor(R.styleable.wheelview_textColorCenter,textColorCenter);
-            dividerColor = a.getColor(R.styleable.wheelview_dividerColor,dividerColor);
-            textSize = a.getDimensionPixelOffset(R.styleable.wheelview_textSize,textSize);
+            textColorCenter = a.getColor(R.styleable.wheelview_textColorCenter, textColorCenter);
+            dividerColor = a.getColor(R.styleable.wheelview_dividerColor, dividerColor);
+            textSize = a.getDimensionPixelOffset(R.styleable.wheelview_textSize, textSize);
         }
         initLoopView(context);
     }
@@ -146,14 +121,14 @@ public class WheelView extends View {
         paintOuterText = new Paint();
         paintOuterText.setColor(textColorOut);
         paintOuterText.setAntiAlias(true);
-        paintOuterText.setTypeface(Typeface.MONOSPACE);
+        paintOuterText.setTypeface(Typeface.SANS_SERIF);
         paintOuterText.setTextSize(textSize);
 
         paintCenterText = new Paint();
         paintCenterText.setColor(textColorCenter);
         paintCenterText.setAntiAlias(true);
         paintCenterText.setTextScaleX(1.1F);
-        paintCenterText.setTypeface(Typeface.MONOSPACE);
+        paintCenterText.setTypeface(Typeface.SANS_SERIF);
         paintCenterText.setTextSize(textSize);
 
         paintIndicator = new Paint();
@@ -173,7 +148,7 @@ public class WheelView extends View {
         measureTextWidthHeight();
 
 
-        halfCircumference = (int) (itemHeight * (itemsVisible - 1)) ;
+        halfCircumference = (int) (itemHeight * (itemsVisible - 1));
 
         measuredHeight = (int) ((halfCircumference * 2) / Math.PI);
 
@@ -216,8 +191,8 @@ public class WheelView extends View {
 
     void smoothScroll(ACTION action) {
         cancelFuture();
-        if (action== ACTION.FLING||action== ACTION.DAGGLE) {
-            mOffset = (int) ((totalScrollY%itemHeight + itemHeight) % itemHeight);
+        if (action == ACTION.FLING || action == ACTION.DAGGLE) {
+            mOffset = (int) ((totalScrollY % itemHeight + itemHeight) % itemHeight);
             if ((float) mOffset > itemHeight / 2.0F) {
                 mOffset = (int) (itemHeight - (float) mOffset);
             } else {
@@ -235,38 +210,35 @@ public class WheelView extends View {
     }
 
     public void cancelFuture() {
-        if (mFuture!=null&&!mFuture.isCancelled()) {
+        if (mFuture != null && !mFuture.isCancelled()) {
             mFuture.cancel(true);
             mFuture = null;
         }
     }
-
 
     public final void setCyclic(boolean cyclic) {
         isLoop = cyclic;
     }
 
     public final void setTextSize(float size) {
-        if (size > 0.0F&&!customTextSize) {
+        if (size > 0.0F && !customTextSize) {
             textSize = (int) (context.getResources().getDisplayMetrics().density * size);
             paintOuterText.setTextSize(textSize);
             paintCenterText.setTextSize(textSize);
         }
     }
 
-    public final void setFont(@NonNull Typeface typeface){
+    public final void setFont(@NonNull Typeface typeface) {
         paintCenterText.setTypeface(typeface);
         paintOuterText.setTypeface(typeface);
     }
 
-    public final void setCurrentItem(int currentItem) {
-        this.initPosition = currentItem;
-        totalScrollY = 0;
-        invalidate();
-    }
-
     public final void setOnItemSelectedListener(OnItemSelectedListener OnItemSelectedListener) {
         this.onItemSelectedListener = OnItemSelectedListener;
+    }
+
+    public final WheelAdapter getAdapter() {
+        return adapter;
     }
 
     public final void setAdapter(WheelAdapter adapter) {
@@ -275,12 +247,14 @@ public class WheelView extends View {
         invalidate();
     }
 
-    public final WheelAdapter getAdapter(){
-        return adapter;
-    }
-
     public final int getCurrentItem() {
         return selectedItem;
+    }
+
+    public final void setCurrentItem(int currentItem) {
+        this.initPosition = currentItem;
+        totalScrollY = 0;
+        invalidate();
     }
 
     protected final void onItemSelected() {
@@ -301,7 +275,7 @@ public class WheelView extends View {
         try {
 
             preCurrentIndex = initPosition + change % adapter.getItemsCount();
-        }catch (ArithmeticException e){
+        } catch (ArithmeticException e) {
             e.printStackTrace();
         }
         if (!isLoop) {
@@ -347,8 +321,8 @@ public class WheelView extends View {
         canvas.drawLine(0.0F, firstLineY, measuredWidth, firstLineY, paintIndicator);
         canvas.drawLine(0.0F, secondLineY, measuredWidth, secondLineY, paintIndicator);
 
-        if(label != null) {
-            int drawRightContentStart = measuredWidth - getTextWidth(paintCenterText,label);
+        if (label != null) {
+            int drawRightContentStart = measuredWidth - getTextWidth(paintCenterText, label);
 
             canvas.drawText(label, drawRightContentStart - CENTERCONTENTOFFSET, centerY, paintCenterText);
         }
@@ -401,7 +375,7 @@ public class WheelView extends View {
                     canvas.clipRect(0, 0, measuredWidth, (int) (itemHeight));
                     canvas.drawText(contentText, drawCenterContentStart, maxTextHeight - CENTERCONTENTOFFSET, paintCenterText);
                     int preSelectedItem = adapter.indexOf(visibles[counter]);
-                    if(preSelectedItem != -1){
+                    if (preSelectedItem != -1) {
                         selectedItem = preSelectedItem;
                     }
                 } else {
@@ -417,19 +391,16 @@ public class WheelView extends View {
         }
     }
 
-
-    private int getLoopMappingIndex(int index){
-        if(index < 0){
+    private int getLoopMappingIndex(int index) {
+        if (index < 0) {
             index = index + adapter.getItemsCount();
             index = getLoopMappingIndex(index);
-        }
-        else if (index > adapter.getItemsCount() - 1) {
+        } else if (index > adapter.getItemsCount() - 1) {
             index = index - adapter.getItemsCount();
             index = getLoopMappingIndex(index);
         }
         return index;
     }
-
 
     private String getContentText(Object item) {
         String contentText = item.toString();
@@ -440,7 +411,7 @@ public class WheelView extends View {
         } catch (NoSuchMethodException e) {
         } catch (InvocationTargetException e) {
         } catch (IllegalAccessException e) {
-        } catch (Exception e){
+        } catch (Exception e) {
         }
         return contentText;
     }
@@ -448,9 +419,9 @@ public class WheelView extends View {
     private void measuredCenterContentStart(String content) {
         Rect rect = new Rect();
         paintCenterText.getTextBounds(content, 0, content.length(), rect);
-        switch (mGravity){
+        switch (mGravity) {
             case Gravity.CENTER:
-                drawCenterContentStart = (int)((measuredWidth - rect.width()) * 0.5);
+                drawCenterContentStart = (int) ((measuredWidth - rect.width()) * 0.5);
                 break;
             case Gravity.LEFT:
                 drawCenterContentStart = 0;
@@ -460,12 +431,13 @@ public class WheelView extends View {
                 break;
         }
     }
+
     private void measuredOutContentStart(String content) {
         Rect rect = new Rect();
         paintOuterText.getTextBounds(content, 0, content.length(), rect);
-        switch (mGravity){
+        switch (mGravity) {
             case Gravity.CENTER:
-                drawOutContentStart = (int)((measuredWidth - rect.width()) * 0.5);
+                drawOutContentStart = (int) ((measuredWidth - rect.width()) * 0.5);
                 break;
             case Gravity.LEFT:
                 drawOutContentStart = 0;
@@ -501,10 +473,9 @@ public class WheelView extends View {
                 if (!isLoop) {
                     float top = -initPosition * itemHeight;
                     float bottom = (adapter.getItemsCount() - 1 - initPosition) * itemHeight;
-                    if(totalScrollY - itemHeight*0.3 < top){
+                    if (totalScrollY - itemHeight * 0.3 < top) {
                         top = totalScrollY - dy;
-                    }
-                    else if(totalScrollY + itemHeight*0.3 > bottom){
+                    } else if (totalScrollY + itemHeight * 0.3 > bottom) {
                         bottom = totalScrollY - dy;
                     }
 
@@ -540,13 +511,11 @@ public class WheelView extends View {
         return true;
     }
 
-
     public int getItemsCount() {
         return adapter != null ? adapter.getItemsCount() : 0;
     }
 
-
-    public void setLabel(String label){
+    public void setLabel(String label) {
         this.label = label;
     }
 
@@ -565,5 +534,10 @@ public class WheelView extends View {
             }
         }
         return iRet;
+    }
+
+    public enum ACTION {
+        // 点击，滑翔(滑到尽头)，拖拽事件
+        CLICK, FLING, DAGGLE
     }
 }

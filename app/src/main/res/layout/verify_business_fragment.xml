@@ -8,6 +8,15 @@
         <variable
             name="viewHandler"
             type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <variable
+            name="data"
+            type="com.io.app.shakomako.api.pojo.verification.BusinessVerificationData" />
+
+        <import type="com.io.app.shakomako.utils.constants.AppConstant" />
+
+        <import type="com.io.app.shakomako.utils.DateUtilsKt" />
+
     </data>
 
     <LinearLayout
@@ -108,7 +117,7 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/Widget.ShakoMako.Text.Black"
                                 android:gravity="center"
-                                android:text="0" />
+                                android:text="@{data.totalDeals+``}" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/Widget.ShakoMako.Text.Black"
@@ -127,7 +136,7 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/Widget.ShakoMako.Text.Black"
                                 android:gravity="center"
-                                android:text="0" />
+                                android:text="@{data.followers+``}" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/Widget.ShakoMako.Text.Black"
@@ -146,7 +155,7 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/Widget.ShakoMako.Text.Black"
                                 android:gravity="center"
-                                android:text="0.00" />
+                                android:text="@{data.ratings+``}" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/Widget.ShakoMako.Text.Black"
@@ -185,14 +194,15 @@
                         android:layout_weight="1"
                         android:gravity="start"
                         android:padding="@dimen/_2sdp"
-                        android:text="@string/design_shoe" />
+                        android:text="@{data.business_name}" />
 
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:button="@drawable/check_box_selector"
                         android:buttonTint="@color/check_box_selector_color"
-                        android:checked="false"
+                        android:checked="@{DateUtilsKt.isValid(data.business_name)? false: true}"
+                        android:enabled="false"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -224,14 +234,15 @@
                         android:layout_weight="1"
                         android:gravity="start"
                         android:padding="@dimen/_2sdp"
-                        android:text="8794" />
+                        android:text="@{data.venderId,default=`Vendor id`}" />
 
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:button="@drawable/check_box_selector"
                         android:buttonTint="@color/check_box_selector_color"
-                        android:checked="false"
+                        android:checked="@{DateUtilsKt.isValid(data.venderId)? false: true}"
+                        android:enabled="false"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -262,14 +273,15 @@
                         android:layout_weight="1"
                         android:gravity="start"
                         android:padding="@dimen/_2sdp"
-                        android:text="@string/pending_verification" />
+                        android:text="@{data.personVerification_status.equalsIgnoreCase(AppConstant.YES)? @string/completed : @string/pending_verification}" />
 
                     <CheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:button="@drawable/check_box_selector"
                         android:buttonTint="@color/check_box_selector_color"
-                        android:checked="false"
+                        android:checked="@{data.personVerification_status.equalsIgnoreCase(AppConstant.YES)? true : false}"
+                        android:enabled="false"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -307,7 +319,8 @@
                         android:layout_height="wrap_content"
                         android:button="@drawable/check_box_selector"
                         android:buttonTint="@color/check_box_selector_color"
-                        android:checked="false"
+                        android:checked="@{data.dealStatus.equalsIgnoreCase(AppConstant.YES)? true : false}"
+                        android:enabled="false"
                         android:gravity="center" />
                 </LinearLayout>
 
@@ -318,6 +331,8 @@
 
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_submit"
+                    android:onClick="@{viewHandler::onClick}"
                     style="@style/Widget.ShakoMako.Text.Black.Bold"
                     android:layout_margin="@dimen/_20sdp"
                     android:background="@drawable/bg_green_rect"

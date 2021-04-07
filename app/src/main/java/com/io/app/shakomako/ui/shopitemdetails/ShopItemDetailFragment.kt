@@ -68,9 +68,10 @@ class ShopItemDetailFragment : HomeBaseFragment<FragmentShopItemDetailBinding>()
             data.product_images
         )
 
-        val tabLayoutMediator = TabLayoutMediator(viewDataBinding.tlShop,
-            viewDataBinding.viewPager, true,
-            TabConfigurationStrategy { _, _ -> })
+        val tabLayoutMediator = TabLayoutMediator(
+            viewDataBinding.tlShop,
+            viewDataBinding.viewPager, true
+        ) { _, _ -> }
         tabLayoutMediator.attach()
 
         viewDataBinding.tvCurrency.text =
