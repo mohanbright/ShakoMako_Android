@@ -172,6 +172,8 @@
             android:id="@+id/action_to_chat"
             app:destination="@id/navigation_chat" />
 
+        <action android:id="@+id/action_to_rating"
+            app:destination="@id/navigation_rating"/>
     </fragment>
 
     <fragment
@@ -179,5 +181,10 @@
         android:name="com.io.app.shakomako.ui.shopdetail.FragmentShopItemDetail"
         android:label="Detail"
         tools:layout="@layout/fragment_shop_item" />
+
+    <fragment android:id="@+id/navigation_rating"
+        android:name="com.io.app.shakomako.ui.rating.RatingFragment"
+        android:label="RATING"
+        tools:layout="@layout/fragment_rating"/>
 
 </navigation>

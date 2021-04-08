@@ -13,6 +13,7 @@
             name="viewModel"
             type="com.io.app.shakomako.ui.home.HomeViewModel" />
 
+
         <import type="android.view.View" />
     </data>
 
@@ -32,7 +33,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/business_my_deals"
+                android:text="@{viewModel.chatObserver.screenObserver==0?@string/deals:@string/business_my_deals}"
+                tools:text="@string/business_my_deals"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -74,7 +76,7 @@
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/colorBlack" />
+            android:background="@color/colorView" />
 
         <RelativeLayout
             android:id="@+id/rl_pending_deals"
@@ -106,7 +108,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_margin="@dimen/_8sdp"
-            android:background="@color/colorBlack" />
+            android:background="@color/colorView" />
 
         <RelativeLayout
             android:id="@+id/rl_done_deals"

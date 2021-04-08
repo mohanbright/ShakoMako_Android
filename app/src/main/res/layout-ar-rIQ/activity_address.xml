@@ -9,6 +9,10 @@
             name="viewHandler"
             type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
 
+        <variable
+            name="viewModel"
+            type="com.io.app.shakomako.ui.address.AddressViewModel" />
+
     </data>
 
     <RelativeLayout
@@ -46,15 +50,15 @@
 
         <View
             android:id="@+id/view"
-            android:layout_below="@id/rl_header"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_below="@id/rl_header"
             android:background="@color/colorView" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_below="@id/view"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -88,8 +92,12 @@
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:background="@color/colorAccent"
+                        android:inputType="text"
+                        android:imeOptions="actionDone"
                         android:gravity="start"
-                        android:hint="@string/enter" />
+                        android:hint="@string/enter"
+                        android:text="@={viewModel.deliveryAddress.label}"
+                        android:textSize="@dimen/_13sdp" />
 
                 </LinearLayout>
 
@@ -116,10 +124,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:inputType="text"
+                        android:imeOptions="actionDone"
                         android:layout_weight="1"
                         android:background="@color/colorAccent"
                         android:gravity="start"
-                        android:hint="@string/enter_building_number" />
+                        android:hint="@string/enter_building_number"
+                        android:text="@={viewModel.deliveryAddress.buildingNumber}"
+                        android:textSize="@dimen/_13sdp" />
 
                 </LinearLayout>
 
@@ -147,9 +159,13 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
+                        android:inputType="text"
+                        android:imeOptions="actionDone"
                         android:background="@color/colorAccent"
                         android:gravity="start"
-                        android:hint="@string/enter_street_name" />
+                        android:hint="@string/enter_street_name"
+                        android:text="@={viewModel.deliveryAddress.streetName}"
+                        android:textSize="@dimen/_13sdp" />
 
                 </LinearLayout>
 
@@ -177,9 +193,13 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
+                        android:inputType="text"
+                        android:imeOptions="actionDone"
                         android:background="@color/colorAccent"
                         android:gravity="start"
-                        android:hint="@string/enter_district" />
+                        android:hint="@string/enter_district"
+                        android:text="@={viewModel.deliveryAddress.district}"
+                        android:textSize="@dimen/_13sdp" />
 
                 </LinearLayout>
 
@@ -209,7 +229,11 @@
                         android:layout_weight="1"
                         android:background="@color/colorAccent"
                         android:gravity="start"
-                        android:hint="@string/enter_city" />
+                        android:inputType="text"
+                        android:imeOptions="actionDone"
+                        android:hint="@string/enter_city"
+                        android:text="@={viewModel.deliveryAddress.city}"
+                        android:textSize="@dimen/_13sdp" />
 
                 </LinearLayout>
 
@@ -236,10 +260,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:inputType="text"
+                        android:imeOptions="actionDone"
                         android:layout_weight="1"
                         android:background="@color/colorAccent"
                         android:gravity="start"
-                        android:hint="@string/enter_country" />
+                        android:hint="@string/enter_country"
+                        android:text="@={viewModel.deliveryAddress.country}"
+                        android:textSize="@dimen/_13sdp" />
 
                 </LinearLayout>
 
@@ -250,20 +278,22 @@
             android:id="@+id/ll_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="@dimen/_20sdp"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorAccent">
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:padding="@dimen/_20sdp">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_save_address"
                 style="@style/Widget.ShakoMako.Text.Green"
-                android:layout_gravity="end"
                 android:layout_width="wrap_content"
-                android:paddingStart="@dimen/_40sdp"
-                android:paddingEnd="@dimen/_40sdp"
+                android:layout_gravity="end"
                 android:background="@drawable/bg_green_round_border"
                 android:gravity="center"
+                android:onClick="@{viewHandler::onClick}"
+                android:paddingStart="@dimen/_40sdp"
                 android:paddingTop="@dimen/_12sdp"
+                android:paddingEnd="@dimen/_40sdp"
                 android:paddingBottom="@dimen/_12sdp"
                 android:text="@string/save_address" />
         </LinearLayout>

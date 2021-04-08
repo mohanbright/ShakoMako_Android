@@ -20,6 +20,10 @@
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 
+    <style name="Widget.ShakoMako.Text.White" parent="Widget.ShakoMako.Text">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <style name="Widget.ShakoMako.Text.Black.SemiBold" parent="Widget.ShakoMako.Text.Black">
         <item name="fontFamily">@font/font_semibold</item>
     </style>
@@ -203,6 +207,7 @@
         <item name="android:textColor">@android:color/darker_gray</item>
 
     </style>
+
     <style name="Widget.ShakoMako.Text.Tiny.Black.L.Bold" parent="Widget.ShakoMako.Text.Tiny.Black.L">
         <item name="android:fontFamily">@font/font_semibold</item>
     </style>

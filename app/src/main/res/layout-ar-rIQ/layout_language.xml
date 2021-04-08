@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewCallback"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <variable
+            name="observer"
+            type="com.io.app.shakomako.ui.home.HomeViewModel.LanguageObserver" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_3sdp">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:paddingTop="@dimen/_6sdp"
+            android:paddingBottom="@dimen/_6sdp"
+            android:background="@drawable/bg_green_border"
+            >
+
+            <TextView
+                android:id="@+id/logout_heading"
+                style="@style/Widget.ShakoMako.Text.Subtitle.Black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:drawableLeft="@drawable/ic_globe"
+                android:drawablePadding="@dimen/_10sdp"
+                android:gravity="center"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/language"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@color/green_selected_lang"
+                android:gravity="center"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/logout_heading" />
+
+
+            <ImageView
+                android:id="@+id/iv_radio_ar"
+                android:layout_width="@dimen/_17sdp"
+                android:layout_height="@dimen/_17sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:onClick="@{viewCallback::onClick}"
+                android:src="@{observer.langObserver.equals(`ar`)?@drawable/radio_fill : @drawable/radio_empty}"
+                app:layout_constraintBottom_toBottomOf="@id/tv_ar"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider1"
+                app:layout_constraintTop_toTopOf="@id/tv_ar"
+                tools:src="@drawable/radio_empty" />
+
+
+            <TextView
+                android:id="@+id/tv_ar"
+                style="@style/Widget.ShakoMako.Text.Tiny.Black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:gravity="center"
+                android:padding="@dimen/_3sdp"
+                android:text="@string/ar"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintLeft_toRightOf="@id/iv_radio_ar"
+                app:layout_constraintTop_toBottomOf="@id/divider1" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@color/green_selected_lang"
+                android:gravity="center"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_ar" />
+
+
+            <ImageView
+                android:id="@+id/iv_radio_en"
+                android:layout_width="@dimen/_17sdp"
+                android:layout_height="@dimen/_17sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:onClick="@{viewCallback::onClick}"
+                tools:src="@drawable/radio_empty"
+                android:src="@{observer.langObserver.equals(`en`)?@drawable/radio_fill : @drawable/radio_empty}"
+                app:layout_constraintBottom_toBottomOf="@id/tv_en"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider1"
+                app:layout_constraintTop_toTopOf="@id/tv_en" />
+
+
+            <TextView
+                android:id="@+id/tv_en"
+                style="@style/Widget.ShakoMako.Text.Tiny.Black.L.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:gravity="center"
+                android:padding="@dimen/_3sdp"
+                android:text="@string/en"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintLeft_toRightOf="@id/iv_radio_en"
+                app:layout_constraintTop_toBottomOf="@id/divider2" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_6sdp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_en" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+</layout>

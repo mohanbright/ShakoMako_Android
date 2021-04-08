@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
+    <string name="cod_exchanged">COD Exchanged</string>
+    <string name="yes">YES</string>
+    <string name="my_likes">My Likes</string>
+    <string name="in_completed">Incompleted</string>
+    <string name="notifications">Notifications</string>
+    <string name="no_notifications_yet">No Notifications, Yet.</string>
+    <string name="product_reviews">Product Reviews</string>
     <string name="app_name">شاكوماكو</string>
     <string name="cont_facebook">الاستمرار مع فيس بوك</string>
     <string name="cont_google">الاستمرار مع جوجل</string>
@@ -64,7 +70,7 @@
     <string name="upload_images">تحميل الصور</string>
     <string name="add_image">إضافة صورة</string>
     <string name="description">وصف</string>
-    <string name="describe_your_product_or_service_nwith_accurate_and_detailed_information_for_nexample_n100_pure_cotton_full_sleeves_white_shirt_nfrom_zara">صِف منتجك أو خدمتك \n  بمعلومات دقيقة ومفصلة على سبيل المثال. \n "قميص أبيض بأكمام طويلة من القطن الخالص بنسبة 100٪  \n من زارا"</string>
+    <string name="describe_your_product_or_service_nwith_accurate_and_detailed_information_for_nexample_n100_pure_cotton_full_sleeves_white_shirt_nfrom_zara">صِف منتجك أو خدمتك \n بمعلومات دقيقة ومفصلة على سبيل المثال. \n "قميص أبيض بأكمام طويلة من القطن الخالص بنسبة 100٪ \n من زارا"</string>
     <string name="delivery_radius">نصف قطر التسليم</string>
     <string name="category">فئة</string>
     <string name="asking_price">طلب السعر</string>
@@ -91,7 +97,7 @@
     <string name="done_deals">الصفقات المنفذة</string>
     <string name="pending_deals">الصفقات المعلقة</string>
     <string name="search">بحث</string>
-    <string name="item_463">البند: 463</string>
+    <string name="item_463">البند: </string>
     <string name="pending_verification">في انتظار التحقق</string>
     <string name="complete">اكتمال</string>
     <string name="business_verify">الأعمال | التحقق</string>
@@ -134,7 +140,7 @@
     <string name="delivery_fee">رسوم التوصيل:</string>
     <string name="product_deal_price">سعر صفقة المنتج:</string>
     <string name="notes">ملاحظات:</string>
-        <string name="quantity">كمية:</string>
+    <string name="quantity">كمية:</string>
     <string name="product_id">معرف المنتج:</string>
     <string name="product">منتج:</string>
     <string name="text_delivery_address">عنوان التسليم:</string>
@@ -148,17 +154,17 @@
     <string name="likes">الإعجابات</string>
     <string name="in_chat_invoice_ici">فاتورة الدردشة (ICI)</string>
     <string name="lipsticking">شفاه</string>
-    <string name="resend_in">Resend In</string>
-    <string name="details">Details</string>
-    <string name="related">Related</string>
-    <string name="overview">Overview</string>
-    <string name="hashtags">Hashtags</string>
+    <string name="resend_in">إعادة الإرسال</string>
+    <string name="details">تفاصيل</string>
+    <string name="related">متعلق</string>
+    <string name="overview">ملخص</string>
+    <string name="hashtags">هاشتاغ</string>
     <string name="something_went_wrong_with_business_id">Something went wrong with business id</string>
-    <string name="please_fill_asking_price">Please Fill Asking Price</string>
-    <string name="please_select_category">Please Select Category</string>
-    <string name="please_fille_radius">Please Fill Radius</string>
-    <string name="please_fill_product_description">Please Fill Product Description</string>
-    <string name="please_select_product_images">Please Select Product Images</string>
+    <string name="please_fill_asking_price">الرجاء تعبئة السعر المطلوب</string>
+    <string name="please_select_category">الرجاء تحديد الفئة</string>
+    <string name="please_fille_radius">الرجاء ملء نصف القطر</string>
+    <string name="please_fill_product_description">يرجى ملء وصف المنتج</string>
+    <string name="please_select_product_images">يرجى تحديد صور المنتج</string>
 
     <string name="_1200_iqd">1200 دينار عراقي</string>
     <string name="personal">الشخصية</string>
@@ -186,16 +192,16 @@
 
     <string name="no_data_available">لا توجد بيانات للعرض</string>
     <string name="support">الدعم</string>
-    <string name="logout_text_heading">Are you sure you want to\nlogout?</string>
-    <string name="cancel">Cancel</string>
+    <string name="logout_text_heading">هل انت متاكد من تسجيل الخروج من الجهاز؟</string>
+    <string name="cancel">الغاء</string>
     <string name="something_went_wrong_with_product_id">Something went wrong with product id</string>
-    <string name="please_fill_lable">ShakoMako Label: can\'t be empty</string>
-    <string name="please_fill_building_number">Building Number: can\'t be empty</string>
-    <string name="please_fill_streetname">Street Name: can\'t be empty</string>
+    <string name="please_fill_lable">وصف العنوان: لا يمكن أن تكون فارغة</string>
+    <string name="please_fill_building_number">رقم البناية: لا يمكن أن تكون فارغة</string>
+    <string name="please_fill_streetname">اسم الشارع: لا يمكن أن تكون فارغ</string>
     <string name="please_fill_district">District: can\'t be empty</string>
-    <string name="please_fill_city">City: can\'t be empty</string>
-    <string name="please_fill_country">Country: can\'t be empty</string>
-    <string name="delete">Delete</string>
+    <string name="please_fill_city">المدينة: لا يمكن أن تكون فارغ</string>
+    <string name="please_fill_country">القطر: لا يمكن أن تكون فارغ</string>
+    <string name="delete">حذف</string>
     <string name="start_typing">Start Typing</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
@@ -203,18 +209,23 @@
     <string name="msg_allow_us_location_permission">Allow us to detect your current location</string>
     <string name="msg_permission_denied_not_able_detect_location">We are not able to detect your current location</string>
     <string name="select_location">Select Location</string>
-    <string name="chat_">Chat</string>
+    <string name="chat_">محادثة</string>
     <string name="delivery_address_not_shared">Delivery address not shared</string>
-    <string name="cod_exchanged">COD Exchanged</string>
-    <string name="yes">YES</string>
-    <string name="my_likes">My Likes</string>
-    <string name="unfollow">Unfollow</string>
 
     <string name="ici_number">ICI Number</string>
     <string name="ici_number_detail">6KJDBFDSEFHI</string>
     <string name="product_code">Product Code</string>
     <string name="total_amount">Total Amount</string>
-    <string name="completed">Completed</string>
-    <string name="in_completed">Incompleted</string>
+    <string name="unfollow">الغاء المتابعة</string>
+    <string name="ar">العربية</string>
+    <string name="en">English</string>
+    <string name="alert">تنبيه!</string>
+
+    <string name="quit">خروج</string>
+    <string name="alert_subtitle">لتغيير اللغة يرجى الخروج واعادة الدخول الى التطبيق</string>
+    <string name="product_">Product</string>
+    <string name="customer_">Customer</string>
+
+
 </resources>
 

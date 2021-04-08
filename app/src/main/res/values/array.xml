@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="product_category">
+        <item>Women bottom wear</item>
+        <item>Women top wear</item>
+        <item>Shoes</item>
+        <item>Women ethnic wear</item>
+        <item>Men ethnic wear</item>
+    </string-array>
+
+</resources>

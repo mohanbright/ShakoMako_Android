@@ -92,7 +92,7 @@ class PendingDealAdapter(
 
         override fun onClick(v: View) {
             when (v.id) {
-                R.id.ll_ici -> {
+                R.id.ll_ici, R.id.ll_rating -> {
                     clickHandler.onClick(v, dealsList[adapterPosition], adapterPosition)
                 }
             }

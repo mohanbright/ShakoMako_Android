@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewHandler"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.rating.RatingFragment">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorGray">
+
+            <TextView
+                style="@style/Widget.ShakoMako.Text.Title.Black"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@string/product_reviews" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:onClick="@{viewHandler::onClick}"
+                android:scaleX=".8"
+                android:src="@drawable/ic_back" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorView" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:gravity="center"
+                    android:letterSpacing=".4"
+                    android:text="OVERALL" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text.Black"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:text="4.37/5" />
+
+                <per.wsj.library.AndRatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:layout_gravity="center"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:rating="4"
+                    android:stepSize=".5"
+                    app:bgDrawable="@drawable/grey"
+                    app:scaleFactor="1.1"
+                    app:starDrawable="@drawable/green"
+                    app:starSpacing=".6dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:gravity="center"
+                    android:text="134 Ratings" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@color/colorView" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:letterSpacing=".4"
+                    android:text="BREAKDOWN" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:orientation="horizontal">
+
+                    <per.wsj.library.AndRatingBar
+                        android:layout_width="match_parent"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:isIndicator="true"
+                        android:numStars="5"
+                        android:rating="5"
+                        android:stepSize=".5"
+                        app:bgDrawable="@drawable/grey"
+                        app:scaleFactor="1.1"
+                        app:starDrawable="@drawable/green"
+                        app:starSpacing=".6dp" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="3dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:background="@color/colorView" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Widget.ShakoMako.Text"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1.4"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:letterSpacing=".4"
+                        android:text="113" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:orientation="horizontal">
+
+                    <per.wsj.library.AndRatingBar
+                        android:layout_width="match_parent"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:isIndicator="true"
+                        android:numStars="5"
+                        android:rating="4"
+                        android:stepSize=".5"
+                        app:bgDrawable="@drawable/grey"
+                        app:scaleFactor="1.1"
+                        app:starDrawable="@drawable/green"
+                        app:starSpacing=".6dp" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="3dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:background="@color/colorView" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Widget.ShakoMako.Text"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1.4"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:letterSpacing=".4"
+                        android:text="14" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:orientation="horizontal">
+
+                    <per.wsj.library.AndRatingBar
+                        android:layout_width="match_parent"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:isIndicator="true"
+                        android:numStars="5"
+                        android:rating="3"
+                        android:stepSize=".5"
+                        app:bgDrawable="@drawable/grey"
+                        app:scaleFactor="1.1"
+                        app:starDrawable="@drawable/green"
+                        app:starSpacing=".6dp" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="3dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:background="@color/colorView" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Widget.ShakoMako.Text"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1.4"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:letterSpacing=".4"
+                        android:text="5" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:orientation="horizontal">
+
+                    <per.wsj.library.AndRatingBar
+                        android:layout_width="match_parent"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:isIndicator="true"
+                        android:numStars="5"
+                        android:rating="2"
+                        android:stepSize=".5"
+                        app:bgDrawable="@drawable/grey"
+                        app:scaleFactor="1.1"
+                        app:starDrawable="@drawable/green"
+                        app:starSpacing=".6dp" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="3dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:background="@color/colorView" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Widget.ShakoMako.Text"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1.4"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:letterSpacing=".4"
+                        android:text="2" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:orientation="horizontal">
+
+                    <per.wsj.library.AndRatingBar
+                        android:layout_width="match_parent"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:isIndicator="true"
+                        android:numStars="5"
+                        android:rating="1"
+                        android:stepSize=".5"
+                        app:bgDrawable="@drawable/grey"
+                        app:scaleFactor="1.1"
+                        app:starDrawable="@drawable/green"
+                        app:starSpacing=".6dp" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="3dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:background="@color/colorView" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Widget.ShakoMako.Text"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1.4"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:letterSpacing=".4"
+                        android:text="0" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+</layout>

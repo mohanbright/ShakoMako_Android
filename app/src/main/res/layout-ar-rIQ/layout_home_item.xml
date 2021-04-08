@@ -12,6 +12,8 @@
         <variable
             name="viewHandler"
             type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <import type="android.view.View" />
     </data>
 
     <LinearLayout
@@ -21,8 +23,11 @@
         android:paddingTop="@dimen/_6sdp">
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_product_type"
             style="@style/Widget.ShakoMako.Text.Large"
             android:layout_margin="@dimen/_13sdp"
+            android:gravity="center"
+            android:onClick="@{viewHandler::onClick}"
             android:text="@{data.name}" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -32,13 +37,32 @@
             android:layout_marginTop="@dimen/_6sdp"
             android:layout_marginBottom="@dimen/_6sdp"
             android:orientation="horizontal"
+            android:visibility="@{data.list.size() !=0? View.VISIBLE : View.GONE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/layout_home_child_item" />
+            tools:listitem="@layout/layout_home_child_item"
+            tools:visibility="gone" />
+
+        <TextView
+            style="@style/Widget.ShakoMako.Text.Small.Black"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/_20sdp"
+            android:gravity="center"
+            android:text="@string/no_data_available"
+            android:visibility="@{data.list.size() == 0? View.VISIBLE : View.GONE}" />
+
+        <LinearLayout
+            android:id="@+id/linlay_pager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recycler_view"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:orientation="horizontal" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/colorBlack" />
+            android:background="@color/colorView" />
 
     </LinearLayout>
 

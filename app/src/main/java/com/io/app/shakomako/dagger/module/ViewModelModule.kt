@@ -10,6 +10,7 @@ import com.io.app.shakomako.ui.like.LikeViewModel
 import com.io.app.shakomako.ui.login.LoginViewModel
 import com.io.app.shakomako.ui.main.MainViewModel
 import com.io.app.shakomako.ui.map.MapViewModel
+import com.io.app.shakomako.ui.notification.NotificationViewModel
 import com.io.app.shakomako.ui.product.AddProductViewModel
 import dagger.Binds
 import dagger.Module
@@ -62,6 +63,11 @@ abstract class ViewModelModule {
     @IntoMap
     @BaseViewModelKey(LikeViewModel::class)
     abstract fun provideLikeViewModel(viewModel: LikeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @BaseViewModelKey(NotificationViewModel::class)
+    abstract fun provideNotificationViewModel(viewModel: NotificationViewModel): ViewModel
 
 
 }

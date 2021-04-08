@@ -18,9 +18,9 @@
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"
-            android:layout_gravity="end"
             android:onClick="onClick"
             android:padding="@dimen/_5sdp"
             android:src="@drawable/ic_baseline_clear_24" />
@@ -30,6 +30,7 @@
             style="@style/LayoutStylePrimary.Transparent"
             android:background="@drawable/login_bg_white"
             android:orientation="vertical"
+
             android:padding="@dimen/_15sdp">
 
             <androidx.appcompat.widget.AppCompatTextView

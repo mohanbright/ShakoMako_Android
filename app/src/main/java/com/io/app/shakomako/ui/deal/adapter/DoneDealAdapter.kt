@@ -14,7 +14,7 @@ import com.io.app.shakomako.helper.callback.ViewClickCallback
 
 class DoneDealAdapter(
     var context: Context,
-    var clickHandler: RecyclerClickHandler<Int, Int, Int>
+    var clickHandler: RecyclerClickHandler<View, PendingDealsResponse, Int>
 ) :
     RecyclerView.Adapter<DoneDealAdapter.DoneDealViewHolder>() {
 
@@ -57,7 +57,7 @@ class DoneDealAdapter(
         override fun onClick(v: View) {
             when (v.id) {
                 R.id.ll_ici -> {
-                    clickHandler.onClick(0, 0, 0)
+                    clickHandler.onClick(v, dealsList[adapterPosition], adapterPosition)
                 }
             }
         }

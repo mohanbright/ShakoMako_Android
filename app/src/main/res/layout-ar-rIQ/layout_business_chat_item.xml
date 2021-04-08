@@ -60,11 +60,9 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="@dimen/_10sdp"
                 android:layout_height="@dimen/_10sdp"
-                android:layout_marginStart="-10dp"
-                android:layout_marginLeft="-10dp"
-                android:layout_marginTop="-2dp"
+                android:layout_marginStart="-14dp"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:layout_toEndOf="@id/profile_image"
-                android:layout_toRightOf="@id/profile_image"
                 android:src="@drawable/ic_verify"
                 android:visibility="@{businessdata.personVerification_status==`no`?v.GONE:v.VISIBLE}" />
 

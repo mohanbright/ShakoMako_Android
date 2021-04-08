@@ -136,8 +136,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
                             android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
                             android:layout_marginEnd="@dimen/_20sdp"
                             android:orientation="horizontal">
 
@@ -206,8 +206,8 @@
                             style="@style/Widget.ShakoMako.Text.Black"
                             android:layout_width="match_parent"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/_10sdp"
                             android:layout_marginStart="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
                             android:layout_marginEnd="@dimen/_25sdp"
                             android:layout_marginBottom="@dimen/_10sdp"
                             android:background="@drawable/bg_green_broder"
@@ -264,8 +264,8 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="end|center_vertical"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:scaleY="1.3"
                         android:padding="@dimen/_4sdp"
+                        android:scaleY="1.3"
                         android:src="@drawable/ic_next_button"
                         android:tint="@android:color/darker_gray" />
                 </LinearLayout>
@@ -310,8 +310,8 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="end|center_vertical"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:scaleY="1.3"
                         android:padding="@dimen/_4sdp"
+                        android:scaleY="1.3"
                         android:src="@drawable/ic_next_button"
                         android:tint="@android:color/darker_gray" />
                 </LinearLayout>
@@ -355,8 +355,8 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="end|center_vertical"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:scaleY="1.3"
                         android:padding="@dimen/_4sdp"
+                        android:scaleY="1.3"
                         android:src="@drawable/ic_next_button"
                         android:tint="@android:color/darker_gray" />
                 </LinearLayout>
@@ -368,8 +368,10 @@
 
 
                 <LinearLayout
+                    android:id="@+id/ll_notification"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="@{viewHandler::onClick}"
                     android:orientation="horizontal"
                     android:padding="@dimen/_10sdp">
 
@@ -399,8 +401,8 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="end|center_vertical"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:scaleY="1.3"
                         android:padding="@dimen/_4sdp"
+                        android:scaleY="1.3"
                         android:src="@drawable/ic_next_button"
                         android:tint="@android:color/darker_gray" />
                 </LinearLayout>
@@ -443,8 +445,8 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="end|center_vertical"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:scaleY="1.3"
                         android:padding="@dimen/_4sdp"
+                        android:scaleY="1.3"
                         android:src="@drawable/ic_next_button"
                         android:tint="@android:color/darker_gray" />
                 </LinearLayout>
@@ -487,8 +489,8 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="end|center_vertical"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:scaleY="1.3"
                         android:padding="@dimen/_4sdp"
+                        android:scaleY="1.3"
                         android:src="@drawable/ic_next_button"
                         android:tint="@android:color/darker_gray" />
                 </LinearLayout>
@@ -500,8 +502,10 @@
 
 
                 <LinearLayout
+                    android:id="@+id/ll_lang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="@{viewHandler::onClick}"
                     android:orientation="horizontal"
                     android:padding="@dimen/_10sdp">
 
@@ -532,8 +536,8 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="end|center_vertical"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:scaleY="1.3"
                         android:padding="@dimen/_4sdp"
+                        android:scaleY="1.3"
                         android:src="@drawable/ic_next_button"
                         android:tint="@android:color/darker_gray" />
                 </LinearLayout>
@@ -579,8 +583,8 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="end|center_vertical"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:scaleY="1.3"
                         android:padding="@dimen/_4sdp"
+                        android:scaleY="1.3"
                         android:src="@drawable/ic_next_button"
                         android:tint="@android:color/darker_gray" />
                 </LinearLayout>

@@ -39,6 +39,7 @@ class HomeViewModel @Inject constructor(
     var shopItemObserver: ShopItemObserver = ShopItemObserver()
     var navigationShopObserver: NavigationShopObserver = NavigationShopObserver()
     var shopItemDetailObserver: ShopItemDetailsObserver = ShopItemDetailsObserver()
+    var languageObserver: LanguageObserver = LanguageObserver()
 
 
     inner class DealObserver : BaseObservable() {
@@ -156,6 +157,14 @@ class HomeViewModel @Inject constructor(
 
     inner class NavigationShopObserver : BaseObservable() {
         var homeItem: HomeItem = HomeItem()
+            set(value) {
+                field = value
+                notifyChange()
+            }
+    }
+
+    inner class LanguageObserver : BaseObservable() {
+        var langObserver: String = "en"
             set(value) {
                 field = value
                 notifyChange()

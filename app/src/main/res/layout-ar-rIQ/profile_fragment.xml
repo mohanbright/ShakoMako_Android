@@ -8,6 +8,10 @@
         <variable
             name="viewHandler"
             type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <variable
+            name="data"
+            type="com.io.app.shakomako.api.pojo.profile.ProfileResponse" />
     </data>
 
     <LinearLayout
@@ -86,20 +90,38 @@
                         android:orientation="vertical"
                         android:padding="@dimen/_10sdp">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/profile_image"
+                        <RelativeLayout
                             android:layout_width="@dimen/_55sdp"
                             android:layout_height="@dimen/_55sdp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_profile"
+                            android:layout_gravity="center">
 
-                            app:civ_circle_background_color="#66AAAAAA" />
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/profile_image"
+                                android:layout_width="@dimen/_55sdp"
+                                android:layout_height="@dimen/_55sdp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_profile"
+                                app:civ_circle_background_color="#66AAAAAA" />
+
+                            <ProgressBar
+                                android:id="@+id/progressBarMedium"
+                                style="?android:attr/progressBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:indeterminateTint="@color/colorPrimary" />
+
+                        </RelativeLayout>
+
 
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/Widget.ShakoMako.Text.Black"
+                            android:layout_width="@dimen/_55sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:gravity="center"
-                            android:text="user@21" />
+                            android:singleLine="false"
+                            android:text="@{data.shakoMakoUserName, default=`user@21`}"
+                            tools:text="hgrhjewgrjgwerjhgqwjhrghjew" />
 
 
                     </LinearLayout>
@@ -115,7 +137,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
-
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginEnd="@dimen/_20sdp"
                             android:orientation="horizontal">
 
                             <LinearLayout
@@ -134,7 +157,7 @@
                                     style="@style/Widget.ShakoMako.Text.Black"
                                     android:layout_marginTop="@dimen/_5sdp"
                                     android:gravity="center"
-                                    android:text="Deals" />
+                                    android:text="@string/deals_" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -153,7 +176,7 @@
                                     style="@style/Widget.ShakoMako.Text.Black"
                                     android:layout_marginTop="@dimen/_5sdp"
                                     android:gravity="center"
-                                    android:text="Followers" />
+                                    android:text="@string/following" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -172,19 +195,24 @@
                                     style="@style/Widget.ShakoMako.Text.Black"
                                     android:layout_marginTop="@dimen/_5sdp"
                                     android:gravity="center"
-                                    android:text="Ratings" />
+                                    android:text="@string/ratings" />
                             </LinearLayout>
 
 
                         </LinearLayout>
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_edit"
                             style="@style/Widget.ShakoMako.Text.Black"
-                            android:layout_width="@dimen/_100sdp"
+                            android:layout_width="match_parent"
                             android:layout_gravity="center_horizontal"
-                            android:layout_margin="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_25sdp"
+                            android:layout_marginEnd="@dimen/_25sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
                             android:background="@drawable/bg_green_broder"
                             android:gravity="center"
+                            android:onClick="@{viewHandler::onClick}"
                             android:paddingStart="@dimen/_10sdp"
                             android:paddingTop="@dimen/_3sdp"
                             android:paddingEnd="@dimen/_10sdp"
@@ -204,8 +232,8 @@
                 <LinearLayout
                     android:id="@+id/ll_delivery_address"
                     android:layout_width="match_parent"
-                    android:onClick="@{viewHandler::onClick}"
                     android:layout_height="wrap_content"
+                    android:onClick="@{viewHandler::onClick}"
                     android:orientation="horizontal"
                     android:padding="@dimen/_10sdp">
 
@@ -232,11 +260,12 @@
 
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/_20sdp"
+                        android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="end|center_vertical"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:padding="@dimen/_3sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:scaleY="1.3"
+                        android:padding="@dimen/_4sdp"
                         android:src="@drawable/ic_next_button"
                         android:tint="@android:color/darker_gray" />
                 </LinearLayout>
@@ -259,7 +288,7 @@
                         android:layout_height="30dp"
                         android:padding="@dimen/_10sdp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_cart"
+                        android:src="@drawable/pay"
                         android:tint="@android:color/darker_gray" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -277,11 +306,12 @@
 
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/_20sdp"
+                        android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="end|center_vertical"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:padding="@dimen/_3sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:scaleY="1.3"
+                        android:padding="@dimen/_4sdp"
                         android:src="@drawable/ic_next_button"
                         android:tint="@android:color/darker_gray" />
                 </LinearLayout>
@@ -303,7 +333,7 @@
                         android:layout_height="30dp"
                         android:padding="@dimen/_10sdp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_cart"
+                        android:src="@drawable/ic_navigation"
                         android:tint="@android:color/darker_gray" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -321,11 +351,12 @@
 
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/_20sdp"
+                        android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="end|center_vertical"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:padding="@dimen/_3sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:scaleY="1.3"
+                        android:padding="@dimen/_4sdp"
                         android:src="@drawable/ic_next_button"
                         android:tint="@android:color/darker_gray" />
                 </LinearLayout>
@@ -363,13 +394,57 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
-
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/_20sdp"
+                        android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="end|center_vertical"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:padding="@dimen/_3sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:scaleY="1.3"
+                        android:padding="@dimen/_4sdp"
+                        android:src="@drawable/ic_next_button"
+                        android:tint="@android:color/darker_gray" />
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#41000000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_35sdp"
+                        android:layout_height="30dp"
+                        android:padding="@dimen/_10sdp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/support" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/Widget.ShakoMako.Text.Black"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="start"
+                        android:padding="@dimen/_2sdp"
+                        android:text="@string/support" />
+
+                    <androidx.legacy.widget.Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:scaleY="1.3"
+                        android:padding="@dimen/_4sdp"
                         android:src="@drawable/ic_next_button"
                         android:tint="@android:color/darker_gray" />
                 </LinearLayout>
@@ -391,8 +466,7 @@
                         android:layout_height="30dp"
                         android:padding="@dimen/_10sdp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_cart"
-                        android:tint="@android:color/darker_gray" />
+                        android:src="@drawable/grey" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/Widget.ShakoMako.Text.Black"
@@ -409,11 +483,12 @@
 
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/_20sdp"
+                        android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="end|center_vertical"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:padding="@dimen/_3sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:scaleY="1.3"
+                        android:padding="@dimen/_4sdp"
                         android:src="@drawable/ic_next_button"
                         android:tint="@android:color/darker_gray" />
                 </LinearLayout>
@@ -425,8 +500,10 @@
 
 
                 <LinearLayout
+                    android:id="@+id/ll_lang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="@{viewHandler::onClick}"
                     android:orientation="horizontal"
                     android:padding="@dimen/_10sdp">
 
@@ -435,7 +512,7 @@
                         android:layout_height="30dp"
                         android:padding="@dimen/_10sdp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_cart"
+                        android:src="@drawable/ic_globe"
                         android:tint="@android:color/darker_gray" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -453,11 +530,12 @@
 
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/_20sdp"
+                        android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="end|center_vertical"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:padding="@dimen/_3sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:scaleY="1.3"
+                        android:padding="@dimen/_4sdp"
                         android:src="@drawable/ic_next_button"
                         android:tint="@android:color/darker_gray" />
                 </LinearLayout>
@@ -469,8 +547,10 @@
 
 
                 <LinearLayout
+                    android:id="@+id/ll_logout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="@{viewHandler::onClick}"
                     android:orientation="horizontal"
                     android:padding="@dimen/_10sdp">
 
@@ -479,7 +559,7 @@
                         android:layout_height="30dp"
                         android:padding="@dimen/_10sdp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_cart"
+                        android:src="@drawable/ic_logout"
                         android:tint="@android:color/darker_gray" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -497,11 +577,12 @@
 
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/_20sdp"
+                        android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="end|center_vertical"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:padding="@dimen/_3sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:scaleY="1.3"
+                        android:padding="@dimen/_4sdp"
                         android:src="@drawable/ic_next_button"
                         android:tint="@android:color/darker_gray" />
                 </LinearLayout>

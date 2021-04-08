@@ -3,6 +3,7 @@ package com.io.app.shakomako.api.repo
 import androidx.annotation.NonNull
 import com.google.gson.JsonObject
 import com.io.app.shakomako.api.pojo.address.DeliveryAddress
+import com.io.app.shakomako.api.pojo.analytics.Analytics
 import com.io.app.shakomako.api.pojo.business.OtherBusinessProfileResponse
 import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
 import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
@@ -19,6 +20,7 @@ import com.io.app.shakomako.api.pojo.like.LikedBusinessData
 import com.io.app.shakomako.api.pojo.like.LikedProductData
 import com.io.app.shakomako.api.pojo.login.LoginRequest
 import com.io.app.shakomako.api.pojo.login.TokenResponse
+import com.io.app.shakomako.api.pojo.product.ProductRelatedResponse
 import com.io.app.shakomako.api.pojo.product.ProductRequest
 import com.io.app.shakomako.api.pojo.product.ProductResponse
 import com.io.app.shakomako.api.pojo.profile.ProfileResponse
@@ -298,6 +300,32 @@ class ApiRepository @Inject constructor(
             ?.subscribe(observer)
     }
 
+    fun createProductRating(
+        productId: Int,
+        rating: String,
+        observer: Observer<ApiResponse<JsonObject>>
+    ) {
+
+        getHeaderApi()
+            ?.createProductRating(productId, rating)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun createBusinessRating(
+        businessId: Int,
+        rating: String,
+        observer: Observer<ApiResponse<JsonObject>>
+    ) {
+
+        getHeaderApi()
+            ?.createBusinessRating(businessId, rating)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
 
     /*--------------------------------------------- ------------- ----------------------------------------*/
     /*--------------------------------------------- Get Type Api ----------------------------------------*/
@@ -488,4 +516,39 @@ class ApiRepository @Inject constructor(
             ?.subscribe(observer)
     }
 
+    fun getNotification(observer: Observer<ApiResponse<JsonObject>>) {
+        getHeaderApi()
+            ?.getNotification()
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+
+    fun getRelatedData(
+        product_category: String,
+        offset: Int,
+        limit: Int,
+        observer: Observer<ApiResponse<List<ProductRelatedResponse>>>
+    ) {
+        getHeaderApi()
+            ?.getRelatedProducts(
+                product_category = product_category,
+                limit = limit,
+                offset = offset
+            )
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun getAnalytics(
+        observer: Observer<ApiResponse<Analytics>>
+    ) {
+        getHeaderApi()
+            ?.getAnalytics()
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
 }

@@ -13,6 +13,7 @@ import com.io.app.shakomako.ui.login.LoginActivity
 import com.io.app.shakomako.ui.main.IntroActivity
 import com.io.app.shakomako.ui.main.MainActivity
 import com.io.app.shakomako.ui.map.MapActivity
+import com.io.app.shakomako.ui.notification.NotificationActivity
 import com.io.app.shakomako.ui.otp.OtpActivity
 import com.io.app.shakomako.ui.product.AddProductActivity
 import dagger.Binds
@@ -63,4 +64,7 @@ abstract class UiModule {
 
     @ContributesAndroidInjector
     abstract fun contributeLikeActivity(): LikesActivity
+
+    @ContributesAndroidInjector
+    abstract fun contributeNotificationActivity(): NotificationActivity
 }

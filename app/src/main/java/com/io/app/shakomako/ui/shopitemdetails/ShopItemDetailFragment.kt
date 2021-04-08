@@ -4,26 +4,37 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
 import com.io.app.shakomako.R
 import com.io.app.shakomako.api.pojo.chat_response.PersonalChatResponse
 import com.io.app.shakomako.api.pojo.chatroom.ChatRoomData
+import com.io.app.shakomako.api.pojo.product.ProductRelatedResponse
 import com.io.app.shakomako.api.pojo.product.ProductResponse
 import com.io.app.shakomako.databinding.FragmentShopItemDetailBinding
+import com.io.app.shakomako.helper.callback.RecyclerClickHandler
 import com.io.app.shakomako.helper.callback.ViewClickCallback
 import com.io.app.shakomako.ui.chat.activity.ChatActivity
 import com.io.app.shakomako.ui.home.HomeBaseFragment
 import com.io.app.shakomako.ui.like.LikesActivity
+import com.io.app.shakomako.ui.shopitemdetails.adapter.BusinessProductRelatedAdapter
 import com.io.app.shakomako.ui.shopitemdetails.adapter.SlidingImageAdapter
 import com.io.app.shakomako.utils.constants.ApiConstant
 import com.io.app.shakomako.utils.constants.AppConstant
+import com.io.app.shakomako.utils.listener.PaginationListener
 import com.io.app.shakomako.utils.session.SessionConstants
 
 class ShopItemDetailFragment : HomeBaseFragment<FragmentShopItemDetailBinding>(),
     ViewClickCallback {
 
     var data: ProductResponse = ProductResponse()
+    var OFFSET = 0
+    var LIMIT = 20
+    lateinit var businessProductRelatedAdapter: BusinessProductRelatedAdapter
+    var isLoadingData = false
+    var isLast = false
+
+    lateinit var gridLayoutManager: GridLayoutManager
 
     override fun layoutRes(): Int {
         return R.layout.fragment_shop_item_detail
@@ -36,8 +47,21 @@ class ShopItemDetailFragment : HomeBaseFragment<FragmentShopItemDetailBinding>()
     }
 
     private fun init() {
+        gridLayoutManager = GridLayoutManager(getThisActivity(), 3)
+        viewDataBinding.rvRelated.layoutManager = gridLayoutManager
+        businessProductRelatedAdapter = BusinessProductRelatedAdapter(object :
+            RecyclerClickHandler<Int, ProductRelatedResponse, Int> {
+            override fun onClick(k: Int, l: ProductRelatedResponse, m: Int) {
+                viewModel.shopItemDetailObserver.screenObserver = 0
+                getProductDetail(l.product_id)
+            }
+
+        })
         viewDataBinding.viewHandler = this@ShopItemDetailFragment
         viewDataBinding.viewModel = viewModel
+        viewDataBinding.businessProductRelatedAdapter = businessProductRelatedAdapter
+
+        paginationListener()
         getData()
     }
 
@@ -54,6 +78,7 @@ class ShopItemDetailFragment : HomeBaseFragment<FragmentShopItemDetailBinding>()
                     if (response.status?.equals(ApiConstant.SUCCESS) == true) {
                         this.data = response.body ?: ProductResponse()
                         setData()
+                        callProductApi(this.data.product_category)
 
                     } else showToast(
                         response.message ?: resources.getString(R.string.msg_something_went_wrong)
@@ -103,6 +128,8 @@ class ShopItemDetailFragment : HomeBaseFragment<FragmentShopItemDetailBinding>()
             R.id.ll_chat -> createChat()
 
             R.id.ll_likes -> startNewActivity(LikesActivity::class.java)
+
+            R.id.ll_rating -> openFragment(AppConstant.RATING_FRAGMENT)
 
         }
     }
@@ -179,6 +206,47 @@ class ShopItemDetailFragment : HomeBaseFragment<FragmentShopItemDetailBinding>()
                     )
                 }
             })
+    }
+
+    private fun callProductApi(category: String) {
+        viewModel.getRelatedData(apiListener(), category, OFFSET, LIMIT)
+            .observe(viewLifecycleOwner, Observer {
+                if (it.status?.equals(ApiConstant.SUCCESS) == true) {
+                    val data = (it.body ?: ArrayList()) as ArrayList<ProductRelatedResponse>
+                    if (data.isEmpty()) {
+                        businessProductRelatedAdapter.removerLoader()
+                        isLast = true
+                        isLoadingData = false
+                        return@Observer
+                    }
+
+                    businessProductRelatedAdapter.setList(data)
+                    businessProductRelatedAdapter.addLoader()
+                    isLoadingData = false
+                } else showToast(
+                    it.message ?: resources.getString(R.string.msg_something_went_wrong)
+                )
+
+            })
+    }
+
+
+    private fun paginationListener() {
+        viewDataBinding.rvRelated.addOnScrollListener(object :
+            PaginationListener(gridLayoutManager) {
+            override fun loadMoreItems() {
+                isLoadingData = true
+                OFFSET += 1
+                businessProductRelatedAdapter.addLoader()
+                callProductApi(data.product_category)
+
+            }
+
+            override fun isLastPage(): Boolean = isLast
+
+            override fun isLoading(): Boolean = isLoadingData
+
+        })
     }
 
 

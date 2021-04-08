@@ -90,6 +90,10 @@ class HomeActivity : DataBindingActivity<ActivityHomeBinding>() {
             AppConstant.NAVIGATION_SHOP_DETAIL -> {
                 open(R.id.action_to_navigation_shop_detail)
             }
+
+            AppConstant.RATING_FRAGMENT -> {
+                open(R.id.action_to_rating)
+            }
         }
     }
 

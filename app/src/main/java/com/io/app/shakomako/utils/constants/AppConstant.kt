@@ -49,6 +49,7 @@ class AppConstant {
         const val EDIT_PROFILE = 109
         const val SHOP_ITEM_DETAILS = 110
         const val NAVIGATION_SHOP_DETAIL = 111
+        const val RATING_FRAGMENT = 112
 
         /*******Ted permission */
         const val PERMISSION_ACCEPTED = 201
@@ -104,5 +105,10 @@ class AppConstant {
         const val LOGIN_TYPE_GOOGLE = "google"
         const val LOGIN_TYPE_FACEBOOK = "facebook"
         const val LOGIN_TYPE_PHONE = "phone"
+
+
+        const val LANGUAGE_TYPE: String = "lang_type"
+        const val LANGUAGE_TYPE_ENGLISH: String = "en"
+        const val LANGUAGE_TYPE_ARABIC: String = "ar"
     }
 }

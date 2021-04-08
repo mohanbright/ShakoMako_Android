@@ -178,10 +178,10 @@
                         android:layout_margin="@dimen/_5sdp"
                         android:background="@color/colorAccent"
                         android:gravity="top|center"
-                        android:text="@={viewModel.addProductObserver.productRequest.productDescription}"
                         android:hint="@string/describe_your_product_or_service_nwith_accurate_and_detailed_information_for_nexample_n100_pure_cotton_full_sleeves_white_shirt_nfrom_zara"
                         android:imeOptions="actionDone"
                         android:inputType="text"
+                        android:text="@={viewModel.addProductObserver.productRequest.productDescription}"
                         android:textColorHint="@color/text_color" />
 
                     <View
@@ -229,13 +229,13 @@
                         android:inputType="number"
                         android:padding="@dimen/_10sdp"
                         android:text="@={viewModel.addProductObserver.productRequest.productLocation}"
-                        android:textColorHint="@color/colorBlack" />
+                        android:textColorHint="@color/colorBlack"
+                        android:textSize="@dimen/_12sdp" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="@dimen/_10sdp"
                         android:layout_height="@dimen/_15sdp"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
@@ -252,20 +252,27 @@
                     android:layout_height="wrap_content">
 
 
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_category"
+                        style="@style/Widget.ShakoMako.Text.Subtitle.Black"
                         android:background="@color/colorAccent"
                         android:hint="@string/category"
+                        android:onClick="@{viewHandler::onClick}"
                         android:padding="@dimen/_10sdp"
-                        android:text="@={viewModel.addProductObserver.productRequest.productCategory}"
+                        android:text="@{viewModel.addProductObserver.productRequest.productCategory}"
                         android:textColorHint="@color/colorBlack" />
+
+                    <Spinner
+                        android:id="@+id/spinner_category"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_centerInParent="true"
+                        android:dropDownSelector="@null"/>
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="@dimen/_10sdp"
                         android:layout_height="@dimen/_15sdp"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
@@ -290,13 +297,13 @@
                         android:inputType="number"
                         android:padding="@dimen/_10sdp"
                         android:text="@={viewModel.addProductObserver.productRequest.productAskingPrice}"
-                        android:textColorHint="@color/colorBlack" />
+                        android:textColorHint="@color/colorBlack"
+                        android:textSize="@dimen/_12sdp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/Widget.ShakoMako.Text.Black"
                         android:layout_width="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_10sdp"

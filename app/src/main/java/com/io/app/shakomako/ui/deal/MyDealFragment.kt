@@ -16,6 +16,7 @@ import com.io.app.shakomako.R
 import com.io.app.shakomako.api.pojo.deal.PendingDealsResponse
 import com.io.app.shakomako.api.pojo.invoice.InvoiceData
 import com.io.app.shakomako.databinding.LayoutInvoiceDialogBinding
+import com.io.app.shakomako.databinding.LayoutRatingDialogBinding
 import com.io.app.shakomako.databinding.MyDealFragmentBinding
 import com.io.app.shakomako.helper.callback.RecyclerClickHandler
 import com.io.app.shakomako.helper.callback.ViewClickCallback
@@ -25,6 +26,8 @@ import com.io.app.shakomako.ui.home.HomeBaseFragment
 import com.io.app.shakomako.ui.invoice.ChatInvoiceActivity
 import com.io.app.shakomako.utils.constants.ApiConstant
 import com.io.app.shakomako.utils.constants.AppConstant
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MyDealFragment : HomeBaseFragment<MyDealFragmentBinding>(), ViewClickCallback {
 
@@ -77,6 +80,10 @@ class MyDealFragment : HomeBaseFragment<MyDealFragmentBinding>(), ViewClickCallb
                             R.id.ll_ici -> {
                                 getInvoiceById(l.invoice_id)
                             }
+
+                            R.id.ll_rating -> {
+                                showRatingDialog(l)
+                            }
                         }
 
 
@@ -85,11 +92,13 @@ class MyDealFragment : HomeBaseFragment<MyDealFragmentBinding>(), ViewClickCallb
         viewDataBinding.rvPendingDeals.adapter = pendingDealsAdapter
 
         doneAdapter =
-            DoneDealAdapter(getBaseActivity(), object : RecyclerClickHandler<Int, Int, Int> {
-                override fun onClick(k: Int, l: Int, m: Int) {
-                    startActivity(Intent(getBaseActivity(), ChatInvoiceActivity::class.java))
-                }
-            })
+            DoneDealAdapter(
+                getBaseActivity(),
+                object : RecyclerClickHandler<View, PendingDealsResponse, Int> {
+                    override fun onClick(k: View, l: PendingDealsResponse, m: Int) {
+                        startActivity(Intent(getBaseActivity(), ChatInvoiceActivity::class.java))
+                    }
+                })
         viewDataBinding.rvDoneDeals.adapter = doneAdapter
     }
 
@@ -130,10 +139,15 @@ class MyDealFragment : HomeBaseFragment<MyDealFragmentBinding>(), ViewClickCallb
                             if (isDealPending) {
                                 viewModel.getPendingDeals(apiListener(), "open").observe(this,
                                     androidx.lifecycle.Observer {
-                                        viewModel.dealObserver.screenObserver = 1
-                                        isDealPending = !isDealPending
-                                        pendingDeals = it.body!!
-                                        pendingDealsAdapter.dealsList = pendingDeals
+                                        if (it.status?.equals(ApiConstant.SUCCESS) == true) {
+                                            viewModel.dealObserver.screenObserver = 1
+                                            isDealPending = !isDealPending
+                                            pendingDeals = it.body!!
+                                            pendingDealsAdapter.dealsList = pendingDeals
+                                        } else showToast(
+                                            it.message
+                                                ?: resources.getString(R.string.msg_something_went_wrong)
+                                        )
 
                                     })
                             } else {
@@ -150,10 +164,15 @@ class MyDealFragment : HomeBaseFragment<MyDealFragmentBinding>(), ViewClickCallb
                             if (isDealPending) {
                                 viewModel.getBusinessDeals(apiListener(), "open").observe(this,
                                     androidx.lifecycle.Observer {
-                                        viewModel.dealObserver.screenObserver = 1
-                                        isDealPending = !isDealPending
-                                        pendingDeals = it.body!!
-                                        pendingDealsAdapter.dealsList = pendingDeals
+                                        if (it.status?.equals(ApiConstant.SUCCESS) == true) {
+                                            viewModel.dealObserver.screenObserver = 1
+                                            isDealPending = !isDealPending
+                                            pendingDeals = it.body!!
+                                            pendingDealsAdapter.dealsList = pendingDeals
+                                        } else showToast(
+                                            it.message
+                                                ?: resources.getString(R.string.msg_something_went_wrong)
+                                        )
 
                                     })
                             } else {
@@ -175,11 +194,15 @@ class MyDealFragment : HomeBaseFragment<MyDealFragmentBinding>(), ViewClickCallb
                             isDealDone -> {
                                 viewModel.getPendingDeals(apiListener(), "close").observe(this,
                                     androidx.lifecycle.Observer {
-                                        viewModel.dealObserver.screenObserver = 2
-                                        isDealDone = !isDealDone
-                                        doneDeals = it.body!!
-                                        doneAdapter.dealsList = doneDeals
-
+                                        if (it.status?.equals(ApiConstant.SUCCESS) == true) {
+                                            viewModel.dealObserver.screenObserver = 2
+                                            isDealDone = !isDealDone
+                                            doneDeals = it.body!!
+                                            doneAdapter.dealsList = doneDeals
+                                        } else showToast(
+                                            it.message
+                                                ?: resources.getString(R.string.msg_something_went_wrong)
+                                        )
                                     })
                             }
                             else -> {
@@ -197,11 +220,15 @@ class MyDealFragment : HomeBaseFragment<MyDealFragmentBinding>(), ViewClickCallb
                             isDealDone -> {
                                 viewModel.getBusinessDeals(apiListener(), "close").observe(this,
                                     androidx.lifecycle.Observer {
-                                        viewModel.dealObserver.screenObserver = 2
-                                        isDealDone = !isDealDone
-                                        doneDeals = it.body!!
-                                        doneAdapter.dealsList = doneDeals
-
+                                        if (it.status?.equals(ApiConstant.SUCCESS) == true) {
+                                            viewModel.dealObserver.screenObserver = 2
+                                            isDealDone = !isDealDone
+                                            doneDeals = it.body!!
+                                            doneAdapter.dealsList = doneDeals
+                                        } else showToast(
+                                            it.message
+                                                ?: resources.getString(R.string.msg_something_went_wrong)
+                                        )
                                     })
                             }
                             else -> {
@@ -255,6 +282,66 @@ class MyDealFragment : HomeBaseFragment<MyDealFragmentBinding>(), ViewClickCallb
         }
         layoutInvoiceDialogBinding.data = it
         dialog.show()
+    }
+
+    private fun showRatingDialog(data: PendingDealsResponse) {
+        val dialog = Dialog(getThisActivity(), R.style.ThemeOverlay_AppCompat_Dialog_Alert)
+        val ratingDialogBinding = DataBindingUtil.inflate<LayoutRatingDialogBinding>(
+            LayoutInflater.from(getThisActivity()), R.layout.layout_rating_dialog, null, false
+        )
+        dialog.run {
+            setContentView(ratingDialogBinding.root)
+
+            window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            window!!.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+            window?.setDimAmount(0.8f)
+            setCancelable(false)
+        }
+
+        ratingDialogBinding.isBusiness = viewModel.chatObserver.screenObserver == 1
+
+        Glide.with(ratingDialogBinding.root).load(data.business_picture)
+            .into(ratingDialogBinding.itemImage)
+
+        ratingDialogBinding.viewHandler = object : ViewClickCallback {
+            override fun onClick(v: View) {
+                when (v.id) {
+                    R.id.iv_clear -> dialog.dismiss()
+
+                    R.id.tv_rate -> {
+                        if (viewModel.chatObserver.screenObserver == 0) {
+                            Log.e(
+                                "TAG",
+                                ratingDialogBinding.ratingProductCustomer.rating.toString()
+                            )
+                            createProductRating(
+                                data.product_id,
+                                ratingDialogBinding.ratingProductCustomer.rating.toString()
+                            )
+
+                            createBusinessRating(
+                                data.business_id,
+                                ratingDialogBinding.ratingBusiness.rating.toString()
+                            )
+                        }
+
+                        dialog.dismiss()
+                    }
+                }
+            }
+        }
+        ratingDialogBinding.data = data
+        dialog.show()
+    }
+
+    private fun createProductRating(id: Int, rating: String) {
+        viewModel.createProductRating(apiListener(), id, rating)
+            .observe(viewLifecycleOwner, Observer { })
+    }
+
+    private fun createBusinessRating(id: Int, rating: String) {
+        viewModel.createBusinessRating(apiListener(), id, rating)
+            .observe(viewLifecycleOwner, Observer { })
     }
 
 }

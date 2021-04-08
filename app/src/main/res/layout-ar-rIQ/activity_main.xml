@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewHandler"
             type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
@@ -20,9 +21,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:src="@drawable/logo"
             android:padding="@dimen/_20sdp"
             android:scaleType="centerInside"
+            android:src="@drawable/logo"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,13 +36,12 @@
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
-            android:onClick="@{viewHandler::onClick}"
             android:background="@drawable/faceebook_bg"
-            app:drawableRightCompat="@drawable/ic_facebook_circular_logo"
             android:drawablePadding="@dimen/_10sdp"
+            android:onClick="@{viewHandler::onClick}"
             android:padding="@dimen/_10sdp"
-            android:gravity="right"
-            android:text="@string/cont_facebook" />
+            android:text="@string/cont_facebook"
+            app:drawableLeftCompat="@drawable/ic_facebook_circular_logo" />
 
 
         <TextView
@@ -51,14 +51,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
-            android:onClick="onClick"
             android:layout_marginBottom="@dimen/_5sdp"
             android:background="@drawable/google_bg"
-            app:drawableRightCompat="@drawable/ic_search"
-            android:gravity="right"
             android:drawablePadding="@dimen/_10sdp"
+            android:onClick="@{viewHandler::onClick}"
             android:padding="@dimen/_10sdp"
-            android:text="@string/cont_google" />
+            android:text="@string/cont_google"
+            app:drawableLeftCompat="@drawable/ic_search" />
 
 
         <TextView
@@ -67,15 +66,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_10sdp"
-            android:onClick="onClick"
             android:layout_marginRight="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:background="@drawable/insta_bg"
-            app:drawableRightCompat="@drawable/ic_instagram"
             android:drawablePadding="@dimen/_10sdp"
+            android:onClick="@{viewHandler::onClick}"
             android:padding="@dimen/_10sdp"
-            android:gravity="right"
-            android:text="@string/cont_insta" />
+            android:text="@string/cont_insta"
+            app:drawableLeftCompat="@drawable/ic_instagram" />
 
         <TextView
             android:id="@+id/tv_number"
@@ -87,30 +85,25 @@
             android:layout_marginBottom="@dimen/_5sdp"
             android:background="@drawable/number_bg"
             android:drawablePadding="@dimen/_10sdp"
-            android:padding="@dimen/_10sdp"
             android:onClick="@{viewHandler::onClick}"
-            android:gravity="right"
+            android:padding="@dimen/_10sdp"
             android:text="@string/cont_number"
-            app:drawableRightCompat="@drawable/ic_smartphone" />
+            app:drawableLeftCompat="@drawable/ic_smartphone" />
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"
+            android:gravity="center"
             android:padding="@dimen/_5sdp"
             android:text="@string/terms"
-            android:gravity="right"
-            android:layout_gravity="center"
-            android:layout_marginRight="@dimen/_10sdp"
             android:textSize="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
-
-
-
 
 
     </LinearLayout>

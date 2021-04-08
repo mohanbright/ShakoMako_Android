@@ -11,6 +11,10 @@
         <variable
             name="viewModel"
             type="com.io.app.shakomako.ui.login.LoginViewModel" />
+
+        <variable
+            name="count"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -57,6 +61,7 @@
             android:inputType="number"
             android:itemBackground="@android:color/transparent"
             android:padding="@dimen/_8sdp"
+
             android:textSize="18dp"
             app:OtpCursorColor="@color/colorPrimary"
             app:OtpItemCount="6"
@@ -104,21 +109,40 @@
             android:padding="@dimen/_5sdp"
             android:text="@string/resend_title"
             android:textSize="@dimen/_10sdp"
-            app:layout_constraintBottom_toBottomOf="@id/resend"
+            app:layout_constraintBottom_toBottomOf="@id/ll_resend"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/resend"
-            app:layout_constraintTop_toTopOf="@id/resend" />
+            app:layout_constraintLeft_toRightOf="@id/ll_resend"
+            app:layout_constraintTop_toTopOf="@id/ll_resend" />
 
-        <TextView
-            android:id="@+id/resend"
-            style="@style/Widget.ShakoMako.Text.Button.Border"
-            android:layout_width="@dimen/_100sdp"
+        <LinearLayout
+            android:id="@+id/ll_resend"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:background="@drawable/button_border_primary"
+            android:orientation="horizontal"
             android:onClick="@{listener::onClick}"
-            android:text="@string/resend"
-            android:textAllCaps="false"
+            android:padding="@dimen/_10sdp"
             app:layout_constraintLeft_toRightOf="@id/tv_resend"
-            app:layout_constraintTop_toBottomOf="@id/divider" />
+            app:layout_constraintTop_toBottomOf="@id/divider">
+
+            <TextView
+                android:id="@+id/resend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:onClick="@{listener::onClick}"
+                android:text="@string/resend"
+                android:textAllCaps="false"
+                app:layout_constraintLeft_toRightOf="@id/tv_resend"
+                app:layout_constraintTop_toBottomOf="@id/divider" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/Widget.ShakoMako.Text.Black"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:text="@{count}" />
+
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

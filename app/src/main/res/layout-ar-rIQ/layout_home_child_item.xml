@@ -7,6 +7,10 @@
         <variable
             name="viewHandler"
             type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <variable
+            name="data"
+            type="com.io.app.shakomako.api.pojo.home.item.HomeFashionData" />
     </data>
 
     <RelativeLayout
@@ -17,31 +21,47 @@
         android:orientation="vertical"
         android:padding="@dimen/_10sdp">
 
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
+        <RelativeLayout
+            android:id="@+id/rl_image"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
-            android:src="@drawable/ic_my_shop"
-            app:civ_border_color="@color/colorBlack"
-            app:civ_border_width="1dp" />
+           >
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="@dimen/_15sdp"
-            android:layout_height="@dimen/_15sdp"
-            android:layout_marginStart="-18dp"
-            android:layout_marginLeft="-18dp"
-            android:layout_marginTop="-2dp"
-            android:layout_toEndOf="@id/profile_image"
-            android:layout_toRightOf="@id/profile_image"
-            android:src="@drawable/ic_verify" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/item_image"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/camera"
+                app:civ_border_color="@color/colorBlack"
+                app:civ_border_width="1dp" />
+
+            <ProgressBar
+                android:id="@+id/progressBarMedium"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:indeterminateTint="@color/colorPrimary" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="-2dp"
+                android:src="@drawable/ic_verify" />
+        </RelativeLayout>
+
 
         <androidx.appcompat.widget.AppCompatTextView
-            style="@style/Widget.ShakoMako.Text.Black"
-            android:layout_width="wrap_content"
-            android:layout_below="@id/profile_image"
+            style="@style/Widget.ShakoMako.Text.Small.Black"
+            android:layout_width="@dimen/_60sdp"
+            android:textSize="@dimen/_9sdp"
+            android:layout_below="@id/rl_image"
             android:layout_marginTop="@dimen/_6sdp"
-            android:text="@string/lipsticking" />
+            android:gravity="center"
+            android:text="@{data.businessName, default=`Mohini's Shop`}"
+            android:textAlignment="center" />
 
     </RelativeLayout>
 

@@ -11,7 +11,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
@@ -23,6 +27,7 @@ import com.io.app.shakomako.helper.callback.DataItemCallBack
 import com.io.app.shakomako.utils.ContextUtils
 import com.io.app.shakomako.utils.FileUtils
 import com.io.app.shakomako.utils.constants.AppConstant
+import com.io.app.shakomako.utils.session.UserSession
 import com.tedpark.tedpermission.rx2.TedRx2Permission
 import dagger.android.support.DaggerAppCompatActivity
 import gun0912.tedbottompicker.TedRxBottomPicker
@@ -42,6 +47,9 @@ abstract class BaseActivity : DaggerAppCompatActivity(), BaseHandler {
     @Inject
     lateinit var viewModelFactory: BaseViewModelFactory
 
+    @Inject
+    lateinit var userSession: UserSession
+
 
     open fun <T : ViewModel?> getViewModel(viewModel: Class<T>?): T {
         return ViewModelProvider(this, viewModelFactory)[viewModel!!]
@@ -51,6 +59,28 @@ abstract class BaseActivity : DaggerAppCompatActivity(), BaseHandler {
         super.onCreate(savedInstanceState)
         getFacebookHashKey()
 
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        if (!::userSession.isInitialized) {
+            var pref = base?.getSharedPreferences(
+                base.resources?.getString(
+                    R.string.shared_pref_file
+                ),
+                Context.MODE_PRIVATE
+            )
+            userSession = UserSession(pref!!, pref.edit())
+        }
+        var locale = if (userSession.language.equals(AppConstant.LANGUAGE_TYPE_ARABIC)) {
+            Locale("ar")
+        } else {
+            Locale("en")
+        }
+        if (base != null) {
+            ContextUtils.updateLocale(base, locale)
+        }
+        Log.e("TOKEN", "${userSession.language}")
+        super.attachBaseContext(base)
     }
 
     private fun getFacebookHashKey() {
@@ -83,15 +113,24 @@ abstract class BaseActivity : DaggerAppCompatActivity(), BaseHandler {
     }
 
     override fun showToast(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-    }
+// Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+        val toast: Toast = Toast(getThisActivity())
 
-    override fun attachBaseContext(newBase: Context?) {
-        var locale = Locale("en")
-        if (newBase != null) {
-            ContextUtils.updateLocale(newBase, locale)
-        };
-        super.attachBaseContext(newBase)
+        val inflater =
+            (getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
+        val view: View = inflater.inflate(R.layout.custom_toast, null)
+        toast.setGravity(Gravity.CENTER, 0, 0)
+
+        val textView: TextView = view.findViewById(R.id.textViewToast)
+        textView.text = if (msg == getThisActivity().resources.getString(R.string.no_internet)) {
+            resources.getString(R.string.no_internet)
+        } else {
+            msg
+        }
+        toast.view = view
+        toast.duration = Toast.LENGTH_SHORT
+
+        toast.show()
     }
 
     override fun onBackPressed() {

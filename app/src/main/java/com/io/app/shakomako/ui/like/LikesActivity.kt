@@ -121,7 +121,7 @@ class LikesActivity : DataBindingActivity<ActivityLikesBinding>(), ViewClickCall
                         productAdapter.addAllData(response.body ?: ArrayList())
                         isLoading = false
                         productAdapter.removeLoading()
-                        Log.e("TAG", "DATA SET SUCCESSFUL");
+                        Log.e("TAG", "DATA SET SUCCESSFUL")
                     } else showToast(
                         response.message ?: resources.getString(R.string.msg_something_went_wrong)
                     )
@@ -143,7 +143,7 @@ class LikesActivity : DataBindingActivity<ActivityLikesBinding>(), ViewClickCall
                         businessAdapter.addAllData(response.body ?: ArrayList())
                         isBusinessLoading = false
                         businessAdapter.removeLoading()
-                        Log.e("TAG", "DATA SET SUCCESSFUL");
+                        Log.e("TAG", "DATA SET SUCCESSFUL")
                     } else showToast(
                         response.message ?: resources.getString(R.string.msg_something_went_wrong)
                     )

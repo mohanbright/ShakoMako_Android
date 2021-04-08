@@ -6,6 +6,10 @@
         <variable
             name="viewHandler"
             type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <variable
+            name="data"
+            type="com.io.app.shakomako.api.pojo.shop.BusinessProducts" />
     </data>
 
     <RelativeLayout
@@ -17,35 +21,57 @@
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:background="@color/colorBlack" />
+            android:background="@color/colorView" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorBlack" />
+            android:background="@color/colorView" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:onClick="@{viewHandler::onClick}">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:onClick="@{viewHandler::onClick}"
+                android:scaleType="centerCrop" />
+
+            <ProgressBar
+                android:id="@+id/progressBarMedium"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:indeterminateTint="@color/colorPrimary" />
+
+        </RelativeLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_edit"
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_alignParentEnd="true"
             android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
             android:onClick="@{viewHandler::onClick}"
-            android:src="@drawable/edit"
-            android:layout_marginRight="@dimen/_5sdp" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_item"
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_70sdp"
-             />
+            android:src="@drawable/edit" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            style="@style/Widget.ShakoMako.Text"
-            android:layout_width="wrap_content"
-            android:layout_below="@id/iv_item"
-            android:text="@string/_1200_iqd" />
+            style="@style/Widget.ShakoMako.Text.Small.White"
+            android:layout_alignParentBottom="true"
+            android:alpha=".3"
+            android:background="@color/black"
+            android:gravity="center"
+            android:text="@{data.productAskingPrice + ` IQD`, default=`1200 IQD`}" />
 
     </RelativeLayout>
 

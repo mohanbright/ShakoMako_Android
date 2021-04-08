@@ -1,6 +1,7 @@
 package com.io.app.shakomako.utils.session
 
 import android.content.SharedPreferences
+import com.io.app.shakomako.utils.constants.AppConstant
 import javax.inject.Inject
 
 class UserSession @Inject constructor(
@@ -70,4 +71,12 @@ class UserSession @Inject constructor(
         editor.clear()
         editor.commit()
     }
+
+    fun saveLanguage(value: String) {
+        editor.putString(AppConstant.LANGUAGE_TYPE, value)
+        editor.apply()
+
+    }
+
+    var language = sharedPreferences.getString(AppConstant.LANGUAGE_TYPE, "en")
 }

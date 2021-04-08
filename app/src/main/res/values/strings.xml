@@ -211,4 +211,15 @@
     <string name="ici_number_detail">6KJDBFDSEFHI</string>
     <string name="product_code">Product Code</string>
     <string name="total_amount">Total Amount</string>
+    <string name="notifications">Notifications</string>
+    <string name="no_notifications_yet">No Notifications, Yet.</string>
+
+    <string name="product_reviews">Product Reviews</string>
+    <string name="ar">العربية</string>
+    <string name="en">English</string>
+    <string name="alert">Alert!!</string>
+    <string name="quit">Quit</string>
+    <string name="alert_subtitle">for Change the app language you need to quit and relaunch the app</string>
+    <string name="product_">Product</string>
+    <string name="customer_">Customer</string>
 </resources>

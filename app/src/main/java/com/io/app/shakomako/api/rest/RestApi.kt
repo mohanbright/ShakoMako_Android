@@ -2,6 +2,7 @@ package com.io.app.shakomako.api.rest
 
 import com.google.gson.JsonObject
 import com.io.app.shakomako.api.pojo.address.DeliveryAddress
+import com.io.app.shakomako.api.pojo.analytics.Analytics
 import com.io.app.shakomako.api.pojo.business.OtherBusinessProfileResponse
 import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
 import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
@@ -18,6 +19,7 @@ import com.io.app.shakomako.api.pojo.like.LikedBusinessData
 import com.io.app.shakomako.api.pojo.like.LikedProductData
 import com.io.app.shakomako.api.pojo.login.LoginRequest
 import com.io.app.shakomako.api.pojo.login.TokenResponse
+import com.io.app.shakomako.api.pojo.product.ProductRelatedResponse
 import com.io.app.shakomako.api.pojo.product.ProductRequest
 import com.io.app.shakomako.api.pojo.product.ProductResponse
 import com.io.app.shakomako.api.pojo.profile.ProfileResponse
@@ -115,6 +117,26 @@ interface RestApi {
     @POST("api/userVerifySubmission")
     fun userVerifySubmission(@Body data: PersonalVerifySubmission): Observable<ApiResponse<JsonObject>>
 
+    @FormUrlEncoded
+    @POST("api/createProductRating")
+    fun createProductRating(
+        @Field("product_id") productId: Int,
+        @Field("rating") rating: String
+    ): Observable<ApiResponse<JsonObject>>
+
+    @FormUrlEncoded
+    @POST("api/createBusinessRating")
+    fun createBusinessRating(
+        @Field("business_id") businessId: Int,
+        @Field("rating") rating: String
+    ): Observable<ApiResponse<JsonObject>>
+
+    @FormUrlEncoded
+    @POST("api/createUserRating")
+    fun createUserRating(
+        @Field("user_id") businessId: Int,
+        @Field("rating") rating: String
+    ): Observable<ApiResponse<JsonObject>>
 
     /** GET APIS*/
 
@@ -196,5 +218,17 @@ interface RestApi {
 
     @GET("api/getpersonalVerificationData")
     fun getPersonalVerificationData(): Observable<ApiResponse<PersonalVerificationData>>
+
+    @GET("api/getNotifications")
+    fun getNotification(): Observable<ApiResponse<JsonObject>>
+
+    @GET("api/getRelatedProducts")
+    fun getRelatedProducts(
+        @Query("product_category") product_category: String, @Query("limit") limit: Int,
+        @Query("offset") offset: Int
+    ): Observable<ApiResponse<List<ProductRelatedResponse>>>
+
+    @GET("api/getAnalytics")
+    fun getAnalytics(): Observable<ApiResponse<Analytics>>
 
 }

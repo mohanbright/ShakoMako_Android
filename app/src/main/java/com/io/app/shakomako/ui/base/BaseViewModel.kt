@@ -25,6 +25,7 @@ import com.io.app.shakomako.api.pojo.like.LikedBusinessData
 import com.io.app.shakomako.api.pojo.like.LikedProductData
 import com.io.app.shakomako.api.pojo.login.LoginRequest
 import com.io.app.shakomako.api.pojo.login.TokenResponse
+import com.io.app.shakomako.api.pojo.product.ProductRelatedResponse
 import com.io.app.shakomako.api.pojo.product.ProductRequest
 import com.io.app.shakomako.api.pojo.product.ProductResponse
 import com.io.app.shakomako.api.pojo.profile.ProfileResponse
@@ -821,7 +822,7 @@ open class BaseViewModel : ViewModel() {
 
                     override fun onError(e: Throwable) {
                         listener.showProgress(false)
-                        listener.msg(e.localizedMessage)
+                        listener.msg(e.localizedMessage ?: "")
                     }
                 })
         } else {
@@ -858,7 +859,7 @@ open class BaseViewModel : ViewModel() {
 
                     override fun onError(e: Throwable) {
                         listener.showProgress(false)
-                        listener.msg(e.localizedMessage)
+                        listener.msg(e.localizedMessage ?: "")
                     }
                 })
         } else {
@@ -893,7 +894,7 @@ open class BaseViewModel : ViewModel() {
 
                     override fun onError(e: Throwable) {
                         listener.showProgress(false)
-                        listener.msg(e.localizedMessage)
+                        listener.msg(e.localizedMessage ?: "")
                     }
                 })
         } else {
@@ -928,7 +929,7 @@ open class BaseViewModel : ViewModel() {
 
                     override fun onError(e: Throwable) {
                         listener.showProgress(false)
-                        listener.msg(e.localizedMessage)
+                        listener.msg(e.localizedMessage ?: "")
                     }
                 })
         } else {
@@ -963,7 +964,7 @@ open class BaseViewModel : ViewModel() {
 
                     override fun onError(e: Throwable) {
                         listener.showProgress(false)
-                        listener.msg(e.localizedMessage)
+                        listener.msg(e.localizedMessage ?: "")
                     }
                 })
         } else {
@@ -998,7 +999,7 @@ open class BaseViewModel : ViewModel() {
 
                     override fun onError(e: Throwable) {
                         listener.showProgress(false)
-                        listener.msg(e.localizedMessage)
+                        listener.msg(e.localizedMessage ?: "")
                     }
                 })
         } else {
@@ -1034,7 +1035,7 @@ open class BaseViewModel : ViewModel() {
 
                     override fun onError(e: Throwable) {
                         listener.showProgress(false)
-                        listener.msg(e.localizedMessage)
+                        listener.msg(e.localizedMessage ?: "")
                     }
                 })
         } else {
@@ -1069,7 +1070,7 @@ open class BaseViewModel : ViewModel() {
                     }
 
                     override fun onError(e: Throwable) {
-                        Log.e("onError", e.localizedMessage)
+                        Log.e("onError", e.localizedMessage ?: "")
                         listener.showProgress(false)
 
                     }
@@ -1107,7 +1108,7 @@ open class BaseViewModel : ViewModel() {
                     }
 
                     override fun onError(e: Throwable) {
-                        Log.e("onError", e.localizedMessage)
+                        Log.e("onError", e.localizedMessage ?: "")
                         listener.showProgress(false)
 
                     }
@@ -1145,7 +1146,7 @@ open class BaseViewModel : ViewModel() {
                     }
 
                     override fun onError(e: Throwable) {
-                        Log.e("onError", e.localizedMessage)
+                        Log.e("onError", e.localizedMessage ?: "")
                         listener.showProgress(false)
 
                     }
@@ -1183,7 +1184,7 @@ open class BaseViewModel : ViewModel() {
                     }
 
                     override fun onError(e: Throwable) {
-                        Log.e("onError", e.localizedMessage)
+                        Log.e("onError", e.localizedMessage ?: "")
                         listener.showProgress(false)
 
                     }
@@ -1220,7 +1221,7 @@ open class BaseViewModel : ViewModel() {
 
                     override fun onError(e: Throwable) {
                         listener.showProgress(false)
-                        listener.msg(e.message!!)
+                        listener.msg(e.localizedMessage ?: "")
 
                     }
 
@@ -1251,7 +1252,7 @@ open class BaseViewModel : ViewModel() {
                     }
 
                     override fun onError(e: Throwable) {
-                        Log.e("onError", e.localizedMessage)
+                        Log.e("onError", e.localizedMessage ?: "")
                         listener.showProgress(false)
 
                     }
@@ -1286,7 +1287,7 @@ open class BaseViewModel : ViewModel() {
                     }
 
                     override fun onError(e: Throwable) {
-                        Log.e("onError", e.localizedMessage)
+                        Log.e("onError", e.localizedMessage ?: "")
                         listener.showProgress(false)
 
                     }
@@ -1324,7 +1325,7 @@ open class BaseViewModel : ViewModel() {
                     }
 
                     override fun onError(e: Throwable) {
-                        Log.e("onError", e.localizedMessage)
+                        Log.e("onError", e.localizedMessage ?: "")
                         listener.showProgress(false)
 
                     }
@@ -1362,7 +1363,164 @@ open class BaseViewModel : ViewModel() {
                     }
 
                     override fun onError(e: Throwable) {
-                        Log.e("onError", e.localizedMessage)
+                        Log.e("onError", e.localizedMessage ?: "")
+                        listener.showProgress(false)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+
+    }
+
+    fun getNotification(listener: ApiListener): LiveData<ApiResponse<JsonObject>> {
+        val result: MutableLiveData<ApiResponse<JsonObject>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.getNotification(
+                object : Observer<ApiResponse<JsonObject>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<JsonObject>) {
+                        Log.e("onNext", "$t")
+                        result.value = t
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.e("onError", e.localizedMessage ?: "")
+                        listener.showProgress(false)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+
+    }
+
+    fun getRelatedData(
+        listener: ApiListener,
+        category: String,
+        limit: Int,
+        offset: Int
+    ): LiveData<ApiResponse<List<ProductRelatedResponse>>> {
+        var result = MutableLiveData<ApiResponse<List<ProductRelatedResponse>>>()
+
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(false)
+            apiRepository.getRelatedData(category, offset, limit,
+                object : Observer<ApiResponse<List<ProductRelatedResponse>>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+
+                    }
+
+                    override fun onNext(t: ApiResponse<List<ProductRelatedResponse>>) {
+                        Log.e("onNext", "$t")
+                        result.value = (t)
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        listener.showProgress(false)
+                        listener.msg(e.message!!)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+
+    }
+
+
+    fun createProductRating(
+        listener: ApiListener,
+        productId: Int,
+        rating: String
+    ): LiveData<ApiResponse<JsonObject>> {
+        val result: MutableLiveData<ApiResponse<JsonObject>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.createProductRating(productId, rating,
+                object : Observer<ApiResponse<JsonObject>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<JsonObject>) {
+                        Log.e("onNext", "$t")
+                        result.value = t
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.e("onError", e.localizedMessage ?: "")
+                        listener.showProgress(false)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+
+    }
+
+
+    fun createBusinessRating(
+        listener: ApiListener,
+        businessId: Int,
+        rating: String
+    ): LiveData<ApiResponse<JsonObject>> {
+        val result: MutableLiveData<ApiResponse<JsonObject>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.createBusinessRating(businessId, rating,
+                object : Observer<ApiResponse<JsonObject>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<JsonObject>) {
+                        Log.e("onNext", "$t")
+                        result.value = t
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.e("onError", e.localizedMessage ?: "")
                         listener.showProgress(false)
 
                     }

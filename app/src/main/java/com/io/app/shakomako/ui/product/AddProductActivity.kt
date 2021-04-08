@@ -1,11 +1,14 @@
 package com.io.app.shakomako.ui.product
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.Observer
@@ -20,6 +23,7 @@ import com.io.app.shakomako.ui.base.BaseUtils
 import com.io.app.shakomako.ui.base.DataBindingActivity
 import com.io.app.shakomako.utils.constants.ApiConstant
 import com.io.app.shakomako.utils.constants.AppConstant
+import com.io.app.shakomako.utils.picker.listener.OnItemSelectedListener
 import kotlinx.android.synthetic.main.activity_add_product.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -29,6 +33,7 @@ class AddProductActivity : DataBindingActivity<ActivityAddProductBinding>(), Vie
     private lateinit var viewModel: AddProductViewModel
     private var map: HashMap<Int, String> = HashMap()
     private var hashTagList: ArrayList<String> = ArrayList()
+    private lateinit var categoryList: Array<String>
 
     override fun layoutRes(): Int {
         return R.layout.activity_add_product
@@ -43,6 +48,8 @@ class AddProductActivity : DataBindingActivity<ActivityAddProductBinding>(), Vie
     }
 
     private fun init() {
+        categoryList = resources.getStringArray(R.array.product_category)
+
         dataBinding.hashtagCount = "0"
         dataBinding.viewModel = viewModel
         dataBinding.viewHandler = this
@@ -141,6 +148,8 @@ class AddProductActivity : DataBindingActivity<ActivityAddProductBinding>(), Vie
                     addProduct()
                 } else updateImage()
             }
+
+            R.id.tv_category -> openSpinner()
         }
     }
 
@@ -165,7 +174,7 @@ class AddProductActivity : DataBindingActivity<ActivityAddProductBinding>(), Vie
                     }
                 })
         } catch (e: RequiredFieldExceptions) {
-            showToast(e.localizedMessage)
+            showToast(e.localizedMessage ?: "")
         }
 
     }
@@ -213,7 +222,7 @@ class AddProductActivity : DataBindingActivity<ActivityAddProductBinding>(), Vie
             )
             uploadProductImage()
         } catch (e: RequiredFieldExceptions) {
-            showToast(e.localizedMessage)
+            showToast(e.localizedMessage ?: "")
         }
 
     }
@@ -305,4 +314,54 @@ class AddProductActivity : DataBindingActivity<ActivityAddProductBinding>(), Vie
         Glide.with(dataBinding.root).load(path).into(view)
     }
 
+    private fun openSpinner() {
+        val adapter = ArrayAdapter(
+            this,
+            R.layout.layout_product_category_spinner,
+            categoryList
+        )
+        dataBinding.spinnerCategory?.adapter = adapter
+
+        dataBinding.spinnerCategory?.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    (view as TextView).text = ""
+                    viewModel.addProductObserver.productRequest.productCategory = categoryList[position]
+                    Log.e("TAG", categoryList[position])
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+            }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

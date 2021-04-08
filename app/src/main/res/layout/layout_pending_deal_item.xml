@@ -12,6 +12,8 @@
             name="dealsData"
             type="com.io.app.shakomako.api.pojo.deal.PendingDealsResponse" />
 
+
+
     </data>
 
     <LinearLayout
@@ -137,6 +139,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_rating"
+                android:onClick="@{viewHandler::onClick}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

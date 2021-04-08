@@ -63,7 +63,7 @@
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/colorBlack" />
+            android:background="@color/colorView" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
