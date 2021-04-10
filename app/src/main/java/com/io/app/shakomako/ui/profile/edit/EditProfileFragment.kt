@@ -27,6 +27,7 @@ import com.io.app.shakomako.helper.callback.ViewClickCallback
 import com.io.app.shakomako.ui.base.BaseUtils
 import com.io.app.shakomako.ui.home.HomeBaseFragment
 import com.io.app.shakomako.utils.ContextUtils
+import com.io.app.shakomako.utils.ProfileFieldType
 import com.io.app.shakomako.utils.constants.ApiConstant
 import com.io.app.shakomako.utils.constants.AppConstant
 import java.util.*
@@ -50,36 +51,36 @@ class EditProfileFragment : HomeBaseFragment<FragmentEditProfileBinding>(), View
         viewDataBinding.data = viewModel.profileObserver.profileObserverData
         loadImage(viewModel.profileObserver.profileObserverData.userImage)
 
-        viewDataBinding.root.setOnClickListener {
-            viewDataBinding.etUsername.clearFocus()
-        }
-
-        viewDataBinding.etUsername.setOnFocusChangeListener { _, p1 ->
-            run {
-                if (p1) {
-                    Log.e("text", "dumy true")
-
-                } else {
-                    viewModel.createUserName(viewModel.profileObserver.profileObserverData.shakoMakoUserName)
-                        .observe(viewLifecycleOwner,
-                            Observer {
-                                Log.e("status", "${it.status}")
-                                if (it.status == 200) {
-                                    viewModel.visibleObserver.visible = true
-
-                                    usernameString =
-                                        viewModel.profileObserver.profileObserverData.shakoMakoUserName
-                                } else {
-                                    viewModel.visibleObserver.visible = false
-                                    viewDataBinding.etUsername.error = it.message
-
-
-                                }
-                            })
-                    Log.e("text", "dumy false")
-                }
-            }
-        }
+//        viewDataBinding.root.setOnClickListener {
+//            viewDataBinding.etUsername.clearFocus()
+//        }
+//
+//        viewDataBinding.etUsername.setOnFocusChangeListener { _, p1 ->
+//            run {
+//                if (p1) {
+//                    Log.e("text", "dumy true")
+//
+//                } else {
+//                    viewModel.createUserName(viewModel.profileObserver.profileObserverData.shakoMakoUserName)
+//                        .observe(viewLifecycleOwner,
+//                            Observer {
+//                                Log.e("status", "${it.status}")
+//                                if (it.status == 200) {
+//                                    viewModel.visibleObserver.visible = true
+//
+//                                    usernameString =
+//                                        viewModel.profileObserver.profileObserverData.shakoMakoUserName
+//                                } else {
+//                                    viewModel.visibleObserver.visible = false
+//                                    viewDataBinding.etUsername.error = it.message
+//
+//
+//                                }
+//                            })
+//                    Log.e("text", "dumy false")
+//                }
+//            }
+//        }
     }
 
     @SuppressLint("CheckResult")
@@ -123,6 +124,35 @@ class EditProfileFragment : HomeBaseFragment<FragmentEditProfileBinding>(), View
 
     override fun onClick(v: View) {
         when (v.id) {
+
+            R.id.tv_shakomako_label -> {
+                viewModel.editProfileFieldObserver.type = ProfileFieldType.SHAKOMAKO_ID
+                openFragment(AppConstant.EDIT_PROFILE_FIELD)
+            }
+
+            R.id.tv_full_name -> {
+                viewModel.editProfileFieldObserver.type = ProfileFieldType.FULL_NAME
+                openFragment(AppConstant.EDIT_PROFILE_FIELD)
+            }
+
+            R.id.tv_email -> {
+                if (viewModel.profileObserver.profileObserverData.loginType == AppConstant.LOGIN_TYPE_GOOGLE || viewModel.profileObserver.profileObserverData.loginType == AppConstant.LOGIN_TYPE_FACEBOOK) {
+                    showToast("You cannot edit your email")
+                    return
+                }
+                viewModel.editProfileFieldObserver.type = ProfileFieldType.EMAIL
+                openFragment(AppConstant.EDIT_PROFILE_FIELD)
+            }
+
+            R.id.tv_phone -> {
+                if (viewModel.profileObserver.profileObserverData.loginType == AppConstant.LOGIN_TYPE_PHONE) {
+                    showToast("You cannot edit your phone")
+                    return
+                }
+                viewModel.editProfileFieldObserver.type = ProfileFieldType.PHONE
+                openFragment(AppConstant.EDIT_PROFILE_FIELD)
+            }
+
             R.id.ll_verify -> {
                 openFragment(AppConstant.VERIFY_PROFILE_FRAGMENT)
             }

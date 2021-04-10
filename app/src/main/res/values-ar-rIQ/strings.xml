@@ -225,6 +225,7 @@
     <string name="alert_subtitle">لتغيير اللغة يرجى الخروج واعادة الدخول الى التطبيق</string>
     <string name="product_">Product</string>
     <string name="customer_">Customer</string>
+    <string name="save">Save</string>
 
 
 </resources>

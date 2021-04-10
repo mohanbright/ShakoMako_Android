@@ -14,6 +14,7 @@ import com.io.app.shakomako.api.pojo.shop.BusinessProducts
 import com.io.app.shakomako.api.pojo.shop.BusinessProfile
 import com.io.app.shakomako.api.repo.ApiRepository
 import com.io.app.shakomako.ui.base.BaseViewModel
+import com.io.app.shakomako.utils.ProfileFieldType
 import com.io.app.shakomako.utils.session.UserSession
 import javax.inject.Inject
 
@@ -40,6 +41,7 @@ class HomeViewModel @Inject constructor(
     var navigationShopObserver: NavigationShopObserver = NavigationShopObserver()
     var shopItemDetailObserver: ShopItemDetailsObserver = ShopItemDetailsObserver()
     var languageObserver: LanguageObserver = LanguageObserver()
+    var editProfileFieldObserver: EditProfileFieldObserver = EditProfileFieldObserver()
 
 
     inner class DealObserver : BaseObservable() {
@@ -165,6 +167,20 @@ class HomeViewModel @Inject constructor(
 
     inner class LanguageObserver : BaseObservable() {
         var langObserver: String = "en"
+            set(value) {
+                field = value
+                notifyChange()
+            }
+    }
+
+    inner class EditProfileFieldObserver : BaseObservable() {
+        var type: Int = 0
+            set(value) {
+                field = value
+                notifyChange()
+            }
+
+        var editedText: String = ""
             set(value) {
                 field = value
                 notifyChange()

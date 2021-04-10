@@ -218,11 +218,12 @@
                         android:padding="@dimen/_2sdp"
                         android:text="@string/shakomako_label" />
 
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/et_username"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_shakomako_label"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:onClick="@{viewHandler::onClick}"
                         android:layout_weight="1"
                         android:background="@color/colorAccent"
                         android:gravity="start"
@@ -250,12 +251,14 @@
                         android:padding="@dimen/_2sdp"
                         android:text="@string/full_name" />
 
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_full_name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:background="@color/colorAccent"
+                        android:onClick="@{viewHandler::onClick}"
                         android:gravity="start"
                         android:hint="@string/enter"
                         android:text="@={data.userName}"
@@ -315,7 +318,9 @@
                         android:padding="@dimen/_2sdp"
                         android:text="@string/email" />
 
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_email"
+                        android:onClick="@{viewHandler::onClick}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -347,7 +352,9 @@
                         android:padding="@dimen/_2sdp"
                         android:text="@string/phone" />
 
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_phone"
+                        android:onClick="@{viewHandler::onClick}"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"

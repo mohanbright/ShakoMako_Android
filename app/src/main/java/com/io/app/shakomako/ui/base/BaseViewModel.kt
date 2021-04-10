@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import com.google.gson.JsonObject
 import com.io.app.shakomako.R
 import com.io.app.shakomako.api.pojo.address.DeliveryAddress
+import com.io.app.shakomako.api.pojo.analytics.Analytics
 import com.io.app.shakomako.api.pojo.business.OtherBusinessProfileResponse
 import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
 import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
@@ -29,6 +30,7 @@ import com.io.app.shakomako.api.pojo.product.ProductRelatedResponse
 import com.io.app.shakomako.api.pojo.product.ProductRequest
 import com.io.app.shakomako.api.pojo.product.ProductResponse
 import com.io.app.shakomako.api.pojo.profile.ProfileResponse
+import com.io.app.shakomako.api.pojo.recentproducts.RecentProducts
 import com.io.app.shakomako.api.pojo.response.ApiResponse
 import com.io.app.shakomako.api.pojo.shop.BusinessDetail
 import com.io.app.shakomako.api.pojo.shop.BusinessProfile
@@ -36,6 +38,7 @@ import com.io.app.shakomako.api.pojo.upload.UploadResponse
 import com.io.app.shakomako.api.pojo.verification.BusinessVerificationData
 import com.io.app.shakomako.api.pojo.verification.PersonalVerificationData
 import com.io.app.shakomako.api.pojo.verification.PersonalVerifySubmission
+import com.io.app.shakomako.api.recentbusiness.RecentBusiness
 import com.io.app.shakomako.api.repo.ApiRepository
 import com.io.app.shakomako.helper.callback.ApiListener
 import com.io.app.shakomako.utils.ApiUtils
@@ -1522,6 +1525,117 @@ open class BaseViewModel : ViewModel() {
                     override fun onError(e: Throwable) {
                         Log.e("onError", e.localizedMessage ?: "")
                         listener.showProgress(false)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+
+    }
+
+    fun getRecentBusiness(listener: ApiListener): LiveData<ApiResponse<List<RecentBusiness>>> {
+        var result = MutableLiveData<ApiResponse<List<RecentBusiness>>>()
+
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.getRecentBusiness(
+                object : Observer<ApiResponse<List<RecentBusiness>>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+
+                    }
+
+                    override fun onNext(t: ApiResponse<List<RecentBusiness>>) {
+                        Log.e("onNext", "$t")
+                        result.value = (t)
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        listener.showProgress(false)
+                        listener.msg(e.message!!)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+
+    }
+
+    fun getRecentProducts(listener: ApiListener): LiveData<ApiResponse<List<RecentProducts>>> {
+        var result = MutableLiveData<ApiResponse<List<RecentProducts>>>()
+
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.getRecentProducts(
+                object : Observer<ApiResponse<List<RecentProducts>>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+
+                    }
+
+                    override fun onNext(t: ApiResponse<List<RecentProducts>>) {
+                        Log.e("onNext", "$t")
+                        result.value = (t)
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        listener.showProgress(false)
+                        listener.msg(e.message!!)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+
+    }
+
+    fun getAnalyticsData(listener: ApiListener): LiveData<ApiResponse<Analytics>> {
+        var result = MutableLiveData<ApiResponse<Analytics>>()
+
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.getAnalytics(
+                object : Observer<ApiResponse<Analytics>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+
+                    }
+
+                    override fun onNext(t: ApiResponse<Analytics>) {
+                        Log.e("onNext", "$t")
+                        result.value = (t)
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        listener.showProgress(false)
+                        listener.msg(e.message!!)
 
                     }
 

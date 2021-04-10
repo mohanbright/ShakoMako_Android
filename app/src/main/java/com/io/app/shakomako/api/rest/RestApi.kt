@@ -23,7 +23,9 @@ import com.io.app.shakomako.api.pojo.product.ProductRelatedResponse
 import com.io.app.shakomako.api.pojo.product.ProductRequest
 import com.io.app.shakomako.api.pojo.product.ProductResponse
 import com.io.app.shakomako.api.pojo.profile.ProfileResponse
+import com.io.app.shakomako.api.pojo.recentproducts.RecentProducts
 import com.io.app.shakomako.api.pojo.response.ApiResponse
+import com.io.app.shakomako.api.pojo.search.SearchQueryResponse
 import com.io.app.shakomako.api.pojo.shop.BusinessDetail
 import com.io.app.shakomako.api.pojo.shop.BusinessProfile
 import com.io.app.shakomako.api.pojo.upload.UploadResponse
@@ -31,6 +33,7 @@ import com.io.app.shakomako.api.pojo.verification.BusinessVerificationData
 import com.io.app.shakomako.api.pojo.verification.BusinessVerifySubmission
 import com.io.app.shakomako.api.pojo.verification.PersonalVerificationData
 import com.io.app.shakomako.api.pojo.verification.PersonalVerifySubmission
+import com.io.app.shakomako.api.recentbusiness.RecentBusiness
 import io.reactivex.Observable
 import okhttp3.MultipartBody
 import retrofit2.http.*
@@ -230,5 +233,17 @@ interface RestApi {
 
     @GET("api/getAnalytics")
     fun getAnalytics(): Observable<ApiResponse<Analytics>>
+
+    @GET("api/getRecentProducts")
+    fun getRecentProducts(): Observable<ApiResponse<List<RecentProducts>>>
+
+
+    @GET("api/getRecentBusiness")
+    fun getRecentBusiness(): Observable<ApiResponse<List<RecentBusiness>>>
+
+    @GET("api/universalSearchBar")
+    fun setByQuery(
+        @Query("search") product_category: String
+    ): Observable<ApiResponse<List<SearchQueryResponse>>>
 
 }

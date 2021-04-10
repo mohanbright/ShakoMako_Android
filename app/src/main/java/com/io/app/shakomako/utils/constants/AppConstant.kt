@@ -50,6 +50,7 @@ class AppConstant {
         const val SHOP_ITEM_DETAILS = 110
         const val NAVIGATION_SHOP_DETAIL = 111
         const val RATING_FRAGMENT = 112
+        const val EDIT_PROFILE_FIELD = 113
 
         /*******Ted permission */
         const val PERMISSION_ACCEPTED = 201

@@ -32,7 +32,7 @@ class ProfileResponse : BaseObservable() {
 
     @SerializedName("user_email")
     @Expose
-    var userEmail: String = ""
+    var userEmail: String? = ""
         set(value) {
             field = value
             notifyChange()

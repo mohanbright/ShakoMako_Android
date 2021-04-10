@@ -14,6 +14,7 @@
             type="com.io.app.shakomako.api.pojo.shop.BusinessProfile" />
 
         <import type="android.view.View" />
+        <import type="com.io.app.shakomako.utils.DateUtilsKt"/>
     </data>
 
     <LinearLayout
@@ -192,7 +193,7 @@
                                     <androidx.appcompat.widget.AppCompatTextView
                                         style="@style/Widget.ShakoMako.Text.Black"
                                         android:gravity="center"
-                                        android:text="@string/_0" />
+                                        android:text="@{DateUtilsKt.convertRatingValue(data.businessProfileDetails.ratings)}" />
 
                                     <androidx.appcompat.widget.AppCompatTextView
                                         style="@style/Widget.ShakoMako.Text.Black"

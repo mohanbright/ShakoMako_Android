@@ -11,7 +11,11 @@
 
         <variable
             name="adapter"
-            type="com.io.app.shakomako.ui.home.adapter.HomeChildAdapter" />
+            type="com.io.app.shakomako.ui.home.adapter.RecentBusinessAdapter" />
+
+        <variable
+            name="productadapter"
+            type="com.io.app.shakomako.ui.home.adapter.RecentProductAdapter" />
     </data>
 
 
@@ -26,10 +30,12 @@
             android:background="@color/colorGray">
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_back_arrow"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/_3sdp"
+                android:onClick="@{viewHandler::onClick}"
                 android:src="@drawable/ic_back_arrow" />
 
             <TextView
@@ -97,12 +103,12 @@
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_brand"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_12sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_12sdp"
-            android:background="@drawable/search_view_grey_bg"
-            android:layout_height="wrap_content" />
+            android:background="@drawable/search_view_grey_bg" />
 
 
         <View
@@ -120,8 +126,8 @@
                 android:id="@+id/rl_sort_by"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:onClick="@{viewHandler::onClick}"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:onClick="@{viewHandler::onClick}">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/Widget.ShakoMako.Text.Small.Black"
@@ -136,34 +142,30 @@
             </RelativeLayout>
 
 
-
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/black"/>
+                android:background="@color/black" />
 
 
             <RelativeLayout
                 android:id="@+id/rl_filter"
                 android:layout_width="0dp"
-                android:onClick="@{viewHandler::onClick}"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_height="match_parent">
+                android:onClick="@{viewHandler::onClick}">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/Widget.ShakoMako.Text.Small.Black"
                     android:layout_width="wrap_content"
-                    android:drawableEnd="@drawable/ic_filter"
-                    android:layout_centerInParent="true"
                     android:layout_height="match_parent"
-                    android:text="@string/filter"
-                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:layout_weight="1"
+                    android:drawableEnd="@drawable/ic_filter"
                     android:drawablePadding="@dimen/_10sdp"
-                    android:layout_weight="1"/>
+                    android:gravity="center"
+                    android:text="@string/filter" />
             </RelativeLayout>
-
-
-
 
 
         </LinearLayout>
@@ -175,33 +177,46 @@
             android:background="@color/colorBlack" />
 
 
-
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_shop_child_item"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:adapter="@{adapter}"
-            android:orientation="horizontal"
-            tools:visibility="visible"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/layout_home_child_item" />
+            android:layout_height="wrap_content">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorBlack" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_products"
-            android:layout_width="match_parent"
-            android:visibility="gone"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/layout_home_item" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_shop_child_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:adapter="@{adapter}"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/layout_home_child_item"
+                    tools:visibility="visible" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorBlack" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_products"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adapter="@{productadapter}"
+                    android:visibility="visible"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="3"
+                    tools:listitem="@layout/layout_recent_products_item" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
 
     </LinearLayout>
 

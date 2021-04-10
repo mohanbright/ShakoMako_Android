@@ -7,6 +7,7 @@ import com.io.app.shakomako.ui.delivery.DeliveryAddressFragment
 import com.io.app.shakomako.ui.home.fragments.HomeFragment
 import com.io.app.shakomako.ui.business.OtherBusinessProfile
 import com.io.app.shakomako.ui.profile.ProfileFragment
+import com.io.app.shakomako.ui.profile.edit.EditProfileFieldFragment
 import com.io.app.shakomako.ui.profile.edit.EditProfileFragment
 import com.io.app.shakomako.ui.profile.verify.PersonalVerifyFragment
 import com.io.app.shakomako.ui.profile_analytics.FragmentProfileAnalytics
@@ -62,5 +63,8 @@ abstract class HomeActivityModule {
 
     @ContributesAndroidInjector
     abstract fun contributeShopItemDetailFragment(): ShopItemDetailFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeEditProfileFieldFragment():EditProfileFieldFragment
 
 }

@@ -1,6 +1,9 @@
 package com.io.app.shakomako.utils
 
 import android.annotation.SuppressLint
+import android.util.Log
+import java.math.RoundingMode
+import java.text.DecimalFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -31,6 +34,19 @@ fun dateFormat(dateString: String): String {
 
 fun isValid(value: String?): Boolean {
     return value == null || value.isEmpty()
+}
+
+fun convertRatingValue(rating: String?): String {
+    return try {
+        val num = rating?.toDouble()
+        val df = DecimalFormat("#.##")
+        df.roundingMode = RoundingMode.CEILING
+        Log.e("convertStringtoDouble", "${df.format(num)}")
+        println(df.format(num))
+        "${df.format(num)}"
+    } catch (t: Throwable) {
+        rating ?: ""
+    }
 }
 
 

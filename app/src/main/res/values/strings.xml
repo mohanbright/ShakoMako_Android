@@ -222,4 +222,7 @@
     <string name="alert_subtitle">for Change the app language you need to quit and relaunch the app</string>
     <string name="product_">Product</string>
     <string name="customer_">Customer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="save">Save</string>
 </resources>

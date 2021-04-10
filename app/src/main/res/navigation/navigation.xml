@@ -156,6 +156,9 @@
         <action
             android:id="@+id/action_to_verify_profile"
             app:destination="@id/navigation_verify_personal" />
+
+        <action android:id="@+id/action_to_edit_profile_field"
+            app:destination="@id/navigation_edit_profile_field"/>
     </fragment>
 
     <fragment
@@ -186,5 +189,10 @@
         android:name="com.io.app.shakomako.ui.rating.RatingFragment"
         android:label="RATING"
         tools:layout="@layout/fragment_rating"/>
+
+    <fragment android:id="@+id/navigation_edit_profile_field"
+        android:name="com.io.app.shakomako.ui.profile.edit.EditProfileFieldFragment"
+        tools:layout="@layout/fragment_edit_profile_field"
+        android:label="EDIT_FIELD"/>
 
 </navigation>

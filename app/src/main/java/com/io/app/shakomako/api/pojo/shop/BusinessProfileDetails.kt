@@ -72,7 +72,7 @@ class BusinessProfileDetails : BaseObservable() {
         }
 
     @SerializedName("ratings")
-    var ratings: Int = 0
+    var ratings: String = ""
         set(value) {
             field = value
             notifyChange()

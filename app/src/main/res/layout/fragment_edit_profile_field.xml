@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewHandler"
+            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <variable
+            name="header"
+            type="String" />
+
+        <variable
+            name="viewModel"
+            type="com.io.app.shakomako.ui.home.HomeViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.profile.edit.EditProfileFieldFragment">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorGray">
+
+            <TextView
+                style="@style/Widget.ShakoMako.Text.Title.Black"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@{header, default=`Test`}" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:onClick="@{viewHandler::onClick}"
+                android:scaleX=".8"
+                android:src="@drawable/ic_back_button" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorView" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/_8sdp"
+            android:text="@={viewModel.editProfileFieldObserver.editedText}"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Widget.ShakoMako.Text.Black"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_black_stroke"
+            android:paddingStart="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:paddingEnd="@dimen/_30sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+
+            android:text="@string/save"/>
+
+    </LinearLayout>
+</layout>

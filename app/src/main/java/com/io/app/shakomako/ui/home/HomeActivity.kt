@@ -94,6 +94,10 @@ class HomeActivity : DataBindingActivity<ActivityHomeBinding>() {
             AppConstant.RATING_FRAGMENT -> {
                 open(R.id.action_to_rating)
             }
+
+            AppConstant.EDIT_PROFILE_FIELD -> {
+                open(R.id.action_to_edit_profile_field)
+            }
         }
     }
 

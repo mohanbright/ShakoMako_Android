@@ -8,6 +8,10 @@
         <variable
             name="viewHandler"
             type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <variable
+            name="data"
+            type="com.io.app.shakomako.api.pojo.analytics.Analytics" />
     </data>
 
     <LinearLayout
@@ -115,7 +119,7 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/Widget.ShakoMako.Text.Black"
                                 android:gravity="center"
-                                android:text="0" />
+                                android:text="@{``+ data.totalDeals}" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/Widget.ShakoMako.Text.Black"
@@ -134,7 +138,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/Widget.ShakoMako.Text.Black"
                                 android:gravity="center"
-                                android:text="0" />
+                                android:text="@{``+ data.followers}"
+                                 />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/Widget.ShakoMako.Text.Black"
@@ -153,7 +158,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/Widget.ShakoMako.Text.Black"
                                 android:gravity="center"
-                                android:text="0.00" />
+                                android:text="@{``+ data.ratings}"
+                                 />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/Widget.ShakoMako.Text.Black"
@@ -204,7 +210,8 @@
                             android:layout_centerInParent="true"
                             android:layout_margin="@dimen/_20sdp"
                             android:paddingTop="@dimen/_20sdp"
-                            android:text="200" />
+                            android:text="@{``+ data.doneDeals}"
+                            />
 
                     </RelativeLayout>
 
@@ -237,7 +244,8 @@
                             android:layout_centerInParent="true"
                             android:layout_margin="@dimen/_20sdp"
                             android:paddingTop="@dimen/_20sdp"
-                            android:text="11" />
+                            android:text="@{``+ data.pendingDeals}"
+                             />
 
                     </RelativeLayout>
 
@@ -274,7 +282,8 @@
                         android:layout_centerInParent="true"
                         android:layout_margin="@dimen/_20sdp"
                         android:paddingTop="@dimen/_20sdp"
-                        android:text="1,00,000 IQD" />
+                        android:text="@{data.earnings==null ? `0 IQD` : data.earnings + `IQD`}"
+                        />
 
                 </RelativeLayout>
 

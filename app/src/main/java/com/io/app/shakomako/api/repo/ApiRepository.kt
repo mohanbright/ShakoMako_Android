@@ -24,7 +24,9 @@ import com.io.app.shakomako.api.pojo.product.ProductRelatedResponse
 import com.io.app.shakomako.api.pojo.product.ProductRequest
 import com.io.app.shakomako.api.pojo.product.ProductResponse
 import com.io.app.shakomako.api.pojo.profile.ProfileResponse
+import com.io.app.shakomako.api.pojo.recentproducts.RecentProducts
 import com.io.app.shakomako.api.pojo.response.ApiResponse
+import com.io.app.shakomako.api.pojo.search.SearchQueryResponse
 import com.io.app.shakomako.api.pojo.shop.BusinessDetail
 import com.io.app.shakomako.api.pojo.shop.BusinessProfile
 import com.io.app.shakomako.api.pojo.upload.UploadResponse
@@ -32,6 +34,7 @@ import com.io.app.shakomako.api.pojo.verification.BusinessVerificationData
 import com.io.app.shakomako.api.pojo.verification.BusinessVerifySubmission
 import com.io.app.shakomako.api.pojo.verification.PersonalVerificationData
 import com.io.app.shakomako.api.pojo.verification.PersonalVerifySubmission
+import com.io.app.shakomako.api.recentbusiness.RecentBusiness
 import com.io.app.shakomako.api.rest.RestApi
 import com.io.app.shakomako.utils.session.UserSession
 import io.reactivex.Observer
@@ -551,4 +554,36 @@ class ApiRepository @Inject constructor(
             ?.observeOn(AndroidSchedulers.mainThread())
             ?.subscribe(observer)
     }
+
+    fun getRecentProducts(
+        observer: Observer<ApiResponse<List<RecentProducts>>>
+    ) {
+        getHeaderApi()
+            ?.getRecentProducts()
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+
+    fun getRecentBusiness(
+        observer: Observer<ApiResponse<List<RecentBusiness>>>
+    ) {
+        getHeaderApi()
+            ?.getRecentBusiness()
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun SearchByQuery(query:String,
+                      observer: Observer<ApiResponse<List<SearchQueryResponse>>>
+    ) {
+        getHeaderApi()
+            ?.setByQuery(query)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
 }

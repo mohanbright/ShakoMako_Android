@@ -2,6 +2,7 @@ package com.io.app.shakomako.ui.profile_analytics
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import com.io.app.shakomako.R
 import com.io.app.shakomako.databinding.FragmentProfileAnalyticsBinding
 import com.io.app.shakomako.helper.callback.ViewClickCallback
@@ -21,6 +22,7 @@ class FragmentProfileAnalytics : HomeBaseFragment<FragmentProfileAnalyticsBindin
 
     private fun init() {
         viewDataBinding.viewHandler = this
+        callApi()
     }
 
     override fun onClick(v: View) {
@@ -32,7 +34,17 @@ class FragmentProfileAnalytics : HomeBaseFragment<FragmentProfileAnalyticsBindin
             R.id.ll_verify -> {
                 openFragment(AppConstant.VERIFY_BUSINESS_FRAGMENT)
             }
+            R.id.iv_back -> {
+                onBackPressed()
+            }
         }
+    }
+
+    private fun callApi() {
+        viewModel.getAnalyticsData(apiListener()).observe(viewLifecycleOwner, Observer {
+            viewDataBinding.data = it.body
+
+        })
     }
 
 }
