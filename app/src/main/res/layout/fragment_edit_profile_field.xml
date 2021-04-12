@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -55,24 +56,58 @@
             android:layout_height="1dp"
             android:background="@color/colorView" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_margin="@dimen/_8sdp"
-            android:text="@={viewModel.editProfileFieldObserver.editedText}"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:orientation="horizontal">
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:ccp_arrowColor="@color/colorBlack"
+                app:ccp_showArrow="false"
+                app:ccp_showFlag="false"
+                app:ccp_showFullName="false"
+                android:visibility="gone"
+                app:ccp_showNameCode="false"
+                app:ccp_showPhoneCode="true" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:background="@color/white"
+                android:text="@={viewModel.editProfileFieldObserver.editedText}" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:background="@color/colorView" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_save"
             style="@style/Widget.ShakoMako.Text.Black"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_15sdp"
             android:background="@drawable/bg_black_stroke"
+            android:onClick="@{viewHandler::onClick}"
             android:paddingStart="@dimen/_30sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:paddingEnd="@dimen/_30sdp"
             android:paddingTop="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_30sdp"
             android:paddingBottom="@dimen/_10sdp"
 
-            android:text="@string/save"/>
+            android:text="@string/save" />
+
 
     </LinearLayout>
 </layout>

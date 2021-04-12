@@ -23,8 +23,9 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_back"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:padding="@dimen/_2sdp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
@@ -35,7 +36,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:gravity="center"
@@ -45,6 +45,12 @@
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:src="@drawable/ic_verify" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/Widget.ShakoMako.Text.Tiny.Black"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:gravity="center"
+                    android:text="@string/verify" />
             </LinearLayout>
         </RelativeLayout>
 

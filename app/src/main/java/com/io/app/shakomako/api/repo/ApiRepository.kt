@@ -330,6 +330,34 @@ class ApiRepository @Inject constructor(
     }
 
 
+    fun updateUserEmailPhone(
+        type: String,
+        phoneNumber: String,
+        observer: Observer<ApiResponse<JsonObject>>
+    ) {
+
+        getHeaderApi()
+            ?.updateUserEmailPhone(type, phoneNumber)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun updateVerification(
+        type: String,
+        phoneNumber: String,
+        otp: Int,
+        observer: Observer<ApiResponse<JsonObject>>
+    ) {
+
+        getHeaderApi()
+            ?.updateVerification(type, phoneNumber, otp)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+
     /*--------------------------------------------- ------------- ----------------------------------------*/
     /*--------------------------------------------- Get Type Api ----------------------------------------*/
     /*--------------------------------------------- ------------- ----------------------------------------*/
@@ -576,8 +604,9 @@ class ApiRepository @Inject constructor(
             ?.subscribe(observer)
     }
 
-    fun SearchByQuery(query:String,
-                      observer: Observer<ApiResponse<List<SearchQueryResponse>>>
+    fun SearchByQuery(
+        query: String,
+        observer: Observer<ApiResponse<List<SearchQueryResponse>>>
     ) {
         getHeaderApi()
             ?.setByQuery(query)

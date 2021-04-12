@@ -1647,4 +1647,83 @@ open class BaseViewModel : ViewModel() {
         return result
 
     }
+
+    fun updateUserEmailPhone(
+        listener: ApiListener,
+        type: String,
+        phoneNumber: String
+    ): LiveData<ApiResponse<JsonObject>> {
+        val result: MutableLiveData<ApiResponse<JsonObject>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.updateUserEmailPhone(type, phoneNumber,
+                object : Observer<ApiResponse<JsonObject>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<JsonObject>) {
+                        Log.e("onNext", "$t")
+                        result.value = t
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.e("onError", e.localizedMessage ?: "")
+                        listener.showProgress(false)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+
+    }
+
+    fun updateVerification(
+        listener: ApiListener,
+        type: String,
+        phoneNumber: String,
+        otp: Int
+    ): LiveData<ApiResponse<JsonObject>> {
+        val result: MutableLiveData<ApiResponse<JsonObject>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.updateVerification(type, phoneNumber, otp,
+                object : Observer<ApiResponse<JsonObject>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<JsonObject>) {
+                        Log.e("onNext", "$t")
+                        result.value = t
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.e("onError", e.localizedMessage ?: "")
+                        listener.showProgress(false)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+
+    }
 }

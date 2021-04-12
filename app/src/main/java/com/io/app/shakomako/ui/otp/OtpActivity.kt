@@ -1,5 +1,6 @@
 package com.io.app.shakomako.ui.otp
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -25,6 +26,7 @@ class OtpActivity : DataBindingActivity<ActivityOtpBinding>(), ViewClickCallback
     var countDownTimer: CountDownTimer? = null
     lateinit var loginViewModel: LoginViewModel
     var isTimerStarted = true
+    var type: Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +40,7 @@ class OtpActivity : DataBindingActivity<ActivityOtpBinding>(), ViewClickCallback
 
     private fun init() {
         startTimer(5000)
+        type = intent.getIntExtra(AppConstant.TYPE, 0)
         loginViewModel.observer.completePhoneNumber =
             intent.getStringExtra(AppConstant.PARCEL_DATA) ?: ""
         dataBinding.tvPhoneNumber.text = loginViewModel.observer.completePhoneNumber
@@ -47,11 +50,10 @@ class OtpActivity : DataBindingActivity<ActivityOtpBinding>(), ViewClickCallback
         when (v.id) {
             R.id.button_verify -> {
                 if (isOtpValid()) {
-                    loginViewModel.verifyOtp(
-                        apiListener,
-                        loginViewModel.observer.completePhoneNumber,
-                        loginViewModel.observer.otp.toInt()
-                    ).observe(this, verifyObserver)
+                    if (type == AppConstant.CHANGE_PHONE_NUMBER) {
+                        updateVerification()
+                    } else
+                        verifyOtp()
                 } else showToast("Not a Valid Otp")
             }
             R.id.ll_resend, R.id.resend -> {
@@ -61,6 +63,31 @@ class OtpActivity : DataBindingActivity<ActivityOtpBinding>(), ViewClickCallback
                 }
             }
         }
+    }
+
+    private fun updateVerification() {
+        loginViewModel.updateVerification(
+            apiListener,
+            AppConstant.LOGIN_TYPE_PHONE,
+            loginViewModel.observer.completePhoneNumber,
+            loginViewModel.observer.otp.toInt()
+        ).observe(this, Observer { response ->
+            run {
+                if (response.status?.equals(ApiConstant.SUCCESS) == true) {
+                    finish()
+                } else showToast(
+                    response.message ?: resources.getString(R.string.msg_something_went_wrong)
+                )
+            }
+        })
+    }
+
+    private fun verifyOtp() {
+        loginViewModel.verifyOtp(
+            apiListener,
+            loginViewModel.observer.completePhoneNumber,
+            loginViewModel.observer.otp.toInt()
+        ).observe(this, verifyObserver)
     }
 
     private var verifyObserver: Observer<ApiResponse<TokenResponse>> =

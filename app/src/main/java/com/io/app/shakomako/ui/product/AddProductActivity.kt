@@ -34,6 +34,7 @@ class AddProductActivity : DataBindingActivity<ActivityAddProductBinding>(), Vie
     private var map: HashMap<Int, String> = HashMap()
     private var hashTagList: ArrayList<String> = ArrayList()
     private lateinit var categoryList: Array<String>
+    private var isFirstTime = true
 
     override fun layoutRes(): Int {
         return R.layout.activity_add_product
@@ -49,6 +50,8 @@ class AddProductActivity : DataBindingActivity<ActivityAddProductBinding>(), Vie
 
     private fun init() {
         categoryList = resources.getStringArray(R.array.product_category)
+
+        openSpinner()
 
         dataBinding.hashtagCount = "0"
         dataBinding.viewModel = viewModel
@@ -72,9 +75,10 @@ class AddProductActivity : DataBindingActivity<ActivityAddProductBinding>(), Vie
             Log.e("TAG", map.size.toString())
         }
 
+
         viewModel.addProductObserver.businessId = intent.getIntExtra(AppConstant.BUSINESS_ID, 0)
 
-        dataBinding.tvBio?.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
+        dataBinding.tvBio.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 checkHashTag()
                 hideKeyboard()
@@ -149,8 +153,13 @@ class AddProductActivity : DataBindingActivity<ActivityAddProductBinding>(), Vie
                 } else updateImage()
             }
 
-            R.id.tv_category -> openSpinner()
+            R.id.tv_category -> {
+                dataBinding.spinnerCategory?.performClick()
+                isFirstTime = false
+
+            }
         }
+
     }
 
     private fun updateProduct() {
@@ -286,23 +295,23 @@ class AddProductActivity : DataBindingActivity<ActivityAddProductBinding>(), Vie
             override fun onItemData(t: Uri?, r: Int?) {
                 when (type) {
                     1 -> {
-                        loadImage(t?.path!!, dataBinding.ivFirstImage!!)
+                        loadImage(t?.path!!, dataBinding.ivFirstImage)
                         map[0] = t.path!!
                     }
                     2 -> {
-                        loadImage(t?.path!!, dataBinding.ivSecondImage!!)
+                        loadImage(t?.path!!, dataBinding.ivSecondImage)
                         map[1] = t.path!!
                     }
                     3 -> {
-                        loadImage(t?.path!!, dataBinding.ivThirdImage!!)
+                        loadImage(t?.path!!, dataBinding.ivThirdImage)
                         map[2] = t.path!!
                     }
                     4 -> {
-                        loadImage(t?.path!!, dataBinding.ivForthImage!!)
+                        loadImage(t?.path!!, dataBinding.ivForthImage)
                         map[3] = t.path!!
                     }
                     5 -> {
-                        loadImage(t?.path!!, dataBinding.ivFifthImage!!)
+                        loadImage(t?.path!!, dataBinding.ivFifthImage)
                         map[4] = t.path!!
                     }
                 }
@@ -330,8 +339,10 @@ class AddProductActivity : DataBindingActivity<ActivityAddProductBinding>(), Vie
                     position: Int,
                     id: Long
                 ) {
+                    if (isFirstTime) return
                     (view as TextView).text = ""
-                    viewModel.addProductObserver.productRequest.productCategory = categoryList[position]
+                    viewModel.addProductObserver.productRequest.productCategory =
+                        categoryList[position]
                     Log.e("TAG", categoryList[position])
                 }
 

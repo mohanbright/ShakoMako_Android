@@ -51,36 +51,6 @@ class EditProfileFragment : HomeBaseFragment<FragmentEditProfileBinding>(), View
         viewDataBinding.data = viewModel.profileObserver.profileObserverData
         loadImage(viewModel.profileObserver.profileObserverData.userImage)
 
-//        viewDataBinding.root.setOnClickListener {
-//            viewDataBinding.etUsername.clearFocus()
-//        }
-//
-//        viewDataBinding.etUsername.setOnFocusChangeListener { _, p1 ->
-//            run {
-//                if (p1) {
-//                    Log.e("text", "dumy true")
-//
-//                } else {
-//                    viewModel.createUserName(viewModel.profileObserver.profileObserverData.shakoMakoUserName)
-//                        .observe(viewLifecycleOwner,
-//                            Observer {
-//                                Log.e("status", "${it.status}")
-//                                if (it.status == 200) {
-//                                    viewModel.visibleObserver.visible = true
-//
-//                                    usernameString =
-//                                        viewModel.profileObserver.profileObserverData.shakoMakoUserName
-//                                } else {
-//                                    viewModel.visibleObserver.visible = false
-//                                    viewDataBinding.etUsername.error = it.message
-//
-//
-//                                }
-//                            })
-//                    Log.e("text", "dumy false")
-//                }
-//            }
-//        }
     }
 
     @SuppressLint("CheckResult")
@@ -167,33 +137,33 @@ class EditProfileFragment : HomeBaseFragment<FragmentEditProfileBinding>(), View
 
             R.id.tv_gender -> showBottomSheet()
 
-            R.id.text_submit -> {
-                viewModel.profileObserver.profileObserverData.shakoMakoUserName = usernameString
-                if (viewModel.profileObserver.profileObserverData.userImage == ""
-                    || viewModel.profileObserver.profileObserverData.userImage.contains("http://ec2-3-142-205-39.us-east-2.compute.amazonaws.com:3000/")
-                )
-                    updateProfile()
-                else {
-                    viewModel.upload(
-                        apiListener(),
-                        viewModel.profileObserver.profileObserverData.userImage
-                    )
-                        .observe(viewLifecycleOwner,
-                            Observer { response ->
-                                run {
-                                    if (response.status?.equals(ApiConstant.SUCCESS) == true) {
-                                        viewModel.profileObserver.profileObserverData.userImage =
-                                            response.body?.image ?: ""
-                                        updateProfile()
-                                    } else showToast(
-                                        response.message
-                                            ?: resources.getString(R.string.msg_something_went_wrong)
-                                    )
-                                }
-                            })
-                }
-
-            }
+//            R.id.text_submit -> {
+//                viewModel.profileObserver.profileObserverData.shakoMakoUserName = usernameString
+//                if (viewModel.profileObserver.profileObserverData.userImage == ""
+//                    || viewModel.profileObserver.profileObserverData.userImage.contains("http://ec2-3-142-205-39.us-east-2.compute.amazonaws.com:3000/")
+//                )
+//                    updateProfile()
+//                else {
+//                    viewModel.upload(
+//                        apiListener(),
+//                        viewModel.profileObserver.profileObserverData.userImage
+//                    )
+//                        .observe(viewLifecycleOwner,
+//                            Observer { response ->
+//                                run {
+//                                    if (response.status?.equals(ApiConstant.SUCCESS) == true) {
+//                                        viewModel.profileObserver.profileObserverData.userImage =
+//                                            response.body?.image ?: ""
+//                                        updateProfile()
+//                                    } else showToast(
+//                                        response.message
+//                                            ?: resources.getString(R.string.msg_something_went_wrong)
+//                                    )
+//                                }
+//                            })
+//                }
+//
+//            }
 
             R.id.edit_profile_image -> {
                 openSingleImagePicker(object : DataItemCallBack<Uri, Int> {

@@ -141,6 +141,21 @@ interface RestApi {
         @Field("rating") rating: String
     ): Observable<ApiResponse<JsonObject>>
 
+    @FormUrlEncoded
+    @POST("api/updateUserEmailPhone")
+    fun updateUserEmailPhone(
+        @Field("type") type: String,
+        @Field("user_phone") phoneNumber: String
+    ): Observable<ApiResponse<JsonObject>>
+
+    @FormUrlEncoded
+    @POST("api/updateVerification")
+    fun updateVerification(
+        @Field("type") type: String,
+        @Field("user_phone") phoneNumber: String,
+        @Field("otp") otp: Int
+    ): Observable<ApiResponse<JsonObject>>
+
     /** GET APIS*/
 
     @GET("api/getUserProfile")

@@ -4,6 +4,7 @@ class AppConstant {
 
     companion object {
 
+        const val CHANGE_PHONE_NUMBER = 11
         const val PARCEL_DATA = "parcel_data"
         const val EXTRA_DATA = "extra_data"
         const val BUSINESS_ID = "business_id"
