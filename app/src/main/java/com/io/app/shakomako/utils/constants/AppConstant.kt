@@ -112,5 +112,10 @@ class AppConstant {
         const val LANGUAGE_TYPE: String = "lang_type"
         const val LANGUAGE_TYPE_ENGLISH: String = "en"
         const val LANGUAGE_TYPE_ARABIC: String = "ar"
+
+        /** Recent Activity Api Constatnt*/
+        const val BUSINESS = "business"
+        const val PRODUCT = "product"
+
     }
 }

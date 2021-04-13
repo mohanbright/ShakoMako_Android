@@ -79,12 +79,20 @@ class ShopItemDetailFragment : HomeBaseFragment<FragmentShopItemDetailBinding>()
                         this.data = response.body ?: ProductResponse()
                         setData()
                         callProductApi(this.data.product_category)
-
+                        saveRecentActivity(id)
                     } else showToast(
                         response.message ?: resources.getString(R.string.msg_something_went_wrong)
                     )
                 }
             })
+    }
+
+    private fun saveRecentActivity(id: Int) {
+        viewModel.saveRecentActivity(
+            id,
+            0,
+            AppConstant.PRODUCT
+        )
     }
 
     private fun setData() {

@@ -226,6 +226,12 @@
     <string name="product_">Product</string>
     <string name="customer_">Customer</string>
     <string name="save">Save</string>
+    <string name="upload_national_id_passport">Upload National Id/ Passport</string>
+    <string name="pay">Pay</string>
+    <string name="amount_due">Amount Due</string>
+    <string name="pay_cash_on_delivery">Pay Cash on Delivery</string>
+    <string name="recently_viewed_products">Recently Viewed Products</string>
+    <string name="recently_viewed_shop">Recently Viewed Shops</string>
 
 
 </resources>

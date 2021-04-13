@@ -3,6 +3,7 @@ package com.io.app.shakomako.ui.base
 import android.content.Context
 import android.util.Log
 import android.widget.TextView
+import androidx.databinding.BaseObservable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,6 +16,7 @@ import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
 import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
 import com.io.app.shakomako.api.pojo.chat_response.OpenDealsData
 import com.io.app.shakomako.api.pojo.chat_response.PersonalChatResponse
+import com.io.app.shakomako.api.pojo.chathistory.CheckChatHistoryResponse
 import com.io.app.shakomako.api.pojo.chatroom.ChatRoomData
 import com.io.app.shakomako.api.pojo.codapproval.CodApprovalData
 import com.io.app.shakomako.api.pojo.deal.CreateDealData
@@ -32,6 +34,7 @@ import com.io.app.shakomako.api.pojo.product.ProductResponse
 import com.io.app.shakomako.api.pojo.profile.ProfileResponse
 import com.io.app.shakomako.api.pojo.recentproducts.RecentProducts
 import com.io.app.shakomako.api.pojo.response.ApiResponse
+import com.io.app.shakomako.api.pojo.search.SearchQueryResponse
 import com.io.app.shakomako.api.pojo.shop.BusinessDetail
 import com.io.app.shakomako.api.pojo.shop.BusinessProfile
 import com.io.app.shakomako.api.pojo.upload.UploadResponse
@@ -41,6 +44,7 @@ import com.io.app.shakomako.api.pojo.verification.PersonalVerifySubmission
 import com.io.app.shakomako.api.recentbusiness.RecentBusiness
 import com.io.app.shakomako.api.repo.ApiRepository
 import com.io.app.shakomako.helper.callback.ApiListener
+import com.io.app.shakomako.ui.home.HomeViewModel
 import com.io.app.shakomako.utils.ApiUtils
 import com.io.app.shakomako.utils.ContextUtils
 import io.reactivex.Observer
@@ -51,6 +55,28 @@ open class BaseViewModel : ViewModel() {
 
     protected lateinit var context: Context
     protected lateinit var apiRepository: ApiRepository
+
+    var visibleSearchObserver: VisibleSearchObserver = VisibleSearchObserver()
+
+
+    inner class VisibleSearchObserver : BaseObservable() {
+        var visible: Int = 0
+            set(value) {
+                field = value
+                notifyChange()
+            }
+        var shopVisible: Int = 0
+            set(value) {
+                field = value
+                notifyChange()
+            }
+
+        var viewVisible: Int = 0
+            set(value) {
+                field = value
+                notifyChange()
+            }
+    }
 
 
     fun login(
@@ -1723,6 +1749,120 @@ open class BaseViewModel : ViewModel() {
             listener.msg(context.getString(R.string.no_internet))
         }
 
+        return result
+
+    }
+
+    fun getSearchByQuery(
+        query: String,
+        listener: ApiListener
+    ): LiveData<ApiResponse<List<SearchQueryResponse>>> {
+        val result = MutableLiveData<ApiResponse<List<SearchQueryResponse>>>()
+
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.searchByQuery(query,
+                object : Observer<ApiResponse<List<SearchQueryResponse>>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+
+                    }
+
+                    override fun onNext(t: ApiResponse<List<SearchQueryResponse>>) {
+                        Log.e("onNext", "$t")
+                        result.value = (t)
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        listener.showProgress(false)
+                        listener.msg(e.message!!)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+
+    }
+
+    fun checkChatHistory(
+        userId: Int,
+        businessId: Int,
+        listener: ApiListener
+    ): LiveData<ApiResponse<CheckChatHistoryResponse>> {
+        val result = MutableLiveData<ApiResponse<CheckChatHistoryResponse>>()
+
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.checkChatHistory(userId, businessId,
+                object : Observer<ApiResponse<CheckChatHistoryResponse>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+
+                    }
+
+                    override fun onNext(t: ApiResponse<CheckChatHistoryResponse>) {
+                        Log.e("onNext", "$t")
+                        result.value = (t)
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        listener.showProgress(false)
+                        listener.msg(e.message!!)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+
+    }
+
+    fun saveRecentActivity(
+        productId: Int,
+        businessId: Int,
+        type: String
+    ): LiveData<ApiResponse<JsonObject>> {
+        val result: MutableLiveData<ApiResponse<JsonObject>> = MutableLiveData()
+        if (ApiUtils.checkInternet(context)) {
+            apiRepository.saveRecentActivity(productId, businessId, type,
+                object : Observer<ApiResponse<JsonObject>> {
+                    override fun onComplete() {
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<JsonObject>) {
+                        Log.e("onNext", "$t")
+                        result.value = t
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.e("onError", e.localizedMessage ?: "")
+
+                    }
+
+                })
+        }
         return result
 
     }

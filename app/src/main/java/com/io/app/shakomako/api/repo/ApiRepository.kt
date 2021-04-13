@@ -9,6 +9,7 @@ import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
 import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
 import com.io.app.shakomako.api.pojo.chat_response.OpenDealsData
 import com.io.app.shakomako.api.pojo.chat_response.PersonalChatResponse
+import com.io.app.shakomako.api.pojo.chathistory.CheckChatHistoryResponse
 import com.io.app.shakomako.api.pojo.chatroom.ChatRoomData
 import com.io.app.shakomako.api.pojo.codapproval.CodApprovalData
 import com.io.app.shakomako.api.pojo.deal.CreateDealData
@@ -45,6 +46,7 @@ import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.http.Part
+import retrofit2.http.Query
 import javax.inject.Inject
 
 class ApiRepository @Inject constructor(
@@ -357,6 +359,20 @@ class ApiRepository @Inject constructor(
             ?.subscribe(observer)
     }
 
+    fun saveRecentActivity(
+        productId: Int,
+        businessId: Int,
+        type: String,
+        observer: Observer<ApiResponse<JsonObject>>
+    ) {
+
+        getHeaderApi()
+            ?.saveRecentActivity(productId, businessId, type)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
 
     /*--------------------------------------------- ------------- ----------------------------------------*/
     /*--------------------------------------------- Get Type Api ----------------------------------------*/
@@ -604,12 +620,24 @@ class ApiRepository @Inject constructor(
             ?.subscribe(observer)
     }
 
-    fun SearchByQuery(
+    fun searchByQuery(
         query: String,
         observer: Observer<ApiResponse<List<SearchQueryResponse>>>
     ) {
         getHeaderApi()
             ?.setByQuery(query)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun checkChatHistory(
+        userId: Int,
+        businessId: Int,
+        observer: Observer<ApiResponse<CheckChatHistoryResponse>>
+    ) {
+        getHeaderApi()
+            ?.checkChatHistory(userId, businessId)
             ?.subscribeOn(Schedulers.single())
             ?.observeOn(AndroidSchedulers.mainThread())
             ?.subscribe(observer)

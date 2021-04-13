@@ -12,6 +12,7 @@
         <variable
             name="data"
             type="com.io.app.shakomako.api.pojo.invoice.InvoiceData" />
+        <import type="com.io.app.shakomako.utils.DateUtilsKt"/>
     </data>
 
     <RelativeLayout
@@ -42,10 +43,10 @@
 
                 <ImageView
                     android:id="@+id/iv_clear"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/_10sdp"
-                    android:src="@drawable/com_facebook_close"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:src="@drawable/cancel"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:onClick="@{viewHandler::onClick}"
                     app:layout_constraintBottom_toBottomOf="@id/tv_invoice"
                     app:layout_constraintRight_toRightOf="parent"
@@ -171,7 +172,7 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/Widget.ShakoMako.Text.Black"
                             android:gravity="center"
-                            android:text="@{``+data.businessDetails.ratings}"
+                            android:text="@{DateUtilsKt.convertRatingValue(data.businessDetails.ratings)}"
                             tools:text="@string/_0" />
 
                         <androidx.appcompat.widget.AppCompatTextView

@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.DatePicker
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
@@ -20,17 +19,14 @@ import com.bumptech.glide.request.target.Target
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.io.app.shakomako.R
 import com.io.app.shakomako.databinding.FragmentEditProfileBinding
-import com.io.app.shakomako.databinding.LayoutChatOptionsBinding
 import com.io.app.shakomako.databinding.LayoutGenderSelectionBinding
 import com.io.app.shakomako.helper.callback.DataItemCallBack
 import com.io.app.shakomako.helper.callback.ViewClickCallback
-import com.io.app.shakomako.ui.base.BaseUtils
 import com.io.app.shakomako.ui.home.HomeBaseFragment
 import com.io.app.shakomako.utils.ContextUtils
 import com.io.app.shakomako.utils.ProfileFieldType
 import com.io.app.shakomako.utils.constants.ApiConstant
 import com.io.app.shakomako.utils.constants.AppConstant
-import java.util.*
 
 class EditProfileFragment : HomeBaseFragment<FragmentEditProfileBinding>(), ViewClickCallback {
 
@@ -137,6 +133,14 @@ class EditProfileFragment : HomeBaseFragment<FragmentEditProfileBinding>(), View
 
             R.id.tv_gender -> showBottomSheet()
 
+            R.id.ll_national_id -> {
+                openSingleImagePicker(object : DataItemCallBack<Uri, Int> {
+                    override fun onItemData(t: Uri?, r: Int?) {
+
+                    }
+                })
+            }
+
 //            R.id.text_submit -> {
 //                viewModel.profileObserver.profileObserverData.shakoMakoUserName = usernameString
 //                if (viewModel.profileObserver.profileObserverData.userImage == ""
@@ -172,18 +176,38 @@ class EditProfileFragment : HomeBaseFragment<FragmentEditProfileBinding>(), View
                             Glide.with(viewDataBinding.root).load(t?.path.toString())
                                 .into(viewDataBinding.profileImage)
                         viewModel.profileObserver.profileObserverData.userImage = t?.path.toString()
-
+                        uploadProfileImage()
                     }
                 })
             }
         }
     }
 
+    private fun uploadProfileImage() {
+        viewModel.upload(
+            apiListener(),
+            viewModel.profileObserver.profileObserverData.userImage
+        )
+            .observe(viewLifecycleOwner,
+                Observer { response ->
+                    run {
+                        if (response.status?.equals(ApiConstant.SUCCESS) == true) {
+                            viewModel.profileObserver.profileObserverData.userImage =
+                                response.body?.image ?: ""
+                            updateProfile()
+                        } else showToast(
+                            response.message
+                                ?: resources.getString(R.string.msg_something_went_wrong)
+                        )
+                    }
+                })
+    }
+
     private fun showDobDialog() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             val datePickerDialog = DatePickerDialog(getBaseActivity(), R.style.AlertStyle)
             datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
-            datePickerDialog.setOnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            datePickerDialog.setOnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                 val date: String
                 val month: Int = monthOfYear + 1
                 date =
@@ -197,8 +221,10 @@ class EditProfileFragment : HomeBaseFragment<FragmentEditProfileBinding>(), View
                         "$year-$month-$dayOfMonth"
                     }
                 viewModel.profileObserver.profileObserverData.dateOfBirth = date
+                updateProfile()
             }
             datePickerDialog.show()
+
         }
     }
 
@@ -218,10 +244,11 @@ class EditProfileFragment : HomeBaseFragment<FragmentEditProfileBinding>(), View
                         resources.getString(R.string.male)
                     R.id.tv_female -> viewModel.profileObserver.profileObserverData.userGender =
                         resources.getString(R.string.female)
-                    R.id.tv_other -> viewModel.profileObserver.profileObserverData.userGender =
-                        resources.getString(R.string.other)
+//                    R.id.tv_other -> viewModel.profileObserver.profileObserverData.userGender =
+//                        resources.getString(R.string.other)
                 }
                 dialogFragment.dismiss()
+                updateProfile()
             }
         }
         dialogFragment.setContentView(bottomSheetBinding.root)

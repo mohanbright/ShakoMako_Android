@@ -8,6 +8,7 @@ import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
 import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
 import com.io.app.shakomako.api.pojo.chat_response.OpenDealsData
 import com.io.app.shakomako.api.pojo.chat_response.PersonalChatResponse
+import com.io.app.shakomako.api.pojo.chathistory.CheckChatHistoryResponse
 import com.io.app.shakomako.api.pojo.chatroom.ChatRoomData
 import com.io.app.shakomako.api.pojo.codapproval.CodApprovalData
 import com.io.app.shakomako.api.pojo.deal.CreateDealData
@@ -156,6 +157,14 @@ interface RestApi {
         @Field("otp") otp: Int
     ): Observable<ApiResponse<JsonObject>>
 
+    @FormUrlEncoded
+    @POST("api/saveRecentActivity")
+    fun saveRecentActivity(
+        @Field("product_id") productId: Int,
+        @Field("business_id") businessId: Int,
+        @Field("type") type: String
+    ): Observable<ApiResponse<JsonObject>>
+
     /** GET APIS*/
 
     @GET("api/getUserProfile")
@@ -260,5 +269,11 @@ interface RestApi {
     fun setByQuery(
         @Query("search") product_category: String
     ): Observable<ApiResponse<List<SearchQueryResponse>>>
+
+    @GET("api/checkChatHistory")
+    fun checkChatHistory(
+        @Query("user_id") userId: Int,
+        @Query("business_id") businessId: Int
+    ): Observable<ApiResponse<CheckChatHistoryResponse>>
 
 }

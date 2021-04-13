@@ -12,6 +12,7 @@ import com.io.app.shakomako.ui.main.MainViewModel
 import com.io.app.shakomako.ui.map.MapViewModel
 import com.io.app.shakomako.ui.notification.NotificationViewModel
 import com.io.app.shakomako.ui.product.AddProductViewModel
+import com.io.app.shakomako.ui.search.SearchViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -68,6 +69,11 @@ abstract class ViewModelModule {
     @IntoMap
     @BaseViewModelKey(NotificationViewModel::class)
     abstract fun provideNotificationViewModel(viewModel: NotificationViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @BaseViewModelKey(SearchViewModel::class)
+    abstract fun provideSearchViewModel(viewModel: SearchViewModel): ViewModel
 
 
 }

@@ -16,6 +16,7 @@ import com.io.app.shakomako.ui.map.MapActivity
 import com.io.app.shakomako.ui.notification.NotificationActivity
 import com.io.app.shakomako.ui.otp.OtpActivity
 import com.io.app.shakomako.ui.product.AddProductActivity
+import com.io.app.shakomako.ui.search.SearchActivity
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -67,4 +68,7 @@ abstract class UiModule {
 
     @ContributesAndroidInjector
     abstract fun contributeNotificationActivity(): NotificationActivity
+
+    @ContributesAndroidInjector
+    abstract fun contributeSearchActivity(): SearchActivity
 }

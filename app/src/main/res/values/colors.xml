@@ -8,6 +8,7 @@
     <color name="colorGray">#FBFBFB</color>
     <color name="text_color">#8C8C8C</color>
     <color name="tick_green">#33D147</color><!--#33D147--><!--5A8852-->
+    <color name="green">#5A8852</color><!--#33D147--><!--5A8852-->
     <color name="un_tick_green">#CDCDCD</color>
     <color name="colorGraphLight">#BDE4C1</color>
     <color name="colorGraphDark">#8ACF94</color>

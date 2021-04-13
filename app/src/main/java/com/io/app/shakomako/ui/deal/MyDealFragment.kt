@@ -15,9 +15,7 @@ import com.bumptech.glide.Glide
 import com.io.app.shakomako.R
 import com.io.app.shakomako.api.pojo.deal.PendingDealsResponse
 import com.io.app.shakomako.api.pojo.invoice.InvoiceData
-import com.io.app.shakomako.databinding.LayoutInvoiceDialogBinding
-import com.io.app.shakomako.databinding.LayoutRatingDialogBinding
-import com.io.app.shakomako.databinding.MyDealFragmentBinding
+import com.io.app.shakomako.databinding.*
 import com.io.app.shakomako.helper.callback.RecyclerClickHandler
 import com.io.app.shakomako.helper.callback.ViewClickCallback
 import com.io.app.shakomako.ui.deal.adapter.DoneDealAdapter
@@ -83,6 +81,13 @@ class MyDealFragment : HomeBaseFragment<MyDealFragmentBinding>(), ViewClickCallb
 
                             R.id.ll_rating -> {
                                 showRatingDialog(l)
+                            }
+
+                            R.id.ll_payment -> {
+                                if (viewModel.chatObserver.screenObserver == 0)
+                                    showPaymentDialog(l)
+                                else showCashDeliveredDialog()
+
                             }
                         }
 
@@ -308,6 +313,12 @@ class MyDealFragment : HomeBaseFragment<MyDealFragmentBinding>(), ViewClickCallb
                 when (v.id) {
                     R.id.iv_clear -> dialog.dismiss()
 
+                    R.id.tv_follow -> viewModel.userFollow(
+                        apiListener(),
+                        ratingDialogBinding.tvFollow,
+                        data.business_id
+                    )
+
                     R.id.tv_rate -> {
                         if (viewModel.chatObserver.screenObserver == 0) {
                             Log.e(
@@ -344,4 +355,69 @@ class MyDealFragment : HomeBaseFragment<MyDealFragmentBinding>(), ViewClickCallb
             .observe(viewLifecycleOwner, Observer { })
     }
 
+    private fun showPaymentDialog(data: PendingDealsResponse) {
+        val dialog = Dialog(getThisActivity(), R.style.ThemeOverlay_AppCompat_Dialog_Alert)
+        val payDialogBinding = DataBindingUtil.inflate<LayoutPayDialogBinding>(
+            LayoutInflater.from(getThisActivity()), R.layout.layout_pay_dialog, null, false
+        )
+        dialog.run {
+            setContentView(payDialogBinding.root)
+
+            window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            window!!.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+            window?.setDimAmount(0.8f)
+            setCancelable(false)
+        }
+
+        Glide.with(payDialogBinding.root).load(data.business_picture)
+            .into(payDialogBinding.itemImage)
+
+        payDialogBinding.viewHandler = object : ViewClickCallback {
+            override fun onClick(v: View) {
+                when (v.id) {
+                    R.id.iv_clear -> dialog.dismiss()
+
+                    R.id.tv_follow -> viewModel.userFollow(
+                        apiListener(),
+                        payDialogBinding.tvFollow,
+                        data.business_id
+                    )
+
+                    R.id.tv_pay_cash_on_delivery -> {
+                        dialog.dismiss()
+                    }
+                }
+            }
+        }
+        payDialogBinding.data = data
+        dialog.show()
+    }
+
+    private fun showCashDeliveredDialog() {
+        val dialog = Dialog(getBaseActivity(), R.style.AlertStyleDialog)
+        val layout: LayoutCashExchangedDialogBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(getBaseActivity()),
+            R.layout.layout_cash_exchanged_dialog,
+            null,
+            false
+        )
+
+        layout.viewHandler = object : ViewClickCallback {
+            override fun onClick(v: View) {
+                when (v.id) {
+                    R.id.tv_yes -> {
+                        //getLatestOpenDeals()
+                    }
+                    R.id.tv_cancel -> {
+
+                    }
+                }
+                dialog.dismiss()
+            }
+        }
+
+        dialog.setContentView(layout.root)
+        dialog.setCancelable(false)
+        dialog.show()
+    }
 }
