@@ -113,6 +113,9 @@
             android:id="@+id/action_to_verify_business"
             app:destination="@id/navigation_verify_business" />
 
+        <action android:id="@+id/action_to_navigation_insight"
+            app:destination="@id/navigation_insight_detail"/>
+
     </fragment>
 
     <fragment
@@ -194,5 +197,11 @@
         android:name="com.io.app.shakomako.ui.profile.edit.EditProfileFieldFragment"
         tools:layout="@layout/fragment_edit_profile_field"
         android:label="EDIT_FIELD"/>
+
+    <fragment
+        android:id="@+id/navigation_insight_detail"
+        android:name="com.io.app.shakomako.ui.insight.FragmentInsightAnalytics"
+        android:label="Insight"
+        tools:layout="@layout/fragment_insight_analytics" />
 
 </navigation>

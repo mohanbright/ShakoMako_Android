@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.io.app.shakomako.utils.DateUtilsKt" />
+
+        <!--        <variable-->
+        <!--            name="viewHandler"-->
+        <!--            type="com.io.app.shakomako.helper.callback.ViewClickCallback" />-->
+
+        <variable
+            name="data"
+            type="com.io.app.shakomako.api.pojo.search.SearchQueryResponse" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/_7sdp"
+            android:paddingTop="@dimen/_5sdp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_item"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:src="@drawable/placeholder"
+                app:civ_border_color="@color/black"
+                app:civ_border_width="1dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/iv_product_heading"
+                style="@style/Widget.ShakoMako.Text.Title.Black"
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/_7sdp"
+                android:gravity="start"
+                android:text="@{data.product_category}"
+                app:layout_constraintLeft_toRightOf="@id/iv_item"
+                app:layout_constraintTop_toTopOf="@id/iv_item"
+                tools:text="Womern top wear" />
+
+            <LinearLayout
+                android:id="@+id/ll_product_des"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="@id/iv_product_heading"
+                app:layout_constraintLeft_toRightOf="@id/iv_item"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_product_heading">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/product_des"
+                    style="@style/Widget.ShakoMako.Text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:padding="@dimen/_3sdp"
+                    android:singleLine="true"
+                    android:text="@{data.product_description}" />
+
+            </LinearLayout>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/product_price"
+                style="@style/Widget.ShakoMako.Text.Small.Black.Bold"
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:text="@{data.product_asking_price +` IQD` }"
+                app:layout_constraintLeft_toLeftOf="@id/ll_product_des"
+                app:layout_constraintLeft_toRightOf="@id/iv_item"
+                app:layout_constraintTop_toBottomOf="@id/ll_product_des"
+                tools:text="1200 IQD" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/product_rating"
+                style="@style/Widget.ShakoMako.Text.Small.Blue"
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:text="@{DateUtilsKt.convertRatingValue(data.ratings)+`Rating`}"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_product_des"
+                tools:text="0 Rating" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_price" />
+    </LinearLayout>
+
+</layout>

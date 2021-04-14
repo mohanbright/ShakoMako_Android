@@ -8,6 +8,12 @@
         <variable
             name="viewHandler"
             type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <variable
+            name="data"
+            type="com.io.app.shakomako.api.pojo.analytics.Analytics" />
+
+        <import type="com.io.app.shakomako.utils.DateUtilsKt" />
     </data>
 
     <LinearLayout
@@ -32,10 +38,11 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_back"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_5sdp"
+                android:padding="@dimen/_2sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:onClick="@{viewHandler::onClick}"
                 android:src="@drawable/ic_back" />
@@ -45,11 +52,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
-                android:onClick="@{viewHandler::onClick}"
-                android:layout_alignParentRight="true"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:gravity="center"
+                android:onClick="@{viewHandler::onClick}"
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -115,7 +121,7 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/Widget.ShakoMako.Text.Black"
                                 android:gravity="center"
-                                android:text="0" />
+                                android:text="@{``+ data.totalDeals}" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/Widget.ShakoMako.Text.Black"
@@ -134,7 +140,7 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/Widget.ShakoMako.Text.Black"
                                 android:gravity="center"
-                                android:text="0" />
+                                android:text="@{``+ data.followers}" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/Widget.ShakoMako.Text.Black"
@@ -153,7 +159,7 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/Widget.ShakoMako.Text.Black"
                                 android:gravity="center"
-                                android:text="0.00" />
+                                android:text="@{DateUtilsKt.convertRatingValue(data.ratings)}" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/Widget.ShakoMako.Text.Black"
@@ -204,7 +210,7 @@
                             android:layout_centerInParent="true"
                             android:layout_margin="@dimen/_20sdp"
                             android:paddingTop="@dimen/_20sdp"
-                            android:text="200" />
+                            android:text="@{``+ data.doneDeals}" />
 
                     </RelativeLayout>
 
@@ -237,7 +243,7 @@
                             android:layout_centerInParent="true"
                             android:layout_margin="@dimen/_20sdp"
                             android:paddingTop="@dimen/_20sdp"
-                            android:text="11" />
+                            android:text="@{``+ data.pendingDeals}" />
 
                     </RelativeLayout>
 
@@ -274,7 +280,7 @@
                         android:layout_centerInParent="true"
                         android:layout_margin="@dimen/_20sdp"
                         android:paddingTop="@dimen/_20sdp"
-                        android:text="1,00,000 IQD" />
+                        android:text="@{data.earnings==null ? `0 IQD` : data.earnings + `IQD`}" />
 
                 </RelativeLayout>
 
@@ -322,6 +328,7 @@
 
 
                     <RelativeLayout
+                        android:id="@+id/rl_insight"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/_80sdp"
                         android:layout_marginStart="@dimen/_10sdp"

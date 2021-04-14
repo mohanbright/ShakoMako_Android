@@ -11,6 +11,7 @@ import com.io.app.shakomako.helper.callback.RecyclerClickHandler
 import com.io.app.shakomako.ui.base.DataBindingActivity
 import com.io.app.shakomako.ui.home.adapter.RecentBusinessAdapter
 import com.io.app.shakomako.ui.home.adapter.RecentProductAdapter
+import com.io.app.shakomako.ui.search.adapter.SearchQueryAdapter
 import com.io.app.shakomako.utils.constants.ApiConstant
 
 class SearchActivity : DataBindingActivity<ActivitySearchBinding>() {
@@ -21,11 +22,13 @@ class SearchActivity : DataBindingActivity<ActivitySearchBinding>() {
 
     lateinit var recentBusinessAdapter: RecentBusinessAdapter
     lateinit var recentProductAdapter: RecentProductAdapter
+    lateinit var searchQueryAdapter: SearchQueryAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         searchViewModel = getViewModel(SearchViewModel::class.java)
+
         init()
         search()
     }
@@ -54,10 +57,13 @@ class SearchActivity : DataBindingActivity<ActivitySearchBinding>() {
                     }
                 })
 
+        searchQueryAdapter = SearchQueryAdapter()
+
         bindViewModel<SearchViewModel> {
             adapter = recentBusinessAdapter
             productadapter = recentProductAdapter
             viewModel = searchViewModel
+            searchadapter = searchQueryAdapter
         }
 
         callBusinessApi()
@@ -104,12 +110,25 @@ class SearchActivity : DataBindingActivity<ActivitySearchBinding>() {
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
             override fun onQueryTextChange(newText: String): Boolean {
-                Log.e("onQueryTextChange", newText)
-                searchViewModel.getSearchByQuery(newText, apiListener())
-                    .observe(this@SearchActivity, Observer {
-                        searchViewModel.visibleSearchObserver.viewVisible = 1
+                Log.e("onQueryTextChange", "$newText")
+                if (newText.isEmpty()) {
+                    Log.e("onQueryTextChange", "text $newText")
+                    searchViewModel.visibleSearchObserver.viewVisible = 0
+                    return true
 
-                    })
+                } else {
+                    searchViewModel.getSearchByQuery(newText, apiListener())
+                        .observe(this@SearchActivity, Observer {
+                            if (it.status == ApiConstant.SUCCESS) {
+                                Log.e("onQueryTextChange", "response api ")
+                                    searchQueryAdapter.addList(it.body!!)
+                            }
+
+                        })
+
+                    searchViewModel.visibleSearchObserver.viewVisible = 1
+                }
+
 
                 return false
             }

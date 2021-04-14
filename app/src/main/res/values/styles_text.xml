@@ -163,6 +163,10 @@
         <item name="android:textColor">@android:color/darker_gray</item>
     </style>
 
+    <style name="Widget.ShakoMako.Text.Small.Blue" parent="Widget.ShakoMako.Text.Black">
+        <item name="android:textColor">@color/colorBlue</item>
+    </style>
+
     <style name="Widget.ShakoMako.Text.Smaller" parent="Widget.ShakoMako.Text">
         <item name="android:textSize">@dimen/_6sdp</item>
         <item name="android:layout_height">wrap_content</item>

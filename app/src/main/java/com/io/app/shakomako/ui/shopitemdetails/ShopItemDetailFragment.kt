@@ -77,6 +77,7 @@ class ShopItemDetailFragment : HomeBaseFragment<FragmentShopItemDetailBinding>()
                 run {
                     if (response.status?.equals(ApiConstant.SUCCESS) == true) {
                         this.data = response.body ?: ProductResponse()
+                        viewModel.shopItemDetailObserver.productResponse = this.data
                         setData()
                         callProductApi(this.data.product_category)
                         saveRecentActivity(id)

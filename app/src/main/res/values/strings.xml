@@ -229,6 +229,17 @@
     <string name="pay">Pay</string>
     <string name="amount_due">Amount Due</string>
     <string name="pay_cash_on_delivery">Pay Cash on Delivery</string>
+
+
     <string name="recently_viewed_products">Recently Viewed Products</string>
     <string name="recently_viewed_shop">Recently Viewed Shops</string>
+    <string name="analytics_insight">Analytics | Insight</string>
+    <string name="shops_visit">Shop Visits</string>
+    <string name="total_likes">Total Likes</string>
+    <string name="total_shares">Total Shares</string>
+    <string name="initiation">Message Initiation</string>
+    <string name="total_followeres">Total Followers</string>
+    <string name="overall_growth">Overall Growth</string>
+    <string name="followed_you">Followed You</string>
+    <string name="unfollowed_you">Unfollowed You</string>
 </resources>

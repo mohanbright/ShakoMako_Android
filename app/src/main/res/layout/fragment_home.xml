@@ -37,8 +37,10 @@
                 android:layout_weight="1" />
 
             <LinearLayout
+                android:id="@+id/ll_search"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:onClick="@{viewHandler::onClick}"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_8sdp"
                 android:gravity="center"

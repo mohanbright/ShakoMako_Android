@@ -3,6 +3,7 @@ package com.io.app.shakomako.api.rest
 import com.google.gson.JsonObject
 import com.io.app.shakomako.api.pojo.address.DeliveryAddress
 import com.io.app.shakomako.api.pojo.analytics.Analytics
+import com.io.app.shakomako.api.pojo.analytics.InsightData
 import com.io.app.shakomako.api.pojo.business.OtherBusinessProfileResponse
 import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
 import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
@@ -275,5 +276,8 @@ interface RestApi {
         @Query("user_id") userId: Int,
         @Query("business_id") businessId: Int
     ): Observable<ApiResponse<CheckChatHistoryResponse>>
+
+    @GET("api/getAnalyticsInsights")
+    fun getAnalyticsInsights(): Observable<ApiResponse<InsightData>>
 
 }

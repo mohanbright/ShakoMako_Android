@@ -11,6 +11,7 @@ import com.google.gson.JsonObject
 import com.io.app.shakomako.R
 import com.io.app.shakomako.api.pojo.address.DeliveryAddress
 import com.io.app.shakomako.api.pojo.analytics.Analytics
+import com.io.app.shakomako.api.pojo.analytics.InsightData
 import com.io.app.shakomako.api.pojo.business.OtherBusinessProfileResponse
 import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
 import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
@@ -56,7 +57,18 @@ open class BaseViewModel : ViewModel() {
     protected lateinit var context: Context
     protected lateinit var apiRepository: ApiRepository
 
+    var visibleObserver: VisibleObserver = VisibleObserver()
+
     var visibleSearchObserver: VisibleSearchObserver = VisibleSearchObserver()
+
+
+    inner class VisibleObserver : BaseObservable() {
+        var progrssVisible: Boolean = true
+            set(value) {
+                field = value
+                notifyChange()
+            }
+    }
 
 
     inner class VisibleSearchObserver : BaseObservable() {
@@ -1753,46 +1765,6 @@ open class BaseViewModel : ViewModel() {
 
     }
 
-    fun getSearchByQuery(
-        query: String,
-        listener: ApiListener
-    ): LiveData<ApiResponse<List<SearchQueryResponse>>> {
-        val result = MutableLiveData<ApiResponse<List<SearchQueryResponse>>>()
-
-        if (ApiUtils.checkInternet(context)) {
-            listener.showProgress(true)
-            apiRepository.searchByQuery(query,
-                object : Observer<ApiResponse<List<SearchQueryResponse>>> {
-                    override fun onComplete() {
-                        listener.showProgress(false)
-                    }
-
-                    override fun onSubscribe(d: Disposable) {
-
-
-                    }
-
-                    override fun onNext(t: ApiResponse<List<SearchQueryResponse>>) {
-                        Log.e("onNext", "$t")
-                        result.value = (t)
-
-                    }
-
-                    override fun onError(e: Throwable) {
-                        listener.showProgress(false)
-                        listener.msg(e.message!!)
-
-                    }
-
-                })
-        } else {
-            listener.msg(context.getString(R.string.no_internet))
-        }
-
-        return result
-
-    }
-
     fun checkChatHistory(
         userId: Int,
         businessId: Int,
@@ -1863,6 +1835,82 @@ open class BaseViewModel : ViewModel() {
 
                 })
         }
+        return result
+
+    }
+
+    fun getSearchByQuery(
+        query: String,
+        listener: ApiListener
+    ): LiveData<ApiResponse<List<SearchQueryResponse>>> {
+        val result = MutableLiveData<ApiResponse<List<SearchQueryResponse>>>()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(false)
+            visibleObserver.progrssVisible = true
+            apiRepository.searchByQuery(query,
+                object : Observer<ApiResponse<List<SearchQueryResponse>>> {
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                        visibleObserver.progrssVisible = false
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+
+                    }
+
+                    override fun onNext(t: ApiResponse<List<SearchQueryResponse>>) {
+                        Log.e("onNext", "$t")
+                        result.value = (t)
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        visibleObserver.progrssVisible = false
+                        listener.msg(e.message!!)
+                        listener.showProgress(false)
+
+                    }
+
+                })
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
+        return result
+
+    }
+
+    fun getInsightData(listener: ApiListener): LiveData<ApiResponse<InsightData>> {
+        var result = MutableLiveData<ApiResponse<InsightData>>()
+        if (ApiUtils.checkInternet(context)) {
+            listener.showProgress(true)
+            apiRepository.getInsightAnalytics(
+                object : Observer<ApiResponse<InsightData>>{
+                    override fun onComplete() {
+                        listener.showProgress(false)
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onNext(t: ApiResponse<InsightData>) {
+                        listener.showProgress(false)
+                        result.value=t
+                    }
+
+                    override fun onError(e: Throwable) {
+                        listener.showProgress(false)
+                        listener.msg(e.localizedMessage)
+                    }
+
+                }
+            )
+        } else {
+            listener.msg(context.getString(R.string.no_internet))
+        }
+
         return result
 
     }

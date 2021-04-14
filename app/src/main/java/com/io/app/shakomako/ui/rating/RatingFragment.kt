@@ -25,6 +25,7 @@ class RatingFragment : HomeBaseFragment<FragmentRatingBinding>(), ViewClickCallb
     private fun init() {
 
         viewDataBinding.viewHandler = this
+        viewDataBinding.data = viewModel.shopItemDetailObserver.productResponse
 
 
     }

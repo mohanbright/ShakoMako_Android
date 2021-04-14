@@ -8,6 +8,11 @@
         <variable
             name="viewHandler"
             type="com.io.app.shakomako.helper.callback.ViewClickCallback" />
+
+        <variable
+            name="data"
+            type="com.io.app.shakomako.api.pojo.product.ProductResponse" />
+        <import type="com.io.app.shakomako.utils.DateUtilsKt"/>
     </data>
 
     <LinearLayout
@@ -67,7 +72,7 @@
                     style="@style/Widget.ShakoMako.Text.Black"
                     android:layout_margin="@dimen/_10sdp"
                     android:gravity="center"
-                    android:text="4.37/5" />
+                    android:text="@{DateUtilsKt.convertRatingValue(data.avgRatings) + `/5`, default=`4.7/5`}" />
 
                 <per.wsj.library.AndRatingBar
                     android:layout_width="wrap_content"
@@ -84,6 +89,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/Widget.ShakoMako.Text"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="@dimen/_30sdp"
                     android:gravity="center"
                     android:text="134 Ratings" />
@@ -134,12 +140,12 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/Widget.ShakoMako.Text"
                         android:layout_width="match_parent"
-                        android:layout_weight="1.4"
                         android:layout_gravity="center"
                         android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_weight="1.4"
                         android:gravity="center"
                         android:letterSpacing=".4"
-                        android:text="113" />
+                        android:text="@{data.total5Stars +``,default=`113`}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -173,12 +179,12 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/Widget.ShakoMako.Text"
                         android:layout_width="match_parent"
-                        android:layout_weight="1.4"
                         android:layout_gravity="center"
                         android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_weight="1.4"
                         android:gravity="center"
                         android:letterSpacing=".4"
-                        android:text="14" />
+                        android:text="@{data.total4Stars +``,default=`14`}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -212,12 +218,12 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/Widget.ShakoMako.Text"
                         android:layout_width="match_parent"
-                        android:layout_weight="1.4"
                         android:layout_gravity="center"
                         android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_weight="1.4"
                         android:gravity="center"
                         android:letterSpacing=".4"
-                        android:text="5" />
+                        android:text="@{data.total3Stars +``,default=`5`}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -251,12 +257,12 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/Widget.ShakoMako.Text"
                         android:layout_width="match_parent"
-                        android:layout_weight="1.4"
                         android:layout_gravity="center"
                         android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_weight="1.4"
                         android:gravity="center"
                         android:letterSpacing=".4"
-                        android:text="2" />
+                        android:text="@{data.total2Stars +``,default=`2`}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -290,12 +296,12 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/Widget.ShakoMako.Text"
                         android:layout_width="match_parent"
-                        android:layout_weight="1.4"
                         android:layout_gravity="center"
                         android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_weight="1.4"
                         android:gravity="center"
                         android:letterSpacing=".4"
-                        android:text="0" />
+                        android:text="@{data.total1Stars +``,default=`0`}" />
                 </LinearLayout>
             </LinearLayout>
 

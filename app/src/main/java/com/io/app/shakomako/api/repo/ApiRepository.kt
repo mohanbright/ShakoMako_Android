@@ -4,6 +4,7 @@ import androidx.annotation.NonNull
 import com.google.gson.JsonObject
 import com.io.app.shakomako.api.pojo.address.DeliveryAddress
 import com.io.app.shakomako.api.pojo.analytics.Analytics
+import com.io.app.shakomako.api.pojo.analytics.InsightData
 import com.io.app.shakomako.api.pojo.business.OtherBusinessProfileResponse
 import com.io.app.shakomako.api.pojo.chat_response.BusinessChatResponse
 import com.io.app.shakomako.api.pojo.chat_response.ChatMessageData
@@ -638,6 +639,27 @@ class ApiRepository @Inject constructor(
     ) {
         getHeaderApi()
             ?.checkChatHistory(userId, businessId)
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+    fun getInsightAnalytics(
+        observer: Observer<ApiResponse<InsightData>>
+    ) {
+        getHeaderApi()
+            ?.getAnalyticsInsights()
+            ?.subscribeOn(Schedulers.single())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(observer)
+    }
+
+
+    fun getCustomerAnalytics(
+        observer: Observer<ApiResponse<InsightData>>
+    ) {
+        getHeaderApi()
+            ?.getAnalyticsInsights()
             ?.subscribeOn(Schedulers.single())
             ?.observeOn(AndroidSchedulers.mainThread())
             ?.subscribe(observer)

@@ -37,8 +37,12 @@ class FragmentProfileAnalytics : HomeBaseFragment<FragmentProfileAnalyticsBindin
             R.id.iv_back -> {
                 onBackPressed()
             }
+            R.id.rl_insight -> {
+                openFragment(AppConstant.NAVIGATION_INSIGHT_ANALYTICS)
+            }
         }
     }
+
 
     private fun callApi() {
         viewModel.getAnalyticsData(apiListener()).observe(viewLifecycleOwner, Observer {

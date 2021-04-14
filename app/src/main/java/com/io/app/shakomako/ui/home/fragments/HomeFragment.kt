@@ -19,6 +19,7 @@ import com.io.app.shakomako.ui.home.HomeBaseFragment
 import com.io.app.shakomako.ui.home.HomeViewModel
 import com.io.app.shakomako.ui.home.adapter.HomeAdapter
 import com.io.app.shakomako.ui.like.LikesActivity
+import com.io.app.shakomako.ui.search.SearchActivity
 import com.io.app.shakomako.utils.constants.ApiConstant
 import com.io.app.shakomako.utils.constants.AppConstant
 
@@ -114,6 +115,9 @@ class HomeFragment : HomeBaseFragment<FragmentHomeBinding>(), ViewClickCallback 
 
             R.id.ll_likes -> {
                 startActivity(Intent(getBaseActivity(), LikesActivity::class.java))
+            }
+            R.id.ll_search ->{
+                startActivity(Intent(getBaseActivity(), SearchActivity::class.java))
             }
         }
     }

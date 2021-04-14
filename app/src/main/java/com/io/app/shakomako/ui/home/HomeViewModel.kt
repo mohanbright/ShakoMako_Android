@@ -8,6 +8,7 @@ import com.io.app.shakomako.api.pojo.business.OtherBusinessProfileResponse
 import com.io.app.shakomako.api.pojo.home.HomeItem
 import com.io.app.shakomako.api.pojo.home.item.HomeFashionData
 import com.io.app.shakomako.api.pojo.product.ProductRequest
+import com.io.app.shakomako.api.pojo.product.ProductResponse
 import com.io.app.shakomako.api.pojo.profile.ProfileResponse
 import com.io.app.shakomako.api.pojo.shop.BusinessDetail
 import com.io.app.shakomako.api.pojo.shop.BusinessProducts
@@ -35,7 +36,6 @@ class HomeViewModel @Inject constructor(
     var shopObserver: ShopObserver = ShopObserver()
     var homeObserver: HomeObserver = HomeObserver()
     var otherBusinessObserver: OtherBusinessObserver = OtherBusinessObserver()
-    var visibleObserver: VisibleObserver = VisibleObserver()
     var profileObserver: ProfileObserver = ProfileObserver()
     var shopItemObserver: ShopItemObserver = ShopItemObserver()
     var navigationShopObserver: NavigationShopObserver = NavigationShopObserver()
@@ -115,13 +115,6 @@ class HomeViewModel @Inject constructor(
             }
     }
 
-    inner class VisibleObserver : BaseObservable() {
-        var visible: Boolean = true
-            set(value) {
-                field = value
-                notifyChange()
-            }
-    }
 
 
     inner class ProfileObserver : BaseObservable() {
@@ -151,6 +144,12 @@ class HomeViewModel @Inject constructor(
 
     inner class ShopItemDetailsObserver : BaseObservable() {
         var screenObserver: Int = 0
+            set(value) {
+                field = value
+                notifyChange()
+            }
+
+        var productResponse: ProductResponse = ProductResponse()
             set(value) {
                 field = value
                 notifyChange()

@@ -98,6 +98,10 @@ class HomeActivity : DataBindingActivity<ActivityHomeBinding>() {
             AppConstant.EDIT_PROFILE_FIELD -> {
                 open(R.id.action_to_edit_profile_field)
             }
+
+            AppConstant.NAVIGATION_INSIGHT_ANALYTICS -> {
+                open(R.id.action_to_navigation_insight)
+            }
         }
     }
 

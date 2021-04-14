@@ -172,11 +172,11 @@ class EditProfileFieldFragment : HomeBaseFragment<FragmentEditProfileFieldBindin
                 Observer {
                     Log.e("status", "${it.status}")
                     if (it.status == 200) {
-                        viewModel.visibleObserver.visible = true
+                        viewModel.visibleObserver.progrssVisible = true
                         usernameString = viewModel.editProfileFieldObserver.editedText
                         if (updating) updateProfile()
                     } else {
-                        viewModel.visibleObserver.visible = false
+                        viewModel.visibleObserver.progrssVisible = false
                         viewDataBinding.etField.error = it.message
 
 
